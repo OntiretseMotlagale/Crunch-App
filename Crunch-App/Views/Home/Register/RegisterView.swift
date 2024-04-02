@@ -101,7 +101,7 @@ struct SecureText: View {
             .background(
             Color("PrimaryBlue"))
             .cornerRadius(10)
-            .padding(.bottom, 10)
+            .padding(.bottom, 9)
         }
     }
 }
