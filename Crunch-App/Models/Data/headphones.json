@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+      "name": "Airpods Pro 2",
+      "image": "airpods-1",
+      "description": "2nd Generation with Magsafe Case (USB-C) AirPods Pro are equipped with active noise cancellation technology. Transparency Mode: This feature allows you to hear the ambient sounds around you while still wearing the AirPods Pro.",
+      "price": 6999,
+      "gallery": ["airpods-1", "airpods-2", "airpods-3", "airpods-4","airpods-5","airpods-5"]
+    },
+    {
+        "id": 2,
+        "name": "Volkano Heaphones",
+        "image": "volkano-1",
+        "description": "These Bluetooth Wireless headphones feature high quality immersive sound and a playtime of up to 24-hours on a full charge, keeping you jamming and comfortable literally ALL day long",
+        "price": 400,
+        "gallery": ["volkano-1","volkano-2","volkano-3","volkano-4"]
+    },
+    {
+        "id": 3,
+        "name": "P9 Headphones",
+        "image": "p9Plus-1",
+        "description": "High Definition Stereo Headphones, specifically created software, and noise reduction technologies combine to create the astonishing sound protection you need to concentrate on what you need to hear.",
+        "price": 225,
+        "gallery": ["p9Plus-1","p9Plus-2","p9Plus-3","p9Plus-4","p9Plus-5"]
+    },
+    {
+        "id": 4,
+        "name": "Redragon H220",
+        "image": "redragon-1",
+        "description": "Use the high precision 40mm neodymium speakers for great stereo sound:",
+        "price": 520,
+        "gallery": ["redragon-1","redragon-2","redragon-3","redragon-4"]
+    },
+    {
+        "id": 5,
+        "name": "Audio-Technica",
+        "image": "audiotechnica-1",
+        "description": "The M-Series ATH-M30x professional monitor headphones combine modern engineering and high-quality materials to deliver a comfortable listening experience, with enhanced audio clarity and sound isolation. ",
+        "price": 2200,
+        "gallery": ["audiotechnica-1","audiotechnica-2"]
+    }
+]

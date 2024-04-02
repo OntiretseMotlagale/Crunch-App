@@ -1,0 +1,42 @@
+[
+    {
+        "id": 19,
+        "name": "Samsung Galaxy",
+        "image": "samsung-1",
+        "description": "Futuristic Colours - Exclusive Ceramic Body - Durable Glass",
+        "price": 8999,
+        "gallery": ["samsung-1"]
+    },
+    {
+        "id": 1,
+        "name": "Airpods Pro 2",
+        "image": "airpods-1",
+        "description": "2nd Generation with Magsafe Case (USB-C) AirPods Pro are equipped with active noise cancellation technology. Transparency Mode: This feature allows you to hear the ambient sounds around you while still wearing the AirPods Pro.",
+        "price": 6999,
+        "gallery": ["airpods-1", "airpods-2", "airpods-3", "airpods-4","airpods-5","airpods-5"]
+    },
+    {
+        "id": 2,
+        "name": "Volkano Heaphones",
+        "image": "volkano-1",
+        "description": "These Bluetooth Wireless headphones feature high quality immersive sound and a playtime of up to 24-hours on a full charge, keeping you jamming and comfortable literally ALL day long",
+        "price": 400,
+        "gallery": ["volkano-1","volkano-2","volkano-3","volkano-4"]
+    },
+    {
+        "id": 17,
+        "name": "Toshiba 43",
+        "image": "toshibaTV-1",
+        "description": "Panel Response Time: 8 ms Max. Resolution: HD 1920x1080",
+        "price": 4499,
+        "gallery": ["toshibaTV-1","toshibaTV-2","toshibaTV-3"]
+    },
+    {
+        "id" : 9,
+        "name" : "Asus Notebook",
+        "image" : "asus-1",
+        "description" : "Intel® Celeron® N4020 Processor 1.1 GHz (4M Cache, up to 2.8 GHz, 2 cores) 8GB DDR4 SO-DIMM ",
+        "price" : 5999,
+        "gallery": ["asus-1","asus-2","asus-3","asus-4"]
+    },
+]

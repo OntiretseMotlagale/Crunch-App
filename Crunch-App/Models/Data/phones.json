@@ -1,0 +1,41 @@
+[
+    {
+        "id": 19,
+        "name": "Samsung Galaxy",
+        "image": "samsung-1",
+        "description": "Futuristic Colours - Exclusive Ceramic Body - Durable Glass",
+        "price": 8999,
+        "gallery": ["samsung-1"]
+    },
+    {
+        "id": 20,
+        "name": "Redmi 9A",
+        "image": "redmi-1",
+        "description": "The Xiaomi Redmi 9A 6.53? HD+ Smartphone is a great affordable smartphone that packs more power for your enjoyment", "price": 2699,
+        "gallery": ["redmi-1","redmi-2"]
+    },
+    {
+        "id": 21,
+        "name": "Mobicel C2 ",
+        "image": "mobicel-1",
+        "description": "Specifications: 1.77 2G device - 0.08 MP VGA Back camera - RAM 32MB, ROM 32MB - Micro SD up to 16GB - Nucleus Operating system - Bluetooth v2.1 ",
+        "price": 180,
+        "gallery": ["mobicel-1"]
+    },
+    {
+        "id": 22,
+        "name": "Nova 11i",
+        "image": "nova-1",
+        "description": "Beautifully designed at just 8.55mm thin, a 94.9% Screen to body ratio, 1mm UltraNarrow Bezel and Double Star Orbit Ring",
+        "price": 5649,
+        "gallery": ["nova-1", "nova-2", "nova-3"]
+    },
+    {
+        "id": 23,
+        "name": "iPhone 15 Pro Max",
+        "image": "iPhone-1",
+        "description": "The iPhone 15 Pro Max display has rounded corners that follow a beautiful curved design, and these corners are within a standard rectangle. ",
+        "price": 33999,
+        "gallery": ["iPhone-1", "iPhone-2", "iPhone-3", "iPhone-4","iPhone-5"]
+    }
+]

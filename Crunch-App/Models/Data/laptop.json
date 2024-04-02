@@ -1,0 +1,42 @@
+[
+    {
+        "id" : 6,
+        "name" : "Acer Aspire 3",
+        "image" : "acer-1",
+        "description" : "Integrated Intel UHD Graphics 600",
+        "price":  7999,
+        "gallery": ["acer-1","acer-2","acer-3"]
+    },
+    {
+        "id" : 7,
+        "name" : "Connex 14 Celeron",
+        "image" : "connex-1",
+        "description": "Experience the perfect blend of power, portability, and style with the Connex 14 Celeron N4020 4/128SSD W11 Home laptop. Engineered to enhance your productivity and simplify your digital lifestyle, this sleek and compact device is your ideal companion for work, entertainment, and everything in between.",
+        "price" : 3500,
+        "gallery": ["connex-1","connex-2"]
+    },
+    {
+        "id" : 8,
+        "name" : "Apple Macbook Pro",
+        "image" : "macbook-1",
+        "description": "Liquid Retina XDR display 14.2-inch (diagonal) Liquid Retina XDR display 1 3024-by-1964 native resolution at 254 pixels per inch Apple M3 Max Pro chip 10-core CPU with 6 performance cores and 4 efficiency cores",
+        "price" : 47999,
+        "gallery": ["macbook-1","macbook-2","macbook-3","macbook-4","macbook-5"]
+    },
+    {
+        "id" : 9,
+        "name" : "Asus Notebook",
+        "image" : "asus-1",
+        "description" : "Intel® Celeron® N4020 Processor 1.1 GHz (4M Cache, up to 2.8 GHz, 2 cores) 8GB DDR4 SO-DIMM ",
+        "price" : 5999,
+        "gallery": ["asus-1","asus-2","asus-3","asus-4"]
+    },
+    {
+        "id" : 10,
+        "name" : "Dell Inspiron ",
+        "image" : "dell-1",
+        "description" : "Experience responsive yet quiet performance, featuring 12th generation Intel Core processors 3520 15.6 Core i5-1135G7 8GB RAM 512GB SSD W11H Laptop",
+        "price" : 12999,
+        "gallery":["dell-1","dell-2","dell-3","dell-4","dell-5","dell-6"]
+    }
+]
