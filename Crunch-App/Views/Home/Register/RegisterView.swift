@@ -76,9 +76,9 @@ struct RegisterView: View {
     }
 }
 
-//#Preview {
-//    RegisterView()
-//}
+#Preview {
+    RegisterView(authService: AuthenticationManager())
+}
 
 struct SecureText: View {
     let iconname: AuthIcons

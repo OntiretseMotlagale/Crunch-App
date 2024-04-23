@@ -9,6 +9,8 @@ import Foundation
 import SwiftUI
 import FirebaseAuth
 
+
+
 class ProfileViewModel: ObservableObject {
     
     func signOut() {
@@ -17,30 +19,145 @@ class ProfileViewModel: ObservableObject {
 }
 struct ProfileView: View {
     @StateObject var viewModel = ProfileViewModel()
+    @State var profileData: [ProfileModel] = [
+        ProfileModel(name: "Personal Data",
+                     iconName: "person",
+                     Tab: .personalData),
+        ProfileModel(name: "Address",
+                     iconName: "house",
+                     Tab: .address),
+        ProfileModel(name: "Orders",
+                     iconName: "bag",
+                     Tab: .orders),
+        ProfileModel(name: "Setting",
+                     iconName: "gearshape",
+                     Tab: .settings)
+    ]
     
     var body: some View {
-            VStack {
-                Image("profile")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 90, height: 90)
-                    .border(Color.green, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
-                    .cornerRadius(90)
-                    .overlay(alignment: .bottomTrailing) {
-                        Button(action: {}, label: {
-                            Image(systemName: "camera.circle.fill")
+        NavigationStack {
+            ScrollView {
+                VStack {
+                    ProfileImage()
+                    Text("Ontiretse Motlagale")
+                        .font(.title.bold())
+                    HStack (spacing: 30) {
+                        Image(systemName: "bubbles.and.sparkles.fill")
+                            .resizable()
+                            .scaledToFit()
+                            .foregroundStyle(Color("PrimaryOrange"))
+                            .frame(width: 30, height: 30)
+                        VStack(alignment: .leading) {
+                            Text("30 Mar, 1997")
+                                .fontWeight(.bold)
+                                .foregroundStyle(Color("PrimaryOrange"))
+                            Text("Birth Date")
+                                .font(.footnote)
+                                .fontWeight(.semibold)
+                        }
+                    }
+                    .padding()
+                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                    .background(
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(Color("SecondaryOrange")))
+                    .padding(.bottom, 20)
+                    VStack {
+                        ForEach(profileData) { item in
+                            ProfileDetailButton(item: item, selectedTab: item.Tab )
+                                .padding(.bottom, 10)
+                        }
+                    }
+                    .padding(.bottom, 30)
+                    Button(action: {}, label: {
+                        HStack(spacing: 15) {
+                            Image("logout")
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: 35, height: 35)
-                                .foregroundColor(.red)
-                        })
-                    }
+                                .frame(width: 20, height: 20)
+                            Text("Logout")
+                                .font(.system(size: 20))
+                                .foregroundStyle(.black)
+                        }
+                    })
+                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal)
+                }
+                .navigationTitle("My Profile")
+                .navigationBarTitleDisplayMode(.inline)
             }
-            .navigationTitle("Profile")
-        .navigationBarTitleDisplayMode(.inline)
+            .padding(.horizontal)
+        }
+    }
+}
+
+struct ProfileDetailButton: View {
+    let item: ProfileModel
+    @State var selectedTab: ProfileCategory
+    
+    var body: some View {
+        VStack {
+            NavigationLink {
+                ProfileScreens(selectedTab: selectedTab)
+            } label: {
+                HStack(spacing: 15) {
+                    Image(systemName: item.iconName)
+                        .resizable()
+                        .scaledToFit()
+                        .foregroundStyle(Color("PrimaryOrange"))
+                        .frame(width: 25, height: 25)
+                    Text(item.name)
+                        .font(.system(size: 20))
+                        .foregroundStyle(.black)
+                    Spacer()
+                    Image(systemName: "chevron.right")
+                        .fontWeight(.bold)
+                        .foregroundStyle(Color("PrimaryGray"))
+                }
+            }
+        }
+        .padding()
+        .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+        .background(RoundedRectangle(cornerRadius: 10)
+            .fill(Color("LightWhite")))
     }
 }
 
 #Preview {
+    /*ProfileDetailButton*/
     ProfileView()
 }
+
+enum ProfileCategory: CaseIterable {
+    case personalData
+    case orders
+    case address
+    case settings
+}
+
+struct ProfileModel: Identifiable {
+    var id = UUID()
+    var name: String
+    var iconName: String
+    var Tab: ProfileCategory
+}
+
+struct ProfileScreens: View {
+    var selectedTab: ProfileCategory
+    var body: some View {
+        VStack {
+            switch selectedTab {
+            case .personalData:
+               PersonalDataView()
+            case .orders:
+              OrdersView()
+            case .address:
+                AddressView()
+            case .settings:
+                SettingsView()
+            }
+        }
+    }
+}
+
+

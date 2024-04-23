@@ -40,9 +40,9 @@ struct LoginView: View {
     }
 }
 
-//#Preview {
-//    LoginView()
-//}
+#Preview {
+    LoginView()
+}
 
 struct CustomButton: View {
     var title: String
