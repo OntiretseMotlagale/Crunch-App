@@ -29,14 +29,13 @@ class ContentViewModel: ObservableObject {
 struct ContentView: View {
     @StateObject var viewModel = ContentViewModel()
     var body: some View {
-        ProfileView()
-//        Group {
-//            if viewModel.userSession != nil {
-//                TabBarView()
-//            } else {
-//                LoginView()
-//            }
-//        }
+        Group {
+            if viewModel.userSession != nil {
+                TabBarView()
+            } else {
+                LoginView()
+            }
+        }
     }
 }
 #Preview {
