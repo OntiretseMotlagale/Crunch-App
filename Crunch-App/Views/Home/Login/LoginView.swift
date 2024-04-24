@@ -29,7 +29,7 @@ struct LoginView: View {
                         RegisterView(authService: AuthenticationManager())
                     } label: {
                         Text("Register")
-                            .foregroundStyle(Color("TertiaryBlue"))
+                            .foregroundStyle(AppColors.textColor)
                     }
                 }
                 .padding(.top, 10)
@@ -53,11 +53,11 @@ struct CustomButton: View {
         }, label: {
             Text(title)
                 .font(.headline)
-                .foregroundStyle(.black)
+                .foregroundStyle(.white)
                 .frame(maxWidth: .infinity)
                 .frame(height: 55)
                 .background(RoundedRectangle(cornerRadius: 10)
-                    .fill(Color("LightBlue")))
+                    .fill(LinearGradient(colors: [AppColors.primaryColor, AppColors.secondayColor], startPoint: .bottomLeading, endPoint: .bottomTrailing)))
         })
     }
 }

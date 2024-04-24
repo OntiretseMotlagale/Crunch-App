@@ -38,7 +38,7 @@ struct ProductDetailView: View {
                         Spacer()
                         Text("R\(item.price)")
                             .font(.title.bold())
-                            .foregroundStyle(Color.lightBlue)
+//                            .foregroundStyle(Color.lightBlue)
                     }
                 }
                 Text("About:")
