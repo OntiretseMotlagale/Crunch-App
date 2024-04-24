@@ -21,7 +21,7 @@ struct PersonalDataView: View {
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 60, height: 35)
-                                .foregroundStyle(Color("PrimaryOrange"))
+                                .foregroundStyle(Color("primaryPurple"))
                         })
                         .background {
                             Circle()
