@@ -69,7 +69,9 @@ struct ProfileView: View {
                         }
                     }
                     .padding(.bottom, 30)
-                    Button(action: {}, label: {
+                    Button(action: {
+                        viewModel.signOut()
+                    }, label: {
                         HStack(spacing: 15) {
                             Image("logout")
                                 .resizable()
