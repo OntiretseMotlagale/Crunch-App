@@ -15,6 +15,14 @@ struct TabBarItem: Identifiable {
     var index: Int
 }
 
+//struct TabBarView: View {
+//    let imageName: Tab = .home
+//    var body: some View {
+//        VStack {
+//            
+//        }
+//    }
+//}
 struct TabBarView: View {
     let tabItems: [TabBarItem] = [
         TabBarItem(iconName: "house", tab: .home, index: 0),

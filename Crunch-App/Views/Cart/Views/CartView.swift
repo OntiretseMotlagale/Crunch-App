@@ -14,38 +14,46 @@ struct CartView: View {
     init(realmManager: RealmManager) {
         _viewModel = StateObject(wrappedValue: CartViewModel(realmManager: realmManager))
     }
-   
     
     var body: some View {
         VStack (alignment: .leading, spacing: 20) {
-            List {
-                ForEach(viewModel.useableCartItems, id: \.self) { items in
-                    CartItem(item: items)
-                        .padding(.bottom, 10)
-                }
-                .onDelete(perform: viewModel.deleteItem)
-            }
-            .listStyle(.plain)
-            .background(
-                Color("SecondaryColor")
-                    .ignoresSafeArea())
-            HStack {
-                Text("Total:")
+            if viewModel.useableCartItems.isEmpty {
                 Spacer()
-                Text("\(viewModel.total)")
+                EmptyCartView()
+                Spacer()
             }
-            .font(.title2)
-            .fontWeight(.black)
-            Button(action: {}, label: {
-                Text("Checkout")
-                    .font(.title3)
-                    .fontWeight(.bold)
-                    .foregroundStyle(.white)
-                    .frame(height: 55)
-                    .frame(maxWidth: .infinity)
-                    .background(RoundedRectangle(cornerRadius: 10)
-                        .fill(Color("LightBlue")))
-            })
+            else {
+                  List {
+                        ForEach(viewModel.useableCartItems, id: \.self) { items in
+                            CartItem(item: items)
+                                .padding(.bottom, 10)
+                        }
+                        .onDelete(perform: viewModel.deleteItem)
+                    }
+                    .listStyle(.plain)
+                    Spacer()
+                    VStack {
+                        Group {
+                            Divider()
+                            CheckoutMenu(text: .constant("Subtotal: "), value: .constant("R500.00"))
+                            CheckoutMenu(text: .constant("Shipping:"), value: .constant("R500.00"))
+                            Divider()
+                            CheckoutMenu(text: .constant("Total:"), value: .constant("R1000.00"))
+                        }
+                        .padding(.bottom, 10)
+                        
+                        Button(action: {}, label: {
+                            Text("Checkout")
+                                .font(.title3)
+                                .fontWeight(.bold)
+                                .foregroundStyle(.white)
+                                .frame(height: 55)
+                                .frame(maxWidth: .infinity)
+                                .background(RoundedRectangle(cornerRadius: 20)
+                                    .fill(Color("primaryPurple")))
+                        })
+                    }
+            }
         }
         .navigationTitle("My Cart")
         .navigationBarTitleDisplayMode(.inline)
@@ -69,16 +77,6 @@ struct EmptyCartView: View {
                 .foregroundStyle(Color("LightGray"))
                 .padding(.horizontal)
                 .padding(.bottom, 30)
-            Button(action: {}, label: {
-                Text("Go Home")
-                    .font(.title3)
-                    .fontWeight(.bold)
-                    .foregroundStyle(.white)
-                    .frame(height: 55)
-                    .frame(maxWidth: .infinity)
-                    .background(RoundedRectangle(cornerRadius: 10)
-                        .fill(Color("LightBlue")))
-            })
         }
         .padding(.horizontal)
     }
@@ -86,4 +84,20 @@ struct EmptyCartView: View {
 
 #Preview {
     CartView(realmManager: RealmManager())
+}
+
+struct CheckoutMenu: View {
+    @Binding var text: String
+    @Binding var value: String
+    var body: some View {
+        HStack {
+            Text(text)
+                .foregroundStyle(Color("LightGray"))
+                .font(.system(size: 16))
+            Spacer()
+            Text(value)
+                .font(.system(size: 20))
+                .fontWeight(.bold)
+        }
+    }
 }
