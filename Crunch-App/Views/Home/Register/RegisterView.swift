@@ -41,7 +41,9 @@ struct RegisterView: View {
             
                 VStack (spacing: 20) {
                     CustomButton(title: "SIGN UP") {
-                        viewModel.register()
+                        Task {
+                            try await  viewModel.register()
+                        }
                     }
                     HStack {
                         RoundedRectangle(cornerSize: CGSize())

@@ -45,12 +45,12 @@ struct ProfileView: View {
                         Image(systemName: "bubbles.and.sparkles.fill")
                             .resizable()
                             .scaledToFit()
-                            .foregroundStyle(Color("PrimaryOrange"))
+                            .foregroundStyle(Color("primaryPurple"))
                             .frame(width: 30, height: 30)
                         VStack(alignment: .leading) {
                             Text("30 Mar, 1997")
                                 .fontWeight(.bold)
-                                .foregroundStyle(Color("PrimaryOrange"))
+                                .foregroundStyle(Color("primaryPurple"))
                             Text("Birth Date")
                                 .font(.footnote)
                                 .fontWeight(.semibold)
@@ -60,7 +60,7 @@ struct ProfileView: View {
                     .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                     .background(
                         RoundedRectangle(cornerRadius: 10)
-                            .fill(Color("SecondaryOrange")))
+                            .fill(Color("primaryPurple")))
                     .padding(.bottom, 20)
                     VStack {
                         ForEach(profileData) { item in
@@ -69,7 +69,9 @@ struct ProfileView: View {
                         }
                     }
                     .padding(.bottom, 30)
-                    Button(action: {}, label: {
+                    Button(action: {
+                        viewModel.signOut()
+                    }, label: {
                         HStack(spacing: 15) {
                             Image("logout")
                                 .resizable()
@@ -104,7 +106,7 @@ struct ProfileDetailButton: View {
                     Image(systemName: item.iconName)
                         .resizable()
                         .scaledToFit()
-                        .foregroundStyle(Color("PrimaryOrange"))
+                        .foregroundStyle(Color("primaryPurple"))
                         .frame(width: 25, height: 25)
                     Text(item.name)
                         .font(.system(size: 20))
