@@ -31,10 +31,10 @@ struct CartView: View {
                         .onDelete(perform: viewModel.deleteItem)
                     }
                     .listStyle(.plain)
+                    .scrollIndicators(.hidden)
                     Spacer()
                     VStack {
                         Group {
-                            Divider()
                             CheckoutMenu(text: .constant("Subtotal: "), value: .constant("R500.00"))
                             CheckoutMenu(text: .constant("Shipping:"), value: .constant("R500.00"))
                             Divider()
@@ -42,22 +42,15 @@ struct CartView: View {
                         }
                         .padding(.bottom, 10)
                         
-                        Button(action: {}, label: {
-                            Text("Checkout")
-                                .font(.title3)
-                                .fontWeight(.bold)
-                                .foregroundStyle(.white)
-                                .frame(height: 55)
-                                .frame(maxWidth: .infinity)
-                                .background(RoundedRectangle(cornerRadius: 20)
-                                    .fill(Color("primaryPurple")))
-                        })
+                        CustomButton(title: "Checkout") {
+                            //Checkout
+                        }
                     }
+                    .padding(.horizontal)
             }
         }
         .navigationTitle("My Cart")
         .navigationBarTitleDisplayMode(.inline)
-        .padding(.horizontal)
         .padding(.bottom, 20)
     }
     

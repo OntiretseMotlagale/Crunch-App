@@ -15,8 +15,8 @@ struct CartItem: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 100, height: 100)
-                    .background(RoundedRectangle(cornerRadius: 20)
-                        .fill(Color("SecondaryColor")))
+                    .background(RoundedRectangle(cornerRadius: 10)
+                        .fill(Color("PrimaryGray")))
                 VStack(alignment: .leading, spacing: 20) {
                     Text(item.name)
                         .font(.title3)
@@ -29,31 +29,16 @@ struct CartItem: View {
                             .fontWeight(.ultraLight)
                         Spacer()
                         HStack(alignment: .center) {
-                            Button(action: {}, label: {
-                                Image(systemName: "minus")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 8)
-                                    .foregroundColor(.black)
-                                    .padding(8)
-                                    .frame(width: 25, height: 25)
-                                    .background(RoundedRectangle(cornerRadius: 5)
-                                        .fill(Color("SecondaryColor")))
-                            })
+                            QuantityButton(imageName: "minus") {
+                                
+                            }
                             Text("1")
                                 .font(.caption)
                                 .fontWeight(.bold)
-                            Button(action: {}, label: {
-                                Image(systemName: "plus")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 8)
-                                    .foregroundColor(.white)
-                                    .padding(8)
-                                    .frame(width: 25, height: 25)
-                                    .background(RoundedRectangle(cornerRadius: 5)
-                                        .fill(Color("LightBlue")))
-                            })
+                                .foregroundStyle(.black)
+                            QuantityButton(imageName: "plus") {
+                                
+                            }
                         }
                         .padding(.trailing, 2)
                     }
@@ -67,8 +52,28 @@ struct CartItem: View {
             .navigationTitle("My Cart")
             .navigationBarTitleDisplayMode(.inline)
     }
+    
+    struct QuantityButton: View {
+        let imageName: String
+        var buttonAction: () -> ()
+        var body: some View {
+            Button(action: {
+                buttonAction()
+            }, label: {
+                Image(systemName: imageName)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 8)
+                    .foregroundColor(.black)
+                    .padding(8)
+                    .frame(width: 25, height: 25)
+                    .background(RoundedRectangle(cornerRadius: 5)
+                        .fill(Color("PrimaryGray")))
+            })
+        }
+    }
 }
-//
-//#Preview {
-//    CartItem(item: RealmProductItem())
-//}
+
+#Preview {
+    CartItem(item: UsableCartItems(name: "Acer Laptop", image: "acer-1", price: 13999, descript: "fhkhf foinfif"))
+}

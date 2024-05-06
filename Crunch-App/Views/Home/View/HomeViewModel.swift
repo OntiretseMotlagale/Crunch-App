@@ -32,7 +32,7 @@ class HomeViewModel: ObservableObject {
                           productModel: dataService.phone,
                           name: "Phones"),
             CategoryModel(imageName: "headphones", 
-                          color: "LightBlue",
+                          color: "TextColor",
                           productModel: dataService.headphones,
                           name: "Headphones"),
             CategoryModel(imageName: "televisions", 

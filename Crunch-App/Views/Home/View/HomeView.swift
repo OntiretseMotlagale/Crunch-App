@@ -8,14 +8,16 @@
 import SwiftUI
 
 struct HomeView: View {
+    
     @StateObject var viewModel = HomeViewModel()
+    
     let column: [GridItem] = [
         GridItem(.flexible(), spacing: 15, alignment: nil),
-        GridItem(.flexible(), spacing: 15, alignment: nil)
-    ]
+        GridItem(.flexible(), spacing: 15, alignment: nil) ]
+    
     var body: some View {
         NavigationStack {
-            ScrollView {
+            ScrollView  {
                 VStack {
                     LazyVGrid(columns: column,
                               alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/,
@@ -33,12 +35,11 @@ struct HomeView: View {
                 .padding(.horizontal)
             }
             .background(
-                Color("SecondaryColor")
-                        .ignoresSafeArea())
+                Color(AppColors.primaryLightGray)
+                    .ignoresSafeArea())
         }
     }
 }
-
 #Preview {
     HomeView()
 }
