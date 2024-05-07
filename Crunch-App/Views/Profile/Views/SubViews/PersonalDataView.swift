@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct PersonalDataView: View {
-    @State var fullname: String = "Bakang"
-    @State var email: String = "Bakang@gmail.com"
+    @State var fullname: String = ""
+    @State var email: String = ""
     @State var showAlert: Bool = false
     @State var newFullname: String = ""
     @State var newEmail: String = ""
