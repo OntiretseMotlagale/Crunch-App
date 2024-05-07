@@ -38,7 +38,7 @@ struct ProductDetailView: View {
                         Spacer()
                         Text("R\(item.price)")
                             .font(.title.bold())
-                            .foregroundStyle(Color.lightBlue)
+//                            .foregroundStyle(Color.lightBlue)
                     }
                 }
                 Text("About:")
@@ -49,17 +49,9 @@ struct ProductDetailView: View {
                     .foregroundStyle(Color.lightGray)
                     .padding(.bottom, 20)
                 
-                Button(action: {
+                CustomButton(title: "Buy Now") {
                     viewModel.addItemToRealm(item: item)
-                }, label: {
-                    Text("Buy Now")
-                        .font(.headline)
-                        .foregroundStyle(.white)
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 55)
-                        .background(RoundedRectangle(cornerRadius: 10)
-                            .fill(Color("LightBlue")))
-                })
+                }
             }
         }
         .padding(.horizontal)
