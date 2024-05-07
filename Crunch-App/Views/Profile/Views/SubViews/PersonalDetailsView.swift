@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct PersonalDataView: View {
+struct PersonalDetailsView: View {
     @State var fullname: String = ""
     @State var email: String = ""
     @State var showAlert: Bool = false
@@ -118,6 +118,6 @@ struct PersonalDataView: View {
 }
 
 #Preview {
-    PersonalDataView()
+    PersonalDetailsView()
 }
 
