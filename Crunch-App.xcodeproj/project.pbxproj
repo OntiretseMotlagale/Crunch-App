@@ -154,13 +154,6 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		2625A9F32BB2F89700BBB478 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
 		2625A9F42BB2F8B000BBB478 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -418,7 +411,6 @@
 		26BD82B02BAEC93100915A14 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				2625A9F32BB2F89700BBB478 /* ViewModel */,
 				2625A9F22BB2F89000BBB478 /* Views */,
 			);
 			path = Profile;
