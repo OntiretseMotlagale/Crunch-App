@@ -34,38 +34,6 @@
             endingLineNumber = "18"
             landmarkName = "TabBarView"
             landmarkType = "14">
-            <Locations>
-               <Location
-                  uuid = "F0013697-EA17-42B8-A9A0-F04A454328F0 - be1e3d9dd845ba7e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Crunch_App.TabBarView.init() -&gt; Crunch_App.TabBarView"
-                  moduleName = "Crunch-App"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ontiretse@glucode.com/Documents/Crunch-App/Crunch-App/Views/Home/Tab%20Bar/TabBarView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "27"
-                  endingLineNumber = "27"
-                  offsetFromSymbolStart = "92">
-               </Location>
-               <Location
-                  uuid = "F0013697-EA17-42B8-A9A0-F04A454328F0 - a73f0e829c214ef9"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Crunch_App.TabBarView.init(selectedTab: Crunch_App.Tab, xOffset: Swift.Double) -&gt; Crunch_App.TabBarView"
-                  moduleName = "Crunch-App"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ontiretse@glucode.com/Documents/Crunch-App/Crunch-App/Views/Home/Tab%20Bar/TabBarView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "27"
-                  endingLineNumber = "27"
-                  offsetFromSymbolStart = "84">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
