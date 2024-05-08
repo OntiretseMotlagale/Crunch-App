@@ -33,6 +33,7 @@ class FirestoreManager {
         guard let data = documentSnapshot.data() else {
             throw URLError(.badURL)
         }
+        
         let uid = data["uid"] as? String
         let email = data["email"] as? String
         let fullname = data["fullname"] as? String
