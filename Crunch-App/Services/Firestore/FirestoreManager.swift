@@ -28,11 +28,10 @@ class FirestoreManager {
             throw URLError(.badURL)
         }
     }
-    
     func fetchFirestoreUser(id: String) async throws -> DatabaseUser {
         let documentSnapshot = try await userFirestoreReference.document(id).getDocument()
         guard let data = documentSnapshot.data() else {
-            throw URLError(.cannotOpenFile)
+            throw URLError(.badURL)
         }
         let uid = data["uid"] as? String
         let email = data["email"] as? String
