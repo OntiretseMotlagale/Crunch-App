@@ -13,6 +13,7 @@ struct DatabaseUser {
 @MainActor
 class FirestoreManager {
     static let shared = FirestoreManager()
+    let userFirestoreReference = Firestore.firestore().collection("users")
     func uploadUser(uid: String, fullname: String, email: String, photoURL: String) async throws {
         let userData: [String : Any] = [
             "uid": uid,
@@ -21,7 +22,7 @@ class FirestoreManager {
             "photoURL": photoURL
         ]
         do {
-            try await Firestore.firestore().collection("users").document(uid).setData(userData)
+            try await userFirestoreReference.document(uid).setData(userData)
         }
         catch {
             throw URLError(.badURL)
@@ -29,7 +30,7 @@ class FirestoreManager {
     }
     
     func fetchFirestoreUser(id: String) async throws -> DatabaseUser {
-        let documentSnapshot = try await Firestore.firestore().collection("users").document(id).getDocument()
+        let documentSnapshot = try await userFirestoreReference.document(id).getDocument()
         guard let data = documentSnapshot.data() else {
             throw URLError(.cannotOpenFile)
         }
