@@ -9,10 +9,8 @@ import Foundation
 import SwiftUI
 import FirebaseAuth
 
-
-
 class ProfileViewModel: ObservableObject {
-    
+  
     func signOut() {
         AuthenticationManager.shared.signOut()
     }
@@ -152,7 +150,7 @@ struct ProfileScreens: View {
             case .personalDetails:
                 PersonalDetailsView()
             case .orders:
-              OrdersView()
+                OrdersView()
             case .address:
                 AddressView()
             case .settings:
