@@ -7,10 +7,21 @@
 
 import SwiftUI
 
+@MainActor
+class PersonalViewModel: ObservableObject {
+    @Published private(set) var databaseUser: DatabaseUser? = nil
+    
+    func loadCurrentUser() async throws {
+        let authUser =  try AuthenticationManager.shared.getAuthenticatedUser()
+        self.databaseUser = try await FirestoreManager.shared.fetchFirestoreUser(id: authUser)
+    }
+}
 struct PersonalDataView: View {
     @State var fullname: String = ""
     @State var email: String = ""
     @State var dateOfBirth: String = ""
+    
+    @StateObject var viewModel = PersonalViewModel()
     var body: some View {
         ScrollView {
             VStack {
@@ -32,20 +43,27 @@ struct PersonalDataView: View {
                     Text("Full Name")
                         .foregroundStyle(Color("LightGray"))
                         .padding(.bottom, 5)
-                    Text("Ontiretse Motlagale")
+                    if let fullname = viewModel.databaseUser?.fullname {
+                        Text(fullname)
+                    }
                     Divider()
                         .padding(.bottom, 5)
-                    Text("Email")
-                        .foregroundStyle(Color("LightGray"))
-                        .padding(.bottom, 5)
-                    Text("OntiretseMotlagale@gmail.com")
+                    
+                        Text("Email")
+                            .foregroundStyle(Color("LightGray"))
+                            .padding(.bottom, 5)
+                if let email =  viewModel.databaseUser {
+                    Text(email.email ?? "No Email")
                         .tint(.black)
+                }
                     Divider()
                 }
             }
             .padding(.horizontal)
             .navigationTitle("Edit Profile")
-            .navigationBarBackButtonHidden()
+        }
+        .task {
+            try? await viewModel.loadCurrentUser()
         }
     }
 }
