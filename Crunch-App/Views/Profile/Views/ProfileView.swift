@@ -18,9 +18,9 @@ class ProfileViewModel: ObservableObject {
 struct ProfileView: View {
     @StateObject var viewModel = ProfileViewModel()
     @State var profileData: [ProfileModel] = [
-        ProfileModel(name: "Personal Data",
+        ProfileModel(name: "Personal Details",
                      iconName: "person",
-                     Tab: .personalData),
+                     Tab: .personalDetails),
         ProfileModel(name: "Address",
                      iconName: "house",
                      Tab: .address),
@@ -129,7 +129,7 @@ struct ProfileDetailButton: View {
 }
 
 enum ProfileCategory: CaseIterable {
-    case personalData
+    case personalDetails
     case orders
     case address
     case settings
@@ -147,8 +147,8 @@ struct ProfileScreens: View {
     var body: some View {
         VStack {
             switch selectedTab {
-            case .personalData:
-                PersonalDataView()
+            case .personalDetails:
+                PersonalDetailsView()
             case .orders:
                 OrdersView()
             case .address:

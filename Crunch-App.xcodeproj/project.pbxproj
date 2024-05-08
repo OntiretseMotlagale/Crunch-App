@@ -58,7 +58,7 @@
 		26BD82AF2BAEB54900915A14 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 26BD82AE2BAEB54900915A14 /* FirebaseAuth */; };
 		26BD82B22BAEC94D00915A14 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BD82B12BAEC94D00915A14 /* ProfileView.swift */; };
 		26BDE27D2BD7977C00E4DAB7 /* ProfileImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BDE27C2BD7977B00E4DAB7 /* ProfileImage.swift */; };
-		26BDE27F2BD7983E00E4DAB7 /* PersonalDataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BDE27E2BD7983E00E4DAB7 /* PersonalDataView.swift */; };
+		26BDE27F2BD7983E00E4DAB7 /* PersonalDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BDE27E2BD7983E00E4DAB7 /* PersonalDetailsView.swift */; };
 		26BDE2812BD7984D00E4DAB7 /* AddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BDE2802BD7984D00E4DAB7 /* AddressView.swift */; };
 		26BDE2832BD7985900E4DAB7 /* OrdersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BDE2822BD7985900E4DAB7 /* OrdersView.swift */; };
 		26BDE2852BD7986600E4DAB7 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BDE2842BD7986600E4DAB7 /* SettingsView.swift */; };
@@ -109,7 +109,7 @@
 		26BD82AB2BAEAB8400915A14 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
 		26BD82B12BAEC94D00915A14 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		26BDE27C2BD7977B00E4DAB7 /* ProfileImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImage.swift; sourceTree = "<group>"; };
-		26BDE27E2BD7983E00E4DAB7 /* PersonalDataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDataView.swift; sourceTree = "<group>"; };
+		26BDE27E2BD7983E00E4DAB7 /* PersonalDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalDetailsView.swift; sourceTree = "<group>"; };
 		26BDE2802BD7984D00E4DAB7 /* AddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressView.swift; sourceTree = "<group>"; };
 		26BDE2822BD7985900E4DAB7 /* OrdersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersView.swift; sourceTree = "<group>"; };
 		26BDE2842BD7986600E4DAB7 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
@@ -152,13 +152,6 @@
 				26BD82B12BAEC94D00915A14 /* ProfileView.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		2625A9F32BB2F89700BBB478 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		2625A9F42BB2F8B000BBB478 /* Views */ = {
@@ -418,7 +411,6 @@
 		26BD82B02BAEC93100915A14 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				2625A9F32BB2F89700BBB478 /* ViewModel */,
 				2625A9F22BB2F89000BBB478 /* Views */,
 			);
 			path = Profile;
@@ -427,7 +419,7 @@
 		26BDE27A2BD7974A00E4DAB7 /* SubViews */ = {
 			isa = PBXGroup;
 			children = (
-				26BDE27E2BD7983E00E4DAB7 /* PersonalDataView.swift */,
+				26BDE27E2BD7983E00E4DAB7 /* PersonalDetailsView.swift */,
 				26BDE2802BD7984D00E4DAB7 /* AddressView.swift */,
 				26BDE2822BD7985900E4DAB7 /* OrdersView.swift */,
 				26BDE2842BD7986600E4DAB7 /* SettingsView.swift */,
@@ -568,7 +560,7 @@
 				264E50872B9DDCE100E46BDD /* RegisterViewModel.swift in Sources */,
 				26BDE27D2BD7977C00E4DAB7 /* ProfileImage.swift in Sources */,
 				267C4D902BDC2987008F412D /* AppColors.swift in Sources */,
-				26BDE27F2BD7983E00E4DAB7 /* PersonalDataView.swift in Sources */,
+				26BDE27F2BD7983E00E4DAB7 /* PersonalDetailsView.swift in Sources */,
 				26BDE2812BD7984D00E4DAB7 /* AddressView.swift in Sources */,
 				26BD829D2BADCE0C00915A14 /* CartViewModel.swift in Sources */,
 				26BD82AC2BAEAB8400915A14 /* AuthenticationManager.swift in Sources */,
