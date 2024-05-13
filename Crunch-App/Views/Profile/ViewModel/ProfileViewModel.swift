@@ -6,3 +6,10 @@
 //
 
 import Foundation
+
+class ProfileViewModel: ObservableObject {
+    
+    func signOut() {
+        AuthenticationManager.shared.signOut()
+    }
+}

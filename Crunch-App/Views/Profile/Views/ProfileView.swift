@@ -9,12 +9,6 @@ import Foundation
 import SwiftUI
 import FirebaseAuth
 
-class ProfileViewModel: ObservableObject {
-    
-    func signOut() {
-        AuthenticationManager.shared.signOut()
-    }
-}
 
 struct ProfileView: View {
     @StateObject var viewModel = ProfileViewModel()
