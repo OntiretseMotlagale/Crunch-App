@@ -9,11 +9,14 @@ import SwiftUI
 
 @MainActor
 class PersonalViewModel: ObservableObject {
-    @Published private(set) var databaseUser: DatabaseUser? = nil
+    let profileViewModel: ProfileViewModel
     
-    func loadCurrentUser() async throws {
-        let authUser =  try AuthenticationManager.shared.getAuthenticatedUser()
-        self.databaseUser = try await FirestoreManager.shared.fetchFirestoreUser(id: authUser)
+    init(profileViewModel: ProfileViewModel) {
+        self.profileViewModel = profileViewModel
+    }
+    
+    func loadCurrentUser() async {
+       try await profileViewModel.loadCurrentUser()
     }
 }
 struct PersonalDataView: View {
@@ -21,7 +24,7 @@ struct PersonalDataView: View {
     @State var email: String = ""
     @State var dateOfBirth: String = ""
     
-    @StateObject var viewModel = PersonalViewModel()
+    @StateObject var viewModel = ProfileViewModel()
     var body: some View {
         ScrollView {
             VStack {
@@ -36,7 +39,8 @@ struct PersonalDataView: View {
                         })
                         .background {
                             Circle()
-                            .fill(.white)}
+                                .fill(.white)
+                        }
                     }
                     .padding(.bottom, 30)
                 VStack (alignment: .leading) {
