@@ -7,12 +7,24 @@
 
 import SwiftUI
 
+@MainActor
+class PersonalDataViewModel: ObservableObject {
+    @Published private(set) var databaseUser: DatabaseUser? = nil
+    @Published var newFullname: String = ""
+    @Published var newEmail: String = ""
+
+    func loadCurrentLoggedInUser() async throws {
+        let authUser = try AuthenticationManager.shared.getAuthenticatedUser()
+        self.databaseUser = try await FirestoreManager.shared.fetchFirestoreUser(id: authUser)
+    }
+}
 struct PersonalDetailsView: View {
     @State var fullname: String = ""
     @State var email: String = ""
     @State var showAlert: Bool = false
-    @State var newFullname: String = ""
-    @State var newEmail: String = ""
+  
+    
+    @StateObject var viewModel = PersonalDataViewModel()
     var body: some View {
         ScrollView {
             VStack {
@@ -31,13 +43,15 @@ struct PersonalDetailsView: View {
                     }
                     .padding(.bottom, 30)
                 buildAlert()
-                   
                     .navigationTitle("Edit Profile")
                 CustomButton(title: "Save") {
                     
                 }
             }
             .padding(.horizontal)
+        }
+        .task {
+            try? await viewModel.loadCurrentLoggedInUser()
         }
     }
     
@@ -49,14 +63,15 @@ struct PersonalDetailsView: View {
                         .foregroundStyle(Color("LightGray"))
                         .fontWeight(.semibold)
                         .padding(.bottom, 5)
-                    Text(fullname)
-                        .fontWeight(.semibold)
+                    if let fullname = viewModel.databaseUser?.fullname {
+                        Text(fullname)
+                            .fontWeight(.semibold)
+                    }
                     Divider()
                         .padding(.bottom, 5)
                 }
                 Button(action: {
-                    self.showAlert = true
-                    print("You tapped me")
+                    self.showAlert.toggle()
                 }, label: {
                     Text("Edit")
                         .fontWeight(.semibold)
@@ -69,9 +84,11 @@ struct PersonalDetailsView: View {
                         .foregroundStyle(Color("LightGray"))
                         .fontWeight(.semibold)
                         .padding(.bottom, 5)
-                    Text(email)
-                        .tint(.black)
-                        .fontWeight(.semibold)
+                    if let email = viewModel.databaseUser?.email {
+                        Text(email)
+                            .tint(.black)
+                            .fontWeight(.semibold)
+                    }
                     Divider()
                         .padding(.bottom, 5)
                 }
@@ -85,13 +102,12 @@ struct PersonalDetailsView: View {
             }
         }
     }
-    
     @ViewBuilder func buildAlert() -> some View {
         buildUserProfileInputs()
             .alert("Edit Full Name", isPresented: $showAlert) {
-            TextField("Full Name", text: $newFullname)
+                TextField("Full Name", text: $viewModel.newFullname)
             Button(role: .cancel) {
-                fullname = newFullname
+                fullname = viewModel.newFullname
             } label: {
                 Text("Save")
             }
@@ -102,9 +118,9 @@ struct PersonalDetailsView: View {
             }
         }
             .alert("Edit Email", isPresented: $showAlert) {
-                TextField("Email", text: $newEmail)
+                TextField("Email", text: $viewModel.newEmail)
                 Button(role: .cancel) {
-                    email = newEmail
+                    email = viewModel.newEmail
                 } label: {
                     Text("Save")
                 }
