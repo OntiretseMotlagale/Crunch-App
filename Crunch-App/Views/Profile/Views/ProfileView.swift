@@ -9,10 +9,17 @@ import Foundation
 import SwiftUI
 import FirebaseAuth
 
+@MainActor
 class ProfileViewModel: ObservableObject {
-  
+    @Published private(set) var databaseUser: DatabaseUser? = nil
+    
     func signOut() {
         AuthenticationManager.shared.signOut()
+    }
+    
+    func loadCurrentUser() async throws {
+        let authUser =  try AuthenticationManager.shared.getAuthenticatedUser()
+        self.databaseUser = try await FirestoreManager.shared.fetchFirestoreUser(id: authUser)
     }
 }
 struct ProfileView: View {
@@ -37,8 +44,10 @@ struct ProfileView: View {
             ScrollView {
                 VStack {
                     ProfileImage()
-                    Text("Ontiretse Motlagale")
-                        .font(.title.bold())
+                    if let fullname = viewModel.databaseUser?.fullname {
+                        Text(fullname)
+                            .font(.title.bold())
+                    }
                     HStack (spacing: 30) {
                         Image(systemName: "bubbles.and.sparkles.fill")
                             .resizable()
@@ -87,6 +96,9 @@ struct ProfileView: View {
                 .navigationBarTitleDisplayMode(.inline)
             }
             .padding(.horizontal)
+        }
+        .task {
+            try? await viewModel.loadCurrentUser()
         }
     }
 }
