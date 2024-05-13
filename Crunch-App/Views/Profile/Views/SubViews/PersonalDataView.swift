@@ -45,7 +45,7 @@ struct PersonalDataView: View {
             }
             .padding(.horizontal)
             .navigationTitle("Edit Profile")
-            .navigationBarBackButtonHidden()
+            
         }
     }
 }
