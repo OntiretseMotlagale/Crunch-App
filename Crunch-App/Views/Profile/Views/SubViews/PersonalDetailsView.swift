@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+@MainActor
 class PersonalDataViewModel: ObservableObject {
     @Published private(set) var databaseUser: DatabaseUser? = nil
     @Published var newFullname: String = ""
@@ -42,7 +43,6 @@ struct PersonalDetailsView: View {
                     }
                     .padding(.bottom, 30)
                 buildAlert()
-                   
                     .navigationTitle("Edit Profile")
                 CustomButton(title: "Save") {
                     
