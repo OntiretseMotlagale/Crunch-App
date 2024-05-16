@@ -11,7 +11,6 @@ import SwiftUI
 class PersonalDataViewModel: ObservableObject {
     @Published private(set) var databaseUser: DatabaseUser? = nil
     @Published var newFullname: String = ""
-    @Published var newEmail: String = ""
 
     func loadCurrentLoggedInUser() async throws {
         let authUser = try AuthenticationManager.shared.getAuthenticatedUser()
@@ -19,12 +18,10 @@ class PersonalDataViewModel: ObservableObject {
     }
 }
 struct PersonalDetailsView: View {
-    @State var fullname: String = ""
-    @State var email: String = ""
-    @State var showAlert: Bool = false
+    @State private var fullname: String = ""
+    @State private var showAlert: Bool = false
   
-    
-    @StateObject var viewModel = PersonalDataViewModel()
+   @StateObject private var viewModel = PersonalDataViewModel()
     var body: some View {
         ScrollView {
             VStack {
@@ -92,13 +89,6 @@ struct PersonalDetailsView: View {
                     Divider()
                         .padding(.bottom, 5)
                 }
-                Button(action: {
-                    self.showAlert.toggle()
-                }, label: {
-                    Text("Edit")
-                        .fontWeight(.semibold)
-                        .foregroundStyle(AppColors.textColor)
-                })
             }
         }
     }
@@ -117,19 +107,6 @@ struct PersonalDetailsView: View {
                 Text("Cancel")
             }
         }
-            .alert("Edit Email", isPresented: $showAlert) {
-                TextField("Email", text: $viewModel.newEmail)
-                Button(role: .cancel) {
-                    email = viewModel.newEmail
-                } label: {
-                    Text("Save")
-                }
-                Button(role: .destructive) {
-                    self.showAlert = false
-                } label: {
-                    Text("Cancel")
-                }
-            }
     }
 }
 
