@@ -12,15 +12,14 @@ struct CategoryView: View {
     var body: some View {
         VStack {
             VStack {
-                VStack {
-                    Image(category.imageName)
-                        .resizable()
-                        .scaledToFit()
-                        .padding()
-                }
-                .frame(width: 150, height: 150)
-                .background(Color(category.color), in: RoundedRectangle(cornerRadius: 10))
-                .padding()
+                
+                Image(category.imageName)
+                    .resizable()
+                    .scaledToFit()
+                    .padding()
+                    .frame(width: 150, height: 150)
+                    .background(Color(category.color), in: RoundedRectangle(cornerRadius: 10))
+                    .padding()
                 Spacer()
                 Text(category.name)
                     .font(.headline)
@@ -36,10 +35,9 @@ struct CategoryView: View {
             }
             .frame(width: 170, height: 260)
             .background(.white, in: RoundedRectangle(cornerRadius: 10))
-        .padding(.horizontal)
+            .shadow(color: .black.opacity(0.1), radius: 4, x: 3, y: 3)
+            .padding(.horizontal)
         }
-        .shadow(color: .black.opacity(0.4), radius: 6, x: 0.5, y: 0.5)
-        
     }
 }
 
