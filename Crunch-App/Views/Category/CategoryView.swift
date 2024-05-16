@@ -12,30 +12,32 @@ struct CategoryView: View {
     var body: some View {
         VStack {
             VStack {
+                
                 Image(category.imageName)
                     .resizable()
                     .scaledToFit()
                     .padding()
+                    .frame(width: 150, height: 150)
+                    .background(Color(category.color), in: RoundedRectangle(cornerRadius: 10))
+                    .padding()
+                Spacer()
+                Text(category.name)
+                    .font(.headline)
+                    .padding(.bottom, 4)
+                    .foregroundStyle(.black)
+                Text("\(category.productModel.count) Items")
+                    .font(.footnote)
+                    .foregroundStyle(.black)
+                    .padding(6)
+                    .background(RoundedRectangle(cornerRadius: 10)
+                        .fill(Color.gray.opacity(0.2)))
+                    .padding(.bottom, 20)
             }
-            .frame(width: 150, height: 150)
-            .background(Color(category.color), in: RoundedRectangle(cornerRadius: 10))
-            .padding()
-            Spacer()
-            Text(category.name)
-                .font(.headline)
-                .padding(.bottom, 4)
-                .foregroundStyle(.black)
-            Text("\(category.productModel.count) Items")
-                .font(.footnote)
-                .foregroundStyle(.black)
-                .padding(6)
-                .background(RoundedRectangle(cornerRadius: 10)
-                    .fill(Color.gray.opacity(0.2)))
-                .padding(.bottom, 20)
+            .frame(width: 170, height: 260)
+            .background(.white, in: RoundedRectangle(cornerRadius: 10))
+            .shadow(color: .black.opacity(0.1), radius: 4, x: 3, y: 3)
+            .padding(.horizontal)
         }
-        .frame(width: 170, height: 260)
-        .background(.white, in: RoundedRectangle(cornerRadius: 10))
-        .padding(.horizontal)
     }
 }
 
