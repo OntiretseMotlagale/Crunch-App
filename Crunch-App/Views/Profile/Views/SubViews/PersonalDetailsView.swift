@@ -11,14 +11,28 @@ import SwiftUI
 class PersonalDataViewModel: ObservableObject {
     @Published private(set) var databaseUser: DatabaseUser? = nil
     @Published var newFullname: String = ""
+    @Published private var fullname: String = ""
 
     func loadCurrentLoggedInUser() async throws {
         let authUser = try AuthenticationManager.shared.getAuthenticatedUser()
         self.databaseUser = try await FirestoreManager.shared.fetchFirestoreUser(id: authUser)
     }
+    
+    func getFullname() -> String {
+        if let fullname = databaseUser?.fullname { return fullname }
+        return ""
+    }
+    
+    func getEmail() -> String {
+        if let email = databaseUser?.email { return email }
+        return ""
+    }
+    func editFullname() {
+         newFullname = getFullname()
+    }
 }
 struct PersonalDetailsView: View {
-    @State private var fullname: String = ""
+    
     @State private var showAlert: Bool = false
   
    @StateObject private var viewModel = PersonalDataViewModel()
@@ -60,10 +74,10 @@ struct PersonalDetailsView: View {
                         .foregroundStyle(Color("LightGray"))
                         .fontWeight(.semibold)
                         .padding(.bottom, 5)
-                    if let fullname = viewModel.databaseUser?.fullname {
-                        Text(fullname)
+                   
+                    Text(viewModel.getFullname())
                             .fontWeight(.semibold)
-                    }
+                    
                     Divider()
                         .padding(.bottom, 5)
                 }
@@ -81,11 +95,11 @@ struct PersonalDetailsView: View {
                         .foregroundStyle(Color("LightGray"))
                         .fontWeight(.semibold)
                         .padding(.bottom, 5)
-                    if let email = viewModel.databaseUser?.email {
-                        Text(email)
+                    
+                    Text(viewModel.getEmail())
                             .tint(.black)
                             .fontWeight(.semibold)
-                    }
+                    
                     Divider()
                         .padding(.bottom, 5)
                 }
@@ -97,7 +111,7 @@ struct PersonalDetailsView: View {
             .alert("Edit Full Name", isPresented: $showAlert) {
                 TextField("Full Name", text: $viewModel.newFullname)
             Button(role: .cancel) {
-                fullname = viewModel.newFullname
+                viewModel.editFullname()
             } label: {
                 Text("Save")
             }
