@@ -44,6 +44,7 @@ struct ProfileView: View {
             ScrollView {
                 VStack {
                     ProfileImage()
+                        .padding(.bottom, 30)
                     if let fullname = viewModel.databaseUser?.fullname {
                         Text(fullname)
                             .font(.title.bold())
@@ -52,22 +53,23 @@ struct ProfileView: View {
                         Image(systemName: "bubbles.and.sparkles.fill")
                             .resizable()
                             .scaledToFit()
-                            .foregroundStyle(Color("primaryPurple"))
+                            .foregroundStyle(.white)
                             .frame(width: 30, height: 30)
                         VStack(alignment: .leading) {
                             Text("30 Mar, 1997")
                                 .fontWeight(.bold)
-                                .foregroundStyle(Color("primaryPurple"))
+                                .foregroundStyle(.white)
                             Text("Birth Date")
                                 .font(.footnote)
                                 .fontWeight(.semibold)
+                                .foregroundStyle(.white)
                         }
                     }
                     .padding()
                     .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                     .background(
                         RoundedRectangle(cornerRadius: 10)
-                            .fill(Color("primaryPurple")))
+                            .fill(AppColors.primaryColor))
                     .padding(.bottom, 20)
                     VStack {
                         ForEach(profileData) { item in
@@ -79,17 +81,18 @@ struct ProfileView: View {
                     Button(action: {
                         viewModel.signOut()
                     }, label: {
-                        HStack(spacing: 15) {
-                            Image("logout")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 20, height: 20)
+                        HStack(spacing: 40) {
                             Text("Logout")
-                                .font(.system(size: 20))
-                                .foregroundStyle(.black)
+                                .font(.system(size: 25))
+                                .fontWeight(.thin)
+                                .foregroundStyle(.white)
                         }
                     })
-                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                   
+                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
+                    .frame(height: 50)
+                    .background(Color.red)
+                    .cornerRadius(30)
                     .padding(.horizontal)
                 }
                 .navigationTitle("My Profile")
@@ -116,22 +119,23 @@ struct ProfileDetailButton: View {
                     Image(systemName: item.iconName)
                         .resizable()
                         .scaledToFit()
-                        .foregroundStyle(Color("primaryPurple"))
-                        .frame(width: 25, height: 25)
+                        .foregroundStyle(.white)
+                        .frame(width: 20, height: 20)
                     Text(item.name)
                         .font(.system(size: 20))
-                        .foregroundStyle(.black)
+                        .fontWeight(.light)
+                        .foregroundStyle(.white)
                     Spacer()
                     Image(systemName: "chevron.right")
                         .fontWeight(.bold)
-                        .foregroundStyle(Color("PrimaryGray"))
+                        .foregroundStyle(.white)
                 }
             }
         }
         .padding()
         .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
         .background(RoundedRectangle(cornerRadius: 10)
-            .fill(Color("LightWhite")))
+            .fill(AppColors.primaryColor))
     }
 }
 
