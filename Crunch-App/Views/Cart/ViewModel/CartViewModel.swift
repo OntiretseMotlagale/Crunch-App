@@ -27,7 +27,7 @@ struct UsableCartItems: Hashable {
     }
 }
 class CartViewModel: ObservableObject {
-    @Published var total = 0
+    @Published var total: Int = 0
     @Published var useableCartItems: [UsableCartItems] = []
     @Published var cartItems: Results<RealmProductItem>! {
         didSet {
@@ -44,7 +44,7 @@ class CartViewModel: ObservableObject {
         mapUsableCartItems()
     }
     
-    func mapUsableCartItems() {
+    private func mapUsableCartItems() {
         self.useableCartItems = cartItems.map {
             UsableCartItems(name: $0.name,
                               image: $0.image,
@@ -52,14 +52,14 @@ class CartViewModel: ObservableObject {
                               descript: $0.descript)
         }
     }
-    func calculateTotal() {
+   private func calculateTotal() {
         mapUsableCartItems()
         total = 0
         for items in useableCartItems {
-            total += items.price
+            total += items.price 
         }
     }
-    func fetchItems() {
+    private func fetchItems() {
         cartItems = realmManager.fetchRealmItems()
     }
     

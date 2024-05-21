@@ -35,10 +35,9 @@ struct CartView: View {
                     Spacer()
                     VStack {
                         Group {
-                            CheckoutMenu(text: .constant("Subtotal: "), value: .constant("R500.00"))
-                            CheckoutMenu(text: .constant("Shipping:"), value: .constant("R500.00"))
                             Divider()
-                            CheckoutMenu(text: .constant("Total:"), value: .constant("R1000.00"))
+                            CheckoutMenu(text: "Total:", value: $viewModel.total)
+                    
                         }
                         .padding(.bottom, 10)
                         
@@ -80,15 +79,15 @@ struct EmptyCartView: View {
 }
 
 struct CheckoutMenu: View {
-    @Binding var text: String
-    @Binding var value: String
+    var text: String
+    @Binding var value: Int
     var body: some View {
         HStack {
             Text(text)
                 .foregroundStyle(Color("LightGray"))
                 .font(.system(size: 16))
             Spacer()
-            Text(value)
+            Text("R\(value)")
                 .font(.system(size: 20))
                 .fontWeight(.bold)
         }
