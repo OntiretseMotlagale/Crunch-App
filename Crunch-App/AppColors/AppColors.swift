@@ -12,6 +12,6 @@ struct AppColors {
     static let textColor = Color("TextColor")
     static let primaryColor = Color("PrimaryColor")
     static let secondayColor = Color("SecondaryColor")
-    
+    static let lightGray = Color("LightGray")
     static let primaryLightGray = Color("PrimaryLightGray")
 }

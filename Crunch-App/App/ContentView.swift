@@ -31,6 +31,7 @@ struct ContentView: View {
     var body: some View {
         Group {
             if viewModel.userSession != nil {
+                Spacer()
                 TabBarView()
             } else {
                 LoginView()

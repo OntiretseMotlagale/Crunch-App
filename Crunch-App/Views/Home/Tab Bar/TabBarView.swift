@@ -15,20 +15,12 @@ struct TabBarItem: Identifiable {
     var index: Int
 }
 
-//struct TabBarView: View {
-//    let imageName: Tab = .home
-//    var body: some View {
-//        VStack {
-//            
-//        }
-//    }
-//}
 struct TabBarView: View {
     let tabItems: [TabBarItem] = [
-        TabBarItem(iconName: "house", tab: .home, index: 0),
+        TabBarItem(iconName: "house.fill", tab: .home, index: 0),
         TabBarItem(iconName: "magnifyingglass", tab: .search, index: 1),
-        TabBarItem(iconName: "cart", tab: .cart, index: 2),
-        TabBarItem(iconName: "person", tab: .profile, index: 3)]
+        TabBarItem(iconName: "cart.fill", tab: .cart, index: 2),
+        TabBarItem(iconName: "person.fill", tab: .profile, index: 3)]
     @State var selectedTab: Tab = .home
     @State var xOffset: Double = 0.0
     var body: some View {
@@ -43,32 +35,34 @@ struct TabBarView: View {
                         Spacer()
                         Image(systemName: item.iconName)
                             .resizable()
-                            .frame(width: 20, height: 20)
-                            .foregroundStyle(selectedTab == item.tab ? .white : .gray)
+                            .frame(width: 25, height: 25)
+                            .foregroundStyle(selectedTab == item.tab ? .black : Color(AppColors.lightGray))
                             .onTapGesture {
                                 withAnimation(.spring()) {
                                     selectedTab = item.tab
-                                    xOffset = Double(item.index * 94)
+                                    xOffset = Double(item.index * 104)
                                 }
                             }
                         Spacer()
                     }
                 }
                 .frame(height: 70)
-                .background(Color.black)
+                .background(.white)
                 .cornerRadius(10)
                 .padding(.horizontal, 10)
                 .overlay(alignment: .bottomLeading) {
                     Circle()
-                        .fill(.white)
+                        .fill(.black)
                         .frame(width: 10, height: 10)
-                        .offset(x: 50, y: -5)
+                        .offset(x: 55, y: -5)
                         .offset(x: xOffset)
                         .padding(.bottom, 3)
                 }
             }
             .navigationBarBackButtonHidden()
         .navigationBarBackButtonHidden(true)
+        .background(Color(AppColors.primaryLightGray)
+            .ignoresSafeArea())
         }
     }
 }
