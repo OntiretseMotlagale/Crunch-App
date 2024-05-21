@@ -17,6 +17,9 @@ struct SearchView: View {
             .searchable(text: $searchText, prompt: "Search for item")
           
         }
+        .background(
+           Color(AppColors.primaryLightGray)
+            .ignoresSafeArea())
     }
 }
 

@@ -51,6 +51,9 @@ struct CartView: View {
         .navigationTitle("My Cart")
         .navigationBarTitleDisplayMode(.inline)
         .padding(.bottom, 20)
+        .background(
+           Color(AppColors.primaryLightGray)
+            .ignoresSafeArea())
     }
     
 }
