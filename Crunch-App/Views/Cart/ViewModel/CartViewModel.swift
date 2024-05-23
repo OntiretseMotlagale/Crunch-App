@@ -28,8 +28,9 @@ struct UsableCartItems: Hashable {
 }
 class CartViewModel: ObservableObject {
     @Published var total: Int = 0
+    @Published var numberOfItems: Int = 2
     @Published var useableCartItems: [UsableCartItems] = []
-    @Published var cartItems: Results<RealmProductItem>! {
+    @Published var realmCartItems: Results<RealmProductItem>! {
         didSet {
             self.calculateTotal()
         }
@@ -42,10 +43,12 @@ class CartViewModel: ObservableObject {
         fetchItems()
         calculateTotal()
         mapUsableCartItems()
+        increaseNumberOfItems()
+        decreaseNumberOfItems()
     }
     
     private func mapUsableCartItems() {
-        self.useableCartItems = cartItems.map {
+        self.useableCartItems = realmCartItems.map {
             UsableCartItems(name: $0.name,
                               image: $0.image,
                               price: $0.price,
@@ -56,17 +59,23 @@ class CartViewModel: ObservableObject {
         mapUsableCartItems()
         total = 0
         for items in useableCartItems {
-            total += items.price 
+            total += items.price * numberOfItems
         }
     }
     private func fetchItems() {
-        cartItems = realmManager.fetchRealmItems()
+        realmCartItems = realmManager.fetchRealmItems()
     }
     
     func deleteItem(at offSet: IndexSet) {
         offSet.forEach { index in
-            realmManager.deleteItem(item: cartItems[index])
+            realmManager.deleteItem(item: realmCartItems[index])
         }
         fetchItems()
+    }
+    func increaseNumberOfItems() {
+        numberOfItems += 1
+    }
+    func decreaseNumberOfItems() {
+        numberOfItems -= 1
     }
 }
