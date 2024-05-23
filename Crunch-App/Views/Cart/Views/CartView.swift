@@ -24,14 +24,15 @@ struct CartView: View {
             }
             else {
                   List {
-                        ForEach(viewModel.useableCartItems, id: \.self) { items in
-                            CartItem(item: items)
+                        ForEach(viewModel.useableCartItems, id: \.self) { items in                            CartItem(cartViewModel: viewModel,
+                                      item: items)
                                 .padding(.bottom, 10)
                         }
                         .onDelete(perform: viewModel.deleteItem)
                     }
                     .listStyle(.plain)
                     .scrollIndicators(.hidden)
+                    .buttonStyle(.plain)
                     Spacer()
                     VStack {
                         Group {
