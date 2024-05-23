@@ -1,14 +1,14 @@
-//
-//  CartItem.swift
-//  Crunch-App
-//
-//  Created by Ontiretse Motlagale on 2024/03/18.
-//
-
 import SwiftUI
 
 struct CartItem: View {
     let item: UsableCartItems
+    @StateObject private var viewModel: CartViewModel
+    
+    init(cartViewModel: CartViewModel, item: UsableCartItems) {
+        self.item = item
+    _viewModel = StateObject(wrappedValue: CartViewModel(realmManager: RealmManager()))
+    }
+    
     var body: some View {
             HStack (alignment: .center) {
                 Image(item.image)
@@ -16,7 +16,8 @@ struct CartItem: View {
                     .scaledToFit()
                     .frame(width: 100, height: 100)
                     .background(RoundedRectangle(cornerRadius: 10)
-                        .fill(Color("PrimaryGray")))
+                        .fill(Color(AppColors.primaryLightGray)))
+                    .shadow(color: Color.black.opacity(0.2), radius: 1, x: 0, y: 0.3)
                 VStack(alignment: .leading, spacing: 20) {
                     Text(item.name)
                         .font(.title3)
@@ -30,14 +31,14 @@ struct CartItem: View {
                         Spacer()
                         HStack(alignment: .center) {
                             QuantityButton(imageName: "minus") {
-                                
+                                viewModel.decreaseNumberOfItems()
                             }
-                            Text("1")
+                            Text("\(viewModel.numberOfItems)")
                                 .font(.caption)
                                 .fontWeight(.bold)
                                 .foregroundStyle(.black)
                             QuantityButton(imageName: "plus") {
-                                
+                                viewModel.increaseNumberOfItems()
                             }
                         }
                         .padding(.trailing, 2)
@@ -48,7 +49,6 @@ struct CartItem: View {
             .background(RoundedRectangle(cornerRadius: 5)
                 .fill(.white))
             .cornerRadius(10)
-            .padding(.horizontal)
             .navigationTitle("My Cart")
             .navigationBarTitleDisplayMode(.inline)
     }
@@ -64,16 +64,20 @@ struct CartItem: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: 8)
-                    .foregroundColor(.black)
+                    .foregroundColor(.white)
                     .padding(8)
                     .frame(width: 25, height: 25)
                     .background(RoundedRectangle(cornerRadius: 5)
-                        .fill(Color("PrimaryGray")))
+                        .fill(Color(AppColors.primaryColor)))
             })
         }
     }
 }
 
 #Preview {
-    CartItem(item: UsableCartItems(name: "Acer Laptop", image: "acer-1", price: 13999, descript: "fhkhf foinfif"))
+    CartItem(cartViewModel: CartViewModel(realmManager: RealmManager()),
+             item: UsableCartItems(name: "Acer Laptop",
+                                   image: "acer-1",
+                                   price: 13999,
+                                   descript: "fhkhf foinfif"))
 }
