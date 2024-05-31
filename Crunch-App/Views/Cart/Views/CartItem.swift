@@ -11,14 +11,15 @@ struct CartItem: View {
     
     var body: some View {
             HStack (alignment: .center) {
-                Image(item.image)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 100, height: 100)
-                    .background(RoundedRectangle(cornerRadius: 10)
-                        .fill(Color(AppColors.primaryLightGray)))
-                    .shadow(color: Color.black.opacity(0.2), radius: 1, x: 0, y: 0.3)
-                VStack(alignment: .leading, spacing: 20) {
+                GroupBox {
+                    Image(item.image)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 80, height: 80)
+                        .shadow(color: Color.black.opacity(0.2), radius: 1, x: 0, y: 0.3)
+                }
+                
+                VStack(alignment: .leading) {
                     Text(item.name)
                         .font(.title3)
                         .fontWeight(.thin)
@@ -29,7 +30,7 @@ struct CartItem: View {
                             .font(.footnote)
                             .fontWeight(.ultraLight)
                         Spacer()
-                        HStack(alignment: .center) {
+                        HStack( spacing: 5) {
                             QuantityButton(imageName: "minus") {
                                 viewModel.decreaseNumberOfItems()
                             }
@@ -45,7 +46,6 @@ struct CartItem: View {
                     }
                 }
             }
-            .padding(8)
             .background(RoundedRectangle(cornerRadius: 5)
                 .fill(.white))
             .cornerRadius(10)
