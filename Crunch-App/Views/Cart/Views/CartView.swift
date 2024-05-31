@@ -11,6 +11,7 @@ import RealmSwift
 
 struct CartView: View {
     @StateObject var viewModel: CartViewModel
+    @State private var show: Bool = false
     init(realmManager: RealmManager) {
         _viewModel = StateObject(wrappedValue: CartViewModel(realmManager: realmManager))
     }
@@ -23,38 +24,43 @@ struct CartView: View {
                 Spacer()
             }
             else {
-                  List {
-                        ForEach(viewModel.useableCartItems, id: \.self) { items in                            CartItem(cartViewModel: viewModel,
-                                      item: items)
-                                .padding(.bottom, 10)
-                        }
-                        .onDelete(perform: viewModel.deleteItem)
+                List {
+                    ForEach(viewModel.useableCartItems, id: \.self) { items in  
+                        CartItem(cartViewModel: viewModel,
+                                item: items)
+                    .padding(.bottom, 10)
                     }
-                    .listStyle(.plain)
-                    .scrollIndicators(.hidden)
-                    .buttonStyle(.plain)
-                    Spacer()
-                    VStack {
-                        Group {
-                            Divider()
-                            CheckoutMenu(text: "Total:", value: $viewModel.total)
-                    
-                        }
-                        .padding(.bottom, 10)
+                    .onDelete(perform: viewModel.deleteItem)
+                }
+                .listStyle(.plain)
+                .scrollIndicators(.hidden)
+                .buttonStyle(.plain)
+                Spacer()
+                VStack {
+                    Group {
+                        Divider()
+                        CheckoutMenu(text: "Total:", value: $viewModel.total)
                         
-                        CustomButton(title: "Checkout") {
-                            //Checkout
-                        }
                     }
-                    .padding(.horizontal)
+                    .padding(.bottom, 10)
+                    
+                    CustomButton(title: "Checkout") {
+                        self.show.toggle()
+                    }
+                    
+                }
+                .padding(.horizontal)
+                .fullScreenCover(isPresented: $show, content: {
+                    SuccessState(viewModel: viewModel, show: $show)
+                })
             }
         }
         .navigationTitle("My Cart")
         .navigationBarTitleDisplayMode(.inline)
         .padding(.bottom, 20)
         .background(
-           Color(AppColors.primaryLightGray)
-            .ignoresSafeArea())
+            Color(AppColors.primaryLightGray)
+                .ignoresSafeArea())
     }
     
 }

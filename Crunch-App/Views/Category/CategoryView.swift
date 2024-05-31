@@ -12,7 +12,6 @@ struct CategoryView: View {
     var body: some View {
         VStack {
             VStack {
-                
                 Image(category.imageName)
                     .resizable()
                     .scaledToFit()
@@ -22,15 +21,15 @@ struct CategoryView: View {
                     .padding()
                 Spacer()
                 Text(category.name)
-                    .font(.headline)
+                    .font(.custom(AppFonts.bold, size: 16))
                     .padding(.bottom, 4)
                     .foregroundStyle(.black)
                 Text("\(category.productModel.count) Items")
-                    .font(.footnote)
+                    .font(.custom(AppFonts.regular, size: 14))
                     .foregroundStyle(.black)
                     .padding(6)
-                    .background(RoundedRectangle(cornerRadius: 10)
-                        .fill(Color.gray.opacity(0.2)))
+                    .background(RoundedRectangle(cornerRadius: 8)
+                        .fill(Color.gray.opacity(0.1)))
                     .padding(.bottom, 20)
             }
             .frame(width: 170, height: 260)

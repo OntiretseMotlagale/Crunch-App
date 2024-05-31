@@ -13,8 +13,17 @@ struct HomeView: View {
     
     let column: [GridItem] = [
         GridItem(.flexible(), spacing: 15, alignment: nil),
-        GridItem(.flexible(), spacing: 15, alignment: nil) ]
+        GridItem(.flexible(), spacing: 15, alignment: nil)]
     
+    init() {
+        for familyName in UIFont.familyNames {
+           print(familyName)
+            
+            for fontName in UIFont.fontNames(forFamilyName: familyName) {
+                print("---\(fontName)")
+            }
+        }
+    }
     var body: some View {
         NavigationStack {
             ScrollView  {
