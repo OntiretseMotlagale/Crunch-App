@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		260E3EA82C04E91400F8B9DC /* AlertKit in Frameworks */ = {isa = PBXBuildFile; productRef = 260E3EA72C04E91400F8B9DC /* AlertKit */; };
+		2621A5A82C08F38800480AE8 /* Montserrat-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2621A5A72C08F38800480AE8 /* Montserrat-Black.ttf */; };
+		2621A5AB2C09D7CB00480AE8 /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2621A5A92C09D7CB00480AE8 /* Montserrat-Bold.ttf */; };
+		2621A5AC2C09D7CB00480AE8 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2621A5AA2C09D7CB00480AE8 /* Montserrat-Regular.ttf */; };
+		2621A5AE2C09DEAA00480AE8 /* AppFonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2621A5AD2C09DEAA00480AE8 /* AppFonts.swift */; };
+		2621A5B02C09E42300480AE8 /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2621A5AF2C09E42300480AE8 /* Montserrat-SemiBold.ttf */; };
 		2625A9F12BB2F63800BBB478 /* ErrorStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2625A9F02BB2F63800BBB478 /* ErrorStateView.swift */; };
 		263404C92BAC443D00A539C6 /* ProductDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263404C82BAC443D00A539C6 /* ProductDetailViewModel.swift */; };
 		264E50612B9CD53200E46BDD /* Crunch_AppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264E50602B9CD53200E46BDD /* Crunch_AppApp.swift */; };
@@ -47,6 +53,7 @@
 		2687FA652BA982F90051B6A0 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2687FA642BA982F90051B6A0 /* RealmManager.swift */; };
 		2687FA672BA985A00051B6A0 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2687FA662BA985A00051B6A0 /* DataService.swift */; };
 		26975F772BA22CD200046D5B /* ProductDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26975F762BA22CD200046D5B /* ProductDetailView.swift */; };
+		26BB9FA62BFF2AE80002FBE6 /* PaymentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BB9FA52BFF2AE80002FBE6 /* PaymentButton.swift */; };
 		26BD829D2BADCE0C00915A14 /* CartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BD829C2BADCE0C00915A14 /* CartViewModel.swift */; };
 		26BD82A02BAEAAE300915A14 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 26BD829F2BAEAAE300915A14 /* GoogleService-Info.plist */; };
 		26BD82A22BAEAB5700915A14 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 26BD82A12BAEAB5700915A14 /* FirebaseAnalytics */; };
@@ -66,10 +73,18 @@
 		26BEF8A22BD8F88900B863E2 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 26BEF8A12BD8F88900B863E2 /* FirebaseFirestore */; };
 		26BEF8A42BD8F88900B863E2 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 26BEF8A32BD8F88900B863E2 /* FirebaseFirestoreSwift */; };
 		26BEF8A62BD8F88900B863E2 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 26BEF8A52BD8F88900B863E2 /* FirebaseStorage */; };
+		26CE449F2BFFCEDE00D539F6 /* PaymentSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CE449E2BFFCEDE00D539F6 /* PaymentSuccessView.swift */; };
+		26E4B8B42BFFB3500042A492 /* SuccessState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E4B8B32BFFB3500042A492 /* SuccessState.swift */; };
 		26F0D9F02BA0A923004FE68D /* CategoryItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F0D9EF2BA0A923004FE68D /* CategoryItemView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2621A5A42C08EB5100480AE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		2621A5A72C08F38800480AE8 /* Montserrat-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Black.ttf"; sourceTree = "<group>"; };
+		2621A5A92C09D7CB00480AE8 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
+		2621A5AA2C09D7CB00480AE8 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
+		2621A5AD2C09DEAA00480AE8 /* AppFonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFonts.swift; sourceTree = "<group>"; };
+		2621A5AF2C09E42300480AE8 /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
 		2625A9F02BB2F63800BBB478 /* ErrorStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorStateView.swift; sourceTree = "<group>"; };
 		263404C82BAC443D00A539C6 /* ProductDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailViewModel.swift; sourceTree = "<group>"; };
 		264E505D2B9CD53200E46BDD /* Crunch-App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Crunch-App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -104,6 +119,7 @@
 		2687FA642BA982F90051B6A0 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		2687FA662BA985A00051B6A0 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		26975F762BA22CD200046D5B /* ProductDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailView.swift; sourceTree = "<group>"; };
+		26BB9FA52BFF2AE80002FBE6 /* PaymentButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentButton.swift; sourceTree = "<group>"; };
 		26BD829C2BADCE0C00915A14 /* CartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewModel.swift; sourceTree = "<group>"; };
 		26BD829F2BAEAAE300915A14 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		26BD82AB2BAEAB8400915A14 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
@@ -114,6 +130,8 @@
 		26BDE2822BD7985900E4DAB7 /* OrdersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersView.swift; sourceTree = "<group>"; };
 		26BDE2842BD7986600E4DAB7 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		26BEF89F2BD8F84D00B863E2 /* FirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreManager.swift; sourceTree = "<group>"; };
+		26CE449E2BFFCEDE00D539F6 /* PaymentSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentSuccessView.swift; sourceTree = "<group>"; };
+		26E4B8B32BFFB3500042A492 /* SuccessState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessState.swift; sourceTree = "<group>"; };
 		26F0D9EF2BA0A923004FE68D /* CategoryItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryItemView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -125,6 +143,7 @@
 				2687FA5E2BA8CC550051B6A0 /* Realm in Frameworks */,
 				2687FA512BA8A5060051B6A0 /* FirebaseAnalyticsSwift in Frameworks */,
 				26BD82A22BAEAB5700915A14 /* FirebaseAnalytics in Frameworks */,
+				260E3EA82C04E91400F8B9DC /* AlertKit in Frameworks */,
 				2687FA602BA8CC550051B6A0 /* RealmSwift in Frameworks */,
 				26BD82AA2BAEAB5700915A14 /* FirebaseAppCheck in Frameworks */,
 				26BEF8A62BD8F88900B863E2 /* FirebaseStorage in Frameworks */,
@@ -144,6 +163,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2621A56A2C08E9A500480AE8 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				2621A5AF2C09E42300480AE8 /* Montserrat-SemiBold.ttf */,
+				2621A5A92C09D7CB00480AE8 /* Montserrat-Bold.ttf */,
+				2621A5AA2C09D7CB00480AE8 /* Montserrat-Regular.ttf */,
+				2621A5A72C08F38800480AE8 /* Montserrat-Black.ttf */,
+				2621A5AD2C09DEAA00480AE8 /* AppFonts.swift */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		2625A9F22BB2F89000BBB478 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -190,6 +221,8 @@
 		264E505F2B9CD53200E46BDD /* Crunch-App */ = {
 			isa = PBXGroup;
 			children = (
+				2621A5A42C08EB5100480AE8 /* Info.plist */,
+				2621A56A2C08E9A500480AE8 /* Fonts */,
 				267C4D8E2BDC2957008F412D /* AppColors */,
 				26BD829F2BAEAAE300915A14 /* GoogleService-Info.plist */,
 				2687FA612BA8CD6A0051B6A0 /* Services */,
@@ -384,6 +417,14 @@
 			path = Authentication;
 			sourceTree = "<group>";
 		};
+		26BB9FA42BFF2AD10002FBE6 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				26BB9FA52BFF2AE80002FBE6 /* PaymentButton.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		26BD829B2BADCDEB00915A14 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -395,8 +436,11 @@
 		26BD829E2BADCE1F00915A14 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				2687FA582BA8A8ED0051B6A0 /* CartView.swift */,
 				2687FA5A2BA8A9000051B6A0 /* CartItem.swift */,
+				26BB9FA42BFF2AD10002FBE6 /* Components */,
+				2687FA582BA8A8ED0051B6A0 /* CartView.swift */,
+				26E4B8B32BFFB3500042A492 /* SuccessState.swift */,
+				26CE449E2BFFCEDE00D539F6 /* PaymentSuccessView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -476,6 +520,7 @@
 				26BEF8A12BD8F88900B863E2 /* FirebaseFirestore */,
 				26BEF8A32BD8F88900B863E2 /* FirebaseFirestoreSwift */,
 				26BEF8A52BD8F88900B863E2 /* FirebaseStorage */,
+				260E3EA72C04E91400F8B9DC /* AlertKit */,
 			);
 			productName = "Crunch-App";
 			productReference = 264E505D2B9CD53200E46BDD /* Crunch-App.app */;
@@ -508,6 +553,7 @@
 			packageReferences = (
 				2687FA4B2BA8A5060051B6A0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				2687FA5C2BA8CC550051B6A0 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				260E3EA62C04E91400F8B9DC /* XCRemoteSwiftPackageReference "AlertKit" */,
 			);
 			productRefGroup = 264E505E2B9CD53200E46BDD /* Products */;
 			projectDirPath = "";
@@ -525,10 +571,14 @@
 			files = (
 				264E50682B9CD53800E46BDD /* Preview Assets.xcassets in Resources */,
 				268796982B9FA3DC00566E28 /* headphones.json in Resources */,
+				2621A5AC2C09D7CB00480AE8 /* Montserrat-Regular.ttf in Resources */,
 				268796992B9FA3DC00566E28 /* phones.json in Resources */,
 				2687969B2B9FA3DC00566E28 /* deals.json in Resources */,
+				2621A5AB2C09D7CB00480AE8 /* Montserrat-Bold.ttf in Resources */,
 				268796972B9FA3DC00566E28 /* television.json in Resources */,
+				2621A5A82C08F38800480AE8 /* Montserrat-Black.ttf in Resources */,
 				2687969A2B9FA3DC00566E28 /* nulls.json in Resources */,
+				2621A5B02C09E42300480AE8 /* Montserrat-SemiBold.ttf in Resources */,
 				268796962B9FA3DC00566E28 /* covers.json in Resources */,
 				264E50652B9CD53800E46BDD /* Assets.xcassets in Resources */,
 				26BD82A02BAEAAE300915A14 /* GoogleService-Info.plist in Resources */,
@@ -552,8 +602,11 @@
 				26BDE2832BD7985900E4DAB7 /* OrdersView.swift in Sources */,
 				2687FA672BA985A00051B6A0 /* DataService.swift in Sources */,
 				2687FA652BA982F90051B6A0 /* RealmManager.swift in Sources */,
+				2621A5AE2C09DEAA00480AE8 /* AppFonts.swift in Sources */,
+				26BB9FA62BFF2AE80002FBE6 /* PaymentButton.swift in Sources */,
 				26BD82B22BAEC94D00915A14 /* ProfileView.swift in Sources */,
 				268796862B9FA20000566E28 /* SearchViewModel.swift in Sources */,
+				26E4B8B42BFFB3500042A492 /* SuccessState.swift in Sources */,
 				264E50632B9CD53200E46BDD /* ContentView.swift in Sources */,
 				2687967F2B9F6CAE00566E28 /* CategoryView.swift in Sources */,
 				268796A22B9FA68A00566E28 /* CodableBundleExtension.swift in Sources */,
@@ -567,6 +620,7 @@
 				2687969E2B9FA3DC00566E28 /* CategoryItem.swift in Sources */,
 				264E50802B9DD68B00E46BDD /* LoginView.swift in Sources */,
 				26F0D9F02BA0A923004FE68D /* CategoryItemView.swift in Sources */,
+				26CE449F2BFFCEDE00D539F6 /* PaymentSuccessView.swift in Sources */,
 				264E50612B9CD53200E46BDD /* Crunch_AppApp.swift in Sources */,
 				2625A9F12BB2F63800BBB478 /* ErrorStateView.swift in Sources */,
 				263404C92BAC443D00A539C6 /* ProductDetailViewModel.swift in Sources */,
@@ -712,6 +766,7 @@
 				DEVELOPMENT_TEAM = B3S9M88R5P;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Crunch-App/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -740,6 +795,7 @@
 				DEVELOPMENT_TEAM = B3S9M88R5P;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Crunch-App/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -782,6 +838,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		260E3EA62C04E91400F8B9DC /* XCRemoteSwiftPackageReference "AlertKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sparrowcode/AlertKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.9;
+			};
+		};
 		2687FA4B2BA8A5060051B6A0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
@@ -801,6 +865,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		260E3EA72C04E91400F8B9DC /* AlertKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 260E3EA62C04E91400F8B9DC /* XCRemoteSwiftPackageReference "AlertKit" */;
+			productName = AlertKit;
+		};
 		2687FA4C2BA8A5060051B6A0 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 2687FA4B2BA8A5060051B6A0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
