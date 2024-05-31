@@ -1,7 +1,7 @@
 [
     {
         "id" : 6,
-        "name" : "Acer Aspire 3",
+        "name" : "Acer Aspire",
         "image" : "acer-1",
         "description" : "Integrated Intel UHD Graphics 600",
         "price":  7999,
@@ -9,7 +9,7 @@
     },
     {
         "id" : 7,
-        "name" : "Connex 14 Celeron",
+        "name" : "Connex 14",
         "image" : "connex-1",
         "description": "Experience the perfect blend of power, portability, and style with the Connex 14 Celeron N4020 4/128SSD W11 Home laptop. Engineered to enhance your productivity and simplify your digital lifestyle, this sleek and compact device is your ideal companion for work, entertainment, and everything in between.",
         "price" : 3500,
@@ -17,7 +17,7 @@
     },
     {
         "id" : 8,
-        "name" : "Apple Macbook Pro",
+        "name" : "Macbook Pro",
         "image" : "macbook-1",
         "description": "Liquid Retina XDR display 14.2-inch (diagonal) Liquid Retina XDR display 1 3024-by-1964 native resolution at 254 pixels per inch Apple M3 Max Pro chip 10-core CPU with 6 performance cores and 4 efficiency cores",
         "price" : 47999,

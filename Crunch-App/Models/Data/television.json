@@ -1,7 +1,7 @@
 [
     {
         "id": 15,
-        "name": "Samsung 4K TV",
+        "name": "Samsung TV",
         "image": "samsungTV-1",
         "description": "Immerse yourself in the picture and enjoy all the Smart contents you want through lifelike 4K powerful upscaling",
         "price": 13999,
@@ -9,7 +9,7 @@
     },
     {
         "id": 16,
-        "name": "Hisense Smart TV",
+        "name": "Hisense TV",
         "image": "hisenseTV-1",
         "description": "Resolution (Horiz x Vert): 3840X2160 Colour depth: 8 bit Image refresh frequency: 60Hz",
         "price": 12380,
@@ -18,7 +18,7 @@
     },
     {
         "id": 17,
-        "name": "Toshiba Smart TV",
+        "name": "Toshiba TV",
         "image": "toshibaTV-1",
         "description": "Panel Response Time: 8 ms Max. Resolution: HD 1920x1080",
         "price": 4499,
@@ -26,7 +26,7 @@
     },
     {
         "id": 18,
-        "name": "Sinotec Smart TV",
+        "name": "Sinotec TV",
         "image": "sinotecTV-1",
         "description": "Key Features of the Sinotec STL-58S1U - Operating System: Whale OS",
         "price": 5999,
