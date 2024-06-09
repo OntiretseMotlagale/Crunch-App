@@ -88,7 +88,6 @@ struct ProfileView: View {
                                 .foregroundStyle(.white)
                         }
                     })
-                   
                     .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
                     .frame(height: 50)
                     .background(Color.red)

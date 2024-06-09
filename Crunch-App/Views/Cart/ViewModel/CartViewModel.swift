@@ -7,6 +7,7 @@
 
 import Foundation
 import RealmSwift
+import FirebaseAuth
 
 
 struct UsableCartItems: Hashable {
@@ -77,5 +78,17 @@ class CartViewModel: ObservableObject {
     }
     func decreaseNumberOfItems() {
         numberOfItems -= 1
+    }
+    
+    func submitOrder() async throws {
+        guard let currentUser = Auth.auth().currentUser?.uid else { return }
+        do {
+            for items in useableCartItems {
+               try await FirestoreManager.shared.uploadOrderItem(uid: currentUser,
+                                                                 image: items.image,
+                                                                 itemName: items.name,
+                                                                 price: items.price)
+            }
+        }
     }
 }

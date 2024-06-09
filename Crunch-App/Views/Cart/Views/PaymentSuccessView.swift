@@ -15,6 +15,7 @@ struct PaymentSuccessView: View {
         ZStack {
             VStack {
                 SuccessState(viewModel: CartViewModel(realmManager: RealmManager()), show: $animate)
+               
             }
         }
     }

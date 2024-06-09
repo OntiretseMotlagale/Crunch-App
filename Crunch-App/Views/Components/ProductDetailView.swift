@@ -13,7 +13,6 @@ import AlertKit
 
 struct ProductDetailView: View {
     @StateObject private var viewModel = ProductDetailViewModel(realmManager: RealmManager())
-
     let item: ProductModel
     @State private var showCartAlert: Bool = false
 

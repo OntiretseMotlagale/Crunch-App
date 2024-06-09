@@ -46,7 +46,7 @@ struct PersonalDetailsView: View {
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 60, height: 35)
-                                .foregroundStyle(Color("primaryPurple"))
+                                .foregroundStyle(Color(AppColors.primaryColor))
                         })
                         .background {
                             Circle()

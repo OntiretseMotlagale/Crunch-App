@@ -11,7 +11,7 @@
         "id": 16,
         "name": "Hisense TV",
         "image": "hisenseTV-1",
-        "description": "Resolution (Horiz x Vert): 3840X2160 Colour depth: 8 bit Image refresh frequency: 60Hz",
+        "description": "Resolution (Horiz x Vert): Colour depth: 8 bit Image refresh frequency: 60Hz",
         "price": 12380,
         "gallery": ["hisenseTV-1", "hisenseTV-2", "hisenseTV-3"]
         

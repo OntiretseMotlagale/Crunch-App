@@ -17,6 +17,7 @@ struct LoginView: View {
                     .padding(.bottom, 20)
                 InputText(value: $viewModel.email, placeholder: "Email Address", iconname: .envelope)
                 SecureText(iconname: .lock, placeholder: "Password", value: $viewModel.password)
+
                 CustomButton(title: "LOG IN") {
                     Task {
                        try await viewModel.signIn()
@@ -29,7 +30,7 @@ struct LoginView: View {
                         RegisterView(authService: AuthenticationManager())
                     } label: {
                         Text("Register")
-                            .foregroundStyle(AppColors.textColor)
+                            .foregroundStyle(LinearGradient(colors: [AppColors.primaryColor, AppColors.secondayColor], startPoint: .center, endPoint: .center))
                     }
                 }
                 .padding(.top, 10)
@@ -52,12 +53,12 @@ struct CustomButton: View {
             buttonAction()
         }, label: {
             Text(title)
-                .font(.headline)
+                .font(.custom(AppFonts.bold, size: 17))
                 .foregroundStyle(.white)
                 .frame(maxWidth: .infinity)
                 .frame(height: 55)
                 .background(RoundedRectangle(cornerRadius: 10)
-                    .fill(LinearGradient(colors: [AppColors.primaryColor, AppColors.secondayColor], startPoint: .bottomLeading, endPoint: .bottomTrailing)))
+                    .fill(LinearGradient(colors: [AppColors.primaryColor, AppColors.secondayColor], startPoint: .center, endPoint: .center)))
         })
     }
 }

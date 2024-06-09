@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import AlertKit
+
 
 enum AuthIcons: String {
     case person
@@ -22,10 +24,11 @@ struct RegisterView: View {
     var body: some View {
         ScrollView {
             VStack {
-                VStack {
+                VStack  {
                     Image("bg")
                         .resizable()
                         .scaledToFit()
+                      
                     .frame(width: 150, height: 150)
                     Text("Register Account")
                         .font(.largeTitle)
@@ -33,11 +36,17 @@ struct RegisterView: View {
                         .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                         .padding(.bottom, 20)
                     InputText(value: $viewModel.fullName, placeholder: "Full Name", iconname: .person)
+               
                     InputText(value: $viewModel.email, placeholder: "Email Address", iconname: .envelope)
+              
                     SecureText(iconname: .lock, placeholder: "Password", value: $viewModel.password)
+                        .padding(.bottom, 10)
+                    Text(viewModel.errorMessage)
+                        .font(.custom(AppFonts.regular, size: 13))
+                        .foregroundStyle(.red)
                 }
                 .padding(.bottom, 15)
-            
+           
                 VStack (spacing: 20) {
                     CustomButton(title: "SIGN UP") {
                         Task {
@@ -74,6 +83,7 @@ struct RegisterView: View {
         }
         .navigationBarBackButtonHidden()
         .navigationBarBackButtonHidden(true)
+        .alert(isPresent: $viewModel.isAccountCreated, view: AlertAppleMusic16View(subtitle: "Account Successfully Created"))
     }
 }
 
