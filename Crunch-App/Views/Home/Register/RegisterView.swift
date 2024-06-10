@@ -28,9 +28,8 @@ struct RegisterView: View {
                     Image("bg")
                         .resizable()
                         .scaledToFit()
-                      
                     .frame(width: 150, height: 150)
-                    Text("Register Account")
+                    Text("Register")
                         .font(.largeTitle)
                         .fontWeight(.bold)
                         .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
