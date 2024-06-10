@@ -57,6 +57,7 @@ struct RegisterView: View {
                         RoundedRectangle(cornerSize: CGSize())
                             .frame(width: 50, height:  1)
                         Text("Or Continue with")
+                            .font(.custom(AppFonts.regular, size: 17))
                         RoundedRectangle(cornerSize: CGSize())
                             .frame(width: 50, height:  1)
                     }
@@ -68,11 +69,13 @@ struct RegisterView: View {
                     }
                     HStack {
                         Text("Already have an account ?")
+                            .font(.custom(AppFonts.regular, size: 15))
                         Button(action: {
                             dimiss()
                         }, label: {
                             Text("Login")
                                 .foregroundStyle(Color("TertiaryBlue"))
+                                .font(.custom(AppFonts.bold, size: 15))
                         })
                     }
                     .padding(.top, 10)
@@ -104,8 +107,10 @@ struct SecureText: View {
                     .scaledToFit()
                     .foregroundStyle(Color("PrimaryGray"))
                     .frame(width: 20, height: 20)
-                SecureField(placeholder, text: $value)
-                    .font(.system(size: 14))
+                SecureField(text: $value) {
+                    Text(placeholder)
+                        .font(.custom(AppFonts.regular, size: 16))
+                }
             }
             .padding()
             .frame(height: 60)
@@ -128,9 +133,10 @@ struct InputText: View {
                     .scaledToFit()
                     .foregroundStyle(Color("PrimaryGray"))
                     .frame(width: 20, height: 20)
-                TextField(placeholder, text: $value)
-                    .font(.system(size: 14))
-                
+                TextField(text: $value) {
+                    Text(placeholder)
+                        .font(.custom(AppFonts.regular, size: 16))
+                }
             }
             .padding()
             .frame(height: 60)

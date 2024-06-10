@@ -16,7 +16,7 @@ struct CartView: View {
     }
     @State private var paymentView: Bool = false
     @State private var realmItems: UsableCartItems = UsableCartItems(name: "", image: "", price: 0, descript: "")
-      
+    
     var body: some View {
         NavigationStack {
             VStack (alignment: .leading, spacing: 20) {
@@ -30,9 +30,9 @@ struct CartView: View {
                         ForEach(viewModel.useableCartItems, id: \.self) { items in
                             
                             CartItem(cartViewModel: viewModel,
-                                    item: items)
-                          
-                        .padding(.bottom, 10)
+                                     item: items)
+                            
+                            .padding(.bottom, 10)
                         }
                         .onDelete(perform: viewModel.deleteItem)
                     }
@@ -56,7 +56,7 @@ struct CartView: View {
                         }
                     }
                     .padding(.horizontal)
-                   
+                    
                 }
             }
             .fullScreenCover(isPresented: $paymentView, content: {
@@ -67,7 +67,7 @@ struct CartView: View {
             .padding(.bottom, 20)
             .background(
                 Color(AppColors.primaryLightGray)
-                .ignoresSafeArea())
+                    .ignoresSafeArea())
         }
     }
     
@@ -94,7 +94,7 @@ struct EmptyCartView: View {
 
 #Preview {
     CartView(realmManager: RealmManager())
-//    ProcessPaymentView()
+    //    ProcessPaymentView()
 }
 struct ProcessPaymentView: View {
     @State private var show: Bool = false
@@ -118,8 +118,8 @@ struct ProcessPaymentView: View {
                 .onAppear {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
                         self.show = true
-                }
-            }.navigationBarBackButtonHidden()
+                    }
+                }.navigationBarBackButtonHidden()
             }
         }
         .background(

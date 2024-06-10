@@ -11,8 +11,7 @@ struct LoginView: View {
                     .scaledToFit()
                     .frame(width: 150, height: 150)
                 Text("Login")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
+                    .font(.custom(AppFonts.bold, size: 30))
                     .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                     .padding(.bottom, 20)
                 InputText(value: $viewModel.email, placeholder: "Email Address", iconname: .envelope)
@@ -26,10 +25,12 @@ struct LoginView: View {
                     .padding(.bottom, 10)
                 HStack {
                     Text("Don't have an account ?")
+                        .font(.custom(AppFonts.regular, size: 15))
                     NavigationLink {
                         RegisterView(authService: AuthenticationManager())
                     } label: {
                         Text("Register")
+                            .font(.custom(AppFonts.bold, size: 15))
                             .foregroundStyle(LinearGradient(colors: [AppColors.primaryColor, AppColors.secondayColor], startPoint: .center, endPoint: .center))
                     }
                 }
