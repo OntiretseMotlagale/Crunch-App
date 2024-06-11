@@ -19,14 +19,17 @@ enum ProfileIcons: String {
 @MainActor
 class ProfileViewModel: ObservableObject {
     @Published private(set) var databaseUser: DatabaseUser? = nil
+    @Inject var firestoreManager: FirestoreManagerProtocol
+    @Inject var authenticationManager: AuthenticationProtocol
     
     func signOut() {
-        AuthenticationManager.shared.signOut()
+        authenticationManager.signOut()
+        UserDefaults.isUserSignedIn = false
     }
     
     func loadCurrentUser() async throws {
-        let authUser =  try AuthenticationManager.shared.getAuthenticatedUser()
-        self.databaseUser = try await FirestoreManager.shared.fetchFirestoreUser(id: authUser)
+        let authUser =  try authenticationManager.getAuthenticatedUser()
+        self.databaseUser = try await firestoreManager.fetchFirestoreUser(id: authUser)
     }
 }
 struct ProfileView: View {

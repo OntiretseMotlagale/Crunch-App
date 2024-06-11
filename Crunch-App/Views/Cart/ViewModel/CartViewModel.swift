@@ -31,6 +31,7 @@ class CartViewModel: ObservableObject {
     @Published var total: Int = 0
     @Published var numberOfItems: Int = 1
     @Published var useableCartItems: [UsableCartItems] = []
+    @Inject var firestoreManager: FirestoreManagerProtocol
     @Published var realmCartItems: Results<RealmProductItem>! {
         didSet {
             self.calculateTotal()
@@ -84,7 +85,7 @@ class CartViewModel: ObservableObject {
         guard let currentUser = Auth.auth().currentUser?.uid else { return }
         do {
             for items in useableCartItems {
-               try await FirestoreManager.shared.uploadOrderItem(uid: currentUser,
+                try await firestoreManager.uploadOrderItem(uid: currentUser,
                                                                  image: items.image,
                                                                  itemName: items.name,
                                                                  price: items.price)

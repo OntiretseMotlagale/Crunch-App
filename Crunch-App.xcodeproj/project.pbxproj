@@ -25,6 +25,11 @@
 		264E50852B9DDCD000E46BDD /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264E50842B9DDCD000E46BDD /* LoginViewModel.swift */; };
 		264E50872B9DDCE100E46BDD /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264E50862B9DDCE100E46BDD /* RegisterViewModel.swift */; };
 		264E508A2B9DE04B00E46BDD /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264E50892B9DE04B00E46BDD /* TabBarView.swift */; };
+		26733B252C1874360037E85D /* DependencyInjector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26733B242C1874360037E85D /* DependencyInjector.swift */; };
+		26733B282C1876310037E85D /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = 26733B272C1876310037E85D /* Swinject */; };
+		26733B2A2C1876310037E85D /* Swinject-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 26733B292C1876310037E85D /* Swinject-Dynamic */; };
+		26733B2C2C1885660037E85D /* Dependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26733B2B2C1885660037E85D /* Dependencies.swift */; };
+		26733B332C18AFB30037E85D /* UserDefaults+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26733B322C18AFB30037E85D /* UserDefaults+Extension.swift */; };
 		267C4D902BDC2987008F412D /* AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 267C4D8F2BDC2987008F412D /* AppColors.swift */; };
 		2687967F2B9F6CAE00566E28 /* CategoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2687967E2B9F6CAE00566E28 /* CategoryView.swift */; };
 		268796812B9F988E00566E28 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268796802B9F988E00566E28 /* HomeViewModel.swift */; };
@@ -79,7 +84,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2621A5A42C08EB5100480AE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		2621A5A72C08F38800480AE8 /* Montserrat-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Black.ttf"; sourceTree = "<group>"; };
 		2621A5A92C09D7CB00480AE8 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		2621A5AA2C09D7CB00480AE8 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
@@ -98,6 +102,9 @@
 		264E50842B9DDCD000E46BDD /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		264E50862B9DDCE100E46BDD /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		264E50892B9DE04B00E46BDD /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
+		26733B242C1874360037E85D /* DependencyInjector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DependencyInjector.swift; sourceTree = "<group>"; };
+		26733B2B2C1885660037E85D /* Dependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dependencies.swift; sourceTree = "<group>"; };
+		26733B322C18AFB30037E85D /* UserDefaults+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Extension.swift"; sourceTree = "<group>"; };
 		267C4D8F2BDC2987008F412D /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
 		2687967E2B9F6CAE00566E28 /* CategoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryView.swift; sourceTree = "<group>"; };
 		268796802B9F988E00566E28 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
@@ -140,11 +147,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26733B2A2C1876310037E85D /* Swinject-Dynamic in Frameworks */,
 				2687FA5E2BA8CC550051B6A0 /* Realm in Frameworks */,
 				2687FA512BA8A5060051B6A0 /* FirebaseAnalyticsSwift in Frameworks */,
 				26BD82A22BAEAB5700915A14 /* FirebaseAnalytics in Frameworks */,
 				260E3EA82C04E91400F8B9DC /* AlertKit in Frameworks */,
 				2687FA602BA8CC550051B6A0 /* RealmSwift in Frameworks */,
+				26733B282C1876310037E85D /* Swinject in Frameworks */,
 				26BD82AA2BAEAB5700915A14 /* FirebaseAppCheck in Frameworks */,
 				26BEF8A62BD8F88900B863E2 /* FirebaseStorage in Frameworks */,
 				26BEF8A42BD8F88900B863E2 /* FirebaseFirestoreSwift in Frameworks */,
@@ -221,10 +230,10 @@
 		264E505F2B9CD53200E46BDD /* Crunch-App */ = {
 			isa = PBXGroup;
 			children = (
-				2621A5A42C08EB5100480AE8 /* Info.plist */,
+				26733B302C18AF990037E85D /* Utilities */,
+				26733B232C1873FC0037E85D /* Dependency Injection */,
 				2621A56A2C08E9A500480AE8 /* Fonts */,
 				267C4D8E2BDC2957008F412D /* AppColors */,
-				26BD829F2BAEAAE300915A14 /* GoogleService-Info.plist */,
 				2687FA612BA8CD6A0051B6A0 /* Services */,
 				268796A02B9FA65900566E28 /* Extension */,
 				264E50762B9CF50200E46BDD /* Views */,
@@ -301,6 +310,31 @@
 				264E50892B9DE04B00E46BDD /* TabBarView.swift */,
 			);
 			path = "Tab Bar";
+			sourceTree = "<group>";
+		};
+		26733B232C1873FC0037E85D /* Dependency Injection */ = {
+			isa = PBXGroup;
+			children = (
+				26733B242C1874360037E85D /* DependencyInjector.swift */,
+				26733B2B2C1885660037E85D /* Dependencies.swift */,
+			);
+			path = "Dependency Injection";
+			sourceTree = "<group>";
+		};
+		26733B302C18AF990037E85D /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				26733B312C18AFA20037E85D /* Extension */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		26733B312C18AFA20037E85D /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				26733B322C18AFB30037E85D /* UserDefaults+Extension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		267C4D8E2BDC2957008F412D /* AppColors */ = {
@@ -394,6 +428,7 @@
 		2687FA612BA8CD6A0051B6A0 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				26BD829F2BAEAAE300915A14 /* GoogleService-Info.plist */,
 				26BEF89E2BD8F82E00B863E2 /* Firestore */,
 				2687FA632BA9694F0051B6A0 /* Authentication */,
 				2687FA622BA969410051B6A0 /* Persistence */,
@@ -521,6 +556,8 @@
 				26BEF8A32BD8F88900B863E2 /* FirebaseFirestoreSwift */,
 				26BEF8A52BD8F88900B863E2 /* FirebaseStorage */,
 				260E3EA72C04E91400F8B9DC /* AlertKit */,
+				26733B272C1876310037E85D /* Swinject */,
+				26733B292C1876310037E85D /* Swinject-Dynamic */,
 			);
 			productName = "Crunch-App";
 			productReference = 264E505D2B9CD53200E46BDD /* Crunch-App.app */;
@@ -554,6 +591,7 @@
 				2687FA4B2BA8A5060051B6A0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				2687FA5C2BA8CC550051B6A0 /* XCRemoteSwiftPackageReference "realm-swift" */,
 				260E3EA62C04E91400F8B9DC /* XCRemoteSwiftPackageReference "AlertKit" */,
+				26733B262C1876310037E85D /* XCRemoteSwiftPackageReference "Swinject" */,
 			);
 			productRefGroup = 264E505E2B9CD53200E46BDD /* Products */;
 			projectDirPath = "";
@@ -597,6 +635,7 @@
 				264E507B2B9CF53600E46BDD /* RegisterView.swift in Sources */,
 				268796812B9F988E00566E28 /* HomeViewModel.swift in Sources */,
 				264E508A2B9DE04B00E46BDD /* TabBarView.swift in Sources */,
+				26733B2C2C1885660037E85D /* Dependencies.swift in Sources */,
 				264E507E2B9CFBB100E46BDD /* HomeView.swift in Sources */,
 				268796842B9FA1F100566E28 /* SearchView.swift in Sources */,
 				26BDE2832BD7985900E4DAB7 /* OrdersView.swift in Sources */,
@@ -617,6 +656,7 @@
 				26BDE2812BD7984D00E4DAB7 /* AddressView.swift in Sources */,
 				26BD829D2BADCE0C00915A14 /* CartViewModel.swift in Sources */,
 				26BD82AC2BAEAB8400915A14 /* AuthenticationManager.swift in Sources */,
+				26733B252C1874360037E85D /* DependencyInjector.swift in Sources */,
 				2687969E2B9FA3DC00566E28 /* CategoryItem.swift in Sources */,
 				264E50802B9DD68B00E46BDD /* LoginView.swift in Sources */,
 				26F0D9F02BA0A923004FE68D /* CategoryItemView.swift in Sources */,
@@ -628,6 +668,7 @@
 				2687969F2B9FA3DC00566E28 /* ProductModel.swift in Sources */,
 				2687FA592BA8A8ED0051B6A0 /* CartView.swift in Sources */,
 				2687FA5B2BA8A9000051B6A0 /* CartItem.swift in Sources */,
+				26733B332C18AFB30037E85D /* UserDefaults+Extension.swift in Sources */,
 				26BDE2852BD7986600E4DAB7 /* SettingsView.swift in Sources */,
 				26975F772BA22CD200046D5B /* ProductDetailView.swift in Sources */,
 				26BEF8A02BD8F84D00B863E2 /* FirestoreManager.swift in Sources */,
@@ -770,6 +811,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -799,6 +841,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -846,6 +889,14 @@
 				minimumVersion = 5.1.9;
 			};
 		};
+		26733B262C1876310037E85D /* XCRemoteSwiftPackageReference "Swinject" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Swinject/Swinject.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.9.1;
+			};
+		};
 		2687FA4B2BA8A5060051B6A0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
@@ -869,6 +920,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 260E3EA62C04E91400F8B9DC /* XCRemoteSwiftPackageReference "AlertKit" */;
 			productName = AlertKit;
+		};
+		26733B272C1876310037E85D /* Swinject */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 26733B262C1876310037E85D /* XCRemoteSwiftPackageReference "Swinject" */;
+			productName = Swinject;
+		};
+		26733B292C1876310037E85D /* Swinject-Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 26733B262C1876310037E85D /* XCRemoteSwiftPackageReference "Swinject" */;
+			productName = "Swinject-Dynamic";
 		};
 		2687FA4C2BA8A5060051B6A0 /* FirebaseAnalytics */ = {
 			isa = XCSwiftPackageProductDependency;

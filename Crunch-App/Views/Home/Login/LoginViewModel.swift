@@ -19,10 +19,13 @@ class LoginViewModel: ObservableObject {
     @Published var password: String = ""
     @Published var errorMessage: String = ""
     
+    @Inject var authenticationProtocol: AuthenticationProtocol
+    
     func signIn() async throws {
         do {
-            try await AuthenticationManager.shared.loginUser(email: email, password: password)
+            try await authenticationProtocol.loginUser(email: email, password: password)
             clearUserDetails()
+            UserDefaults.isUserSignedIn = true
         }
         catch let error {
             self.errorMessage = error.localizedDescription

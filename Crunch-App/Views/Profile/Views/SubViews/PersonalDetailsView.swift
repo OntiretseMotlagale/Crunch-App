@@ -12,10 +12,12 @@ class PersonalDataViewModel: ObservableObject {
     @Published private(set) var databaseUser: DatabaseUser? = nil
     @Published var newFullname: String = ""
     @Published private var fullname: String = ""
+    @Inject var firestoreManager: FirestoreManagerProtocol
+    @Inject var authenticationManager: AuthenticationProtocol
 
     func loadCurrentLoggedInUser() async throws {
-        let authUser = try AuthenticationManager.shared.getAuthenticatedUser()
-        self.databaseUser = try await FirestoreManager.shared.fetchFirestoreUser(id: authUser)
+        let authUser = try authenticationManager.getAuthenticatedUser()
+        self.databaseUser = try await firestoreManager.fetchFirestoreUser(id: authUser)
     }
     
     func getFullname() -> String {

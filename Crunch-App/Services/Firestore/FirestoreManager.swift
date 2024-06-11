@@ -3,6 +3,14 @@ import Foundation
 import FirebaseAuth
 import FirebaseFirestore
 
+
+protocol FirestoreManagerProtocol {
+    func uploadUser(uid: String, fullname: String, email: String, photoURL: String) async throws
+    func fetchFirestoreUser(id: String) async throws -> DatabaseUser
+    func uploadOrderItem(uid: String, image: String, itemName: String, price: Int) async throws
+    func fetchOrderItems( userID: String) async throws -> [DatabaseUserOrder]
+    
+}
 struct DatabaseUserOrder: Identifiable, Decodable {
     var id = UUID().uuidString
     var uid: String?
@@ -18,8 +26,7 @@ struct DatabaseUser {
 }
 
 @MainActor
-class FirestoreManager {
-    static let shared = FirestoreManager()
+class FirestoreManager: FirestoreManagerProtocol {
     
     private let userFirestoreReference = Firestore.firestore().collection("users")
     private let orderFirestoreReference = Firestore.firestore().collection("orders")

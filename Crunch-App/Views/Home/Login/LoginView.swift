@@ -16,7 +16,7 @@ struct LoginView: View {
                     .padding(.bottom, 20)
                 InputText(value: $viewModel.email, placeholder: "Email Address", iconname: .envelope)
                 SecureText(iconname: .lock, placeholder: "Password", value: $viewModel.password)
-
+                
                 CustomButton(title: "LOG IN") {
                     Task {
                        try await viewModel.signIn()
@@ -27,7 +27,7 @@ struct LoginView: View {
                     Text("Don't have an account ?")
                         .font(.custom(AppFonts.regular, size: 15))
                     NavigationLink {
-                        RegisterView(authService: AuthenticationManager())
+                        RegisterView()
                     } label: {
                         Text("Register")
                             .font(.custom(AppFonts.bold, size: 15))
