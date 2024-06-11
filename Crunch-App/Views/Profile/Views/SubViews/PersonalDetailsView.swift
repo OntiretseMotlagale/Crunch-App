@@ -99,7 +99,6 @@ struct PersonalDetailsView: View {
                     Text(viewModel.getEmail())
                             .tint(.black)
                             .fontWeight(.semibold)
-                    
                     Divider()
                         .padding(.bottom, 5)
                 }

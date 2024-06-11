@@ -9,6 +9,13 @@ import Foundation
 import SwiftUI
 import FirebaseAuth
 
+enum ProfileIcons: String {
+    case house
+    case address
+    case bag
+    case settings
+    
+}
 @MainActor
 class ProfileViewModel: ObservableObject {
     @Published private(set) var databaseUser: DatabaseUser? = nil
@@ -26,7 +33,7 @@ struct ProfileView: View {
     @StateObject var viewModel = ProfileViewModel()
     @State var profileData: [ProfileModel] = [
         ProfileModel(name: "Personal Details",
-                     iconName: "person",
+                     iconName: "person.fill",
                      Tab: .personalDetails),
         ProfileModel(name: "Address",
                      iconName: "house",
@@ -34,34 +41,27 @@ struct ProfileView: View {
         ProfileModel(name: "Orders",
                      iconName: "bag",
                      Tab: .orders),
-        ProfileModel(name: "Setting",
+        ProfileModel(name: "Settings",
                      iconName: "gearshape",
                      Tab: .settings)
     ]
     
     var body: some View {
-        NavigationStack {
+        NavigationView {
             ScrollView {
+               
                 VStack {
                     ProfileImage()
                         .padding(.bottom, 30)
-                    if let fullname = viewModel.databaseUser?.fullname {
-                        Text(fullname)
-                            .font(.title.bold())
-                    }
+                  
                     HStack (spacing: 30) {
-                        Image(systemName: "bubbles.and.sparkles.fill")
-                            .resizable()
-                            .scaledToFit()
+                        Image(systemName: "checkmark.seal")
+                            .imageScale(.large)
+                            .symbolRenderingMode(.multicolor)
                             .foregroundStyle(.white)
-                            .frame(width: 30, height: 30)
-                        VStack(alignment: .leading) {
-                            Text("30 Mar, 1997")
-                                .fontWeight(.bold)
-                                .foregroundStyle(.white)
-                            Text("Birth Date")
-                                .font(.footnote)
-                                .fontWeight(.semibold)
+                        if let fullname = viewModel.databaseUser?.fullname {
+                            Text(fullname)
+                                .font(.custom(AppFonts.bold, size: 20))
                                 .foregroundStyle(.white)
                         }
                     }
@@ -71,33 +71,35 @@ struct ProfileView: View {
                         RoundedRectangle(cornerRadius: 10)
                             .fill(AppColors.primaryColor))
                     .padding(.bottom, 20)
-                    VStack {
+                    VStack(alignment: .leading, spacing: 0) {
                         ForEach(profileData) { item in
-                            ProfileDetailButton(item: item, selectedTab: item.Tab )
-                                .padding(.bottom, 10)
+                            ProfileDetailButton(item: item, selectedTab: item.Tab)
                         }
                     }
                     .padding(.bottom, 30)
                     Button(action: {
                         viewModel.signOut()
                     }, label: {
-                        HStack(spacing: 40) {
+                        HStack(spacing: 10) {
+                           Image(systemName:  "door.left.hand.open")
+                                .imageScale(.large)
+                                .foregroundStyle(.red)
                             Text("Logout")
-                                .font(.system(size: 25))
-                                .fontWeight(.thin)
-                                .foregroundStyle(.white)
+                                .font(.custom(AppFonts.bold, size: 16))
+                                .foregroundStyle(.pink)
                         }
                     })
-                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .center)
+                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                     .frame(height: 50)
-                    .background(Color.red)
-                    .cornerRadius(30)
                     .padding(.horizontal)
                 }
                 .navigationTitle("My Profile")
                 .navigationBarTitleDisplayMode(.inline)
             }
             .padding(.horizontal)
+            .background(
+                AppColors.primaryLightGray
+                    .ignoresSafeArea())
         }
         .task {
             try? await viewModel.loadCurrentUser()
@@ -110,36 +112,36 @@ struct ProfileDetailButton: View {
     @State var selectedTab: ProfileCategory
     
     var body: some View {
-        VStack {
-            NavigationLink {
-                ProfileScreens(selectedTab: selectedTab)
-            } label: {
-                HStack(spacing: 15) {
-                    Image(systemName: item.iconName)
-                        .resizable()
-                        .scaledToFit()
-                        .foregroundStyle(.white)
-                        .frame(width: 20, height: 20)
-                    Text(item.name)
-                        .font(.system(size: 20))
-                        .fontWeight(.light)
-                        .foregroundStyle(.white)
-                    Spacer()
-                    Image(systemName: "chevron.right")
-                        .fontWeight(.bold)
-                        .foregroundStyle(.white)
-                }
+        VStack (alignment: .leading, spacing: 0){
+            GroupBox {
+                NavigationLink {
+                    ProfileScreens(selectedTab: selectedTab)
+                } label: {
+                    HStack {
+                        HStack(spacing: 15) {
+                            Image(systemName: item.iconName)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 30, height: 30)
+                            Text(item.name)
+                                .font(.custom(AppFonts.semibold, size: 15))
+                                .foregroundStyle(.black)
+                        }
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                            .fontWeight(.regular)
+                            .foregroundStyle(.black)
+                    }
+            }
+                .frame(height: 30)
             }
         }
-        .padding()
+        .padding(.vertical, 8)
         .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-        .background(RoundedRectangle(cornerRadius: 10)
-            .fill(AppColors.primaryColor))
     }
 }
 
 #Preview {
-    /*ProfileDetailButton*/
     ProfileView()
 }
 

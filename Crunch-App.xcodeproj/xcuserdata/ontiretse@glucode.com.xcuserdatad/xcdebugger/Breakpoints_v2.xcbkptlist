@@ -34,92 +34,6 @@
             endingLineNumber = "20"
             landmarkName = "fetchOrders()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "850AFE34-5F6C-48D7-86BB-20CD04D9454C - e88036613f6b617f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(1) suspend resume partial function for Crunch_App.OrdersViewModel.fetchOrders() async throws -&gt; ()"
-                  moduleName = "Crunch-App"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ontiretse@glucode.com/Downloads/Crunch-App/Crunch-App/Views/Profile/Views/SubViews/OrdersView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "20"
-                  endingLineNumber = "20">
-               </Location>
-               <Location
-                  uuid = "850AFE34-5F6C-48D7-86BB-20CD04D9454C - fab2a2c040fb803f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(2) await resume partial function for Crunch_App.OrdersViewModel.fetchOrders() async throws -&gt; ()"
-                  moduleName = "Crunch-App"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ontiretse@glucode.com/Downloads/Crunch-App/Crunch-App/Views/Profile/Views/SubViews/OrdersView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "20"
-                  endingLineNumber = "20">
-               </Location>
-               <Location
-                  uuid = "850AFE34-5F6C-48D7-86BB-20CD04D9454C - 7d7f53236a8e0511"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for Crunch_App.OrdersViewModel.fetchOrders() async throws -&gt; ()"
-                  moduleName = "Crunch-App"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ontiretse@glucode.com/Downloads/Crunch-App/Crunch-App/Views/Profile/Views/SubViews/OrdersView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "16"
-                  endingLineNumber = "16">
-               </Location>
-               <Location
-                  uuid = "850AFE34-5F6C-48D7-86BB-20CD04D9454C - 7d7f53236a8e058d"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for Crunch_App.OrdersViewModel.fetchOrders() async throws -&gt; ()"
-                  moduleName = "Crunch-App"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ontiretse@glucode.com/Downloads/Crunch-App/Crunch-App/Views/Profile/Views/SubViews/OrdersView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "20"
-                  endingLineNumber = "20">
-               </Location>
-               <Location
-                  uuid = "850AFE34-5F6C-48D7-86BB-20CD04D9454C - 88a6e24270605b18"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(4) suspend resume partial function for Crunch_App.OrdersViewModel.fetchOrders() async throws -&gt; ()"
-                  moduleName = "Crunch-App"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ontiretse@glucode.com/Downloads/Crunch-App/Crunch-App/Views/Profile/Views/SubViews/OrdersView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "16"
-                  endingLineNumber = "16">
-               </Location>
-               <Location
-                  uuid = "850AFE34-5F6C-48D7-86BB-20CD04D9454C - 88a6e24270605b84"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(4) suspend resume partial function for Crunch_App.OrdersViewModel.fetchOrders() async throws -&gt; ()"
-                  moduleName = "Crunch-App"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ontiretse@glucode.com/Downloads/Crunch-App/Crunch-App/Views/Profile/Views/SubViews/OrdersView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "20"
-                  endingLineNumber = "20">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -136,36 +50,6 @@
             endingLineNumber = "31"
             landmarkName = "body"
             landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "45FCD143-10C2-4B51-86EC-FEBFC9EA198E - f779ac8dcc335239"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; SwiftUI.List&lt;Swift.Never, SwiftUI.ForEach&lt;Swift.Array&lt;Crunch_App.DatabaseUserOrder&gt;, Swift.String, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0&gt;&gt; in Crunch_App.OrdersView.body.getter : some"
-                  moduleName = "Crunch-App"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ontiretse@glucode.com/Downloads/Crunch-App/Crunch-App/Views/Profile/Views/SubViews/OrdersView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "31"
-                  endingLineNumber = "31">
-               </Location>
-               <Location
-                  uuid = "45FCD143-10C2-4B51-86EC-FEBFC9EA198E - ce2ced9dbf615e7b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; SwiftUI.ForEach&lt;Swift.Array&lt;Crunch_App.DatabaseUserOrder&gt;, Swift.String, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0&gt; in closure #1 () -&gt; SwiftUI.List&lt;Swift.Never, SwiftUI.ForEach&lt;Swift.Array&lt;Crunch_App.DatabaseUserOrder&gt;, Swift.String, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0&gt;&gt; in Crunch_App.OrdersView.body.getter : some"
-                  moduleName = "Crunch-App"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ontiretse@glucode.com/Downloads/Crunch-App/Crunch-App/Views/Profile/Views/SubViews/OrdersView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "32"
-                  endingLineNumber = "32">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -182,71 +66,13 @@
             endingLineNumber = "65"
             landmarkName = "body"
             landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "2E54F7FB-6CBF-4B25-A77F-408106ADAF65 - ba6743724afcbac0"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(1) suspend resume partial function for closure #2 @Sendable () async -&gt; () in Crunch_App.PersonalDetailsView.body.getter : some"
-                  moduleName = "Crunch-App"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ontiretse@glucode.com/Downloads/Crunch-App/Crunch-App/Views/Profile/Views/SubViews/PersonalDetailsView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "65"
-                  endingLineNumber = "65">
-               </Location>
-               <Location
-                  uuid = "2E54F7FB-6CBF-4B25-A77F-408106ADAF65 - 7b9c2e988324e633"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(2) await resume partial function for closure #2 @Sendable () async -&gt; () in Crunch_App.PersonalDetailsView.body.getter : some"
-                  moduleName = "Crunch-App"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ontiretse@glucode.com/Downloads/Crunch-App/Crunch-App/Views/Profile/Views/SubViews/PersonalDetailsView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "65"
-                  endingLineNumber = "65">
-               </Location>
-               <Location
-                  uuid = "2E54F7FB-6CBF-4B25-A77F-408106ADAF65 - 4bf4bb08fe0132cc"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for closure #2 @Sendable () async -&gt; () in Crunch_App.PersonalDetailsView.body.getter : some"
-                  moduleName = "Crunch-App"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ontiretse@glucode.com/Downloads/Crunch-App/Crunch-App/Views/Profile/Views/SubViews/PersonalDetailsView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "65"
-                  endingLineNumber = "65">
-               </Location>
-               <Location
-                  uuid = "2E54F7FB-6CBF-4B25-A77F-408106ADAF65 - 233db7e444688eca"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(4) suspend resume partial function for closure #2 @Sendable () async -&gt; () in Crunch_App.PersonalDetailsView.body.getter : some"
-                  moduleName = "Crunch-App"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ontiretse@glucode.com/Downloads/Crunch-App/Crunch-App/Views/Profile/Views/SubViews/PersonalDetailsView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "65"
-                  endingLineNumber = "65">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "7EF532A5-2981-44F6-A898-71B725C79F95"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Crunch-App/Views/Profile/Views/SubViews/PersonalDetailsView.swift"
@@ -288,36 +114,6 @@
             endingLineNumber = "16"
             landmarkName = "loadCurrentLoggedInUser()"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "BD5A06A6-7A6F-4619-B95A-F7CA40E25CC9 - 67a9c131b754b2b4"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Crunch_App.PersonalDataViewModel.loadCurrentLoggedInUser() async throws -&gt; ()"
-                  moduleName = "Crunch-App"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ontiretse@glucode.com/Downloads/Crunch-App/Crunch-App/Views/Profile/Views/SubViews/PersonalDetailsView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "16"
-                  endingLineNumber = "16">
-               </Location>
-               <Location
-                  uuid = "BD5A06A6-7A6F-4619-B95A-F7CA40E25CC9 - 63724153d2ca3de2"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(1) suspend resume partial function for Crunch_App.PersonalDataViewModel.loadCurrentLoggedInUser() async throws -&gt; ()"
-                  moduleName = "Crunch-App"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/ontiretse@glucode.com/Downloads/Crunch-App/Crunch-App/Views/Profile/Views/SubViews/PersonalDetailsView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "16"
-                  endingLineNumber = "16">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
