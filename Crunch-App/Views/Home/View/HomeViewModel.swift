@@ -16,13 +16,17 @@ struct CategoryModel: Identifiable {
     var name: String
 }
 
-class HomeViewModel: ObservableObject {
+protocol HomeViewProtocol {
+    func getJsonData() -> [CategoryModel]
+}
+
+class HomeViewModel: HomeViewProtocol {
     
     let dataService = DataService()
     
-    func getData() -> [CategoryModel] {
-        let laptopData = [
-            CategoryModel(imageName: "laptops", 
+    func getJsonData() -> [CategoryModel] {
+        let dataFromJSON = [
+            CategoryModel(imageName: "laptops",
                           color: "primaryGreen",
                           productModel:
                             dataService.laptop,
@@ -39,6 +43,6 @@ class HomeViewModel: ObservableObject {
                           color: "primaryPurple",
                           productModel: dataService.television,
                           name: "Television")]
-        return laptopData
+        return dataFromJSON
     }
 }

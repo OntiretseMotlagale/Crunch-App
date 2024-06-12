@@ -12,7 +12,7 @@ protocol FirestoreManagerProtocol {
     
 }
 struct DatabaseUserOrder: Identifiable, Decodable {
-    var id = UUID().uuidString
+    @DocumentID var id: String? = UUID().uuidString
     var uid: String?
     var productImage: String?
     var productname: String?
