@@ -7,29 +7,30 @@
 
 import Foundation
 
-enum RegistrationError: Error {
-    case fullnameEmpty
-    case emailEmpty
-    case passwordEmpty
-    case passwordTooShort
+protocol RegisterUserProtocol {
+    var fullName: String { get set }
+    var email: String { get set }
+    var password: String { get set }
+    var errorMessage: String { get set }
+    var isAccountCreated: Bool { get set }
     
+    func register() async throws
+    func clearUserDetails()
 }
-@MainActor
-class RegisterViewModel: ObservableObject {
+
+class RegisterViewModel: ObservableObject, RegisterUserProtocol {
     @Published var fullName: String = ""
     @Published var email: String = ""
     @Published var password: String = ""
     @Published var errorMessage: String = ""
     @Published var isAccountCreated: Bool = false
     
-    let authService: AuthenticationManager
-    init(authService: AuthenticationManager) {
-        self.authService = authService
-    }
-    
+    @Inject var firestoreManager: FirestoreManagerProtocol
+    @Inject var authenticationProtocol: AuthenticationProtocol
+
     func register() async throws {
         do {
-            try await authService.registerUser(fullName: fullName, email: email, password: password)
+            try await authenticationProtocol.registerUser(fullName: fullName, email: email, password: password)
             clearUserDetails()
             self.isAccountCreated = true
         }
@@ -37,11 +38,11 @@ class RegisterViewModel: ObservableObject {
             self.errorMessage = error.localizedDescription
         }
     }
-    private func clearUserDetails() {
+    func clearUserDetails() {
         self.email = ""
         self.password = ""
         self.fullName = ""
         self.errorMessage = ""
     }
-
+    
 }

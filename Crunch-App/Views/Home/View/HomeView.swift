@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @StateObject var viewModel = HomeViewModel()
+    @Inject var homeViewProtocol: HomeViewProtocol
     
     let column: [GridItem] = [
         GridItem(.flexible(), spacing: 15, alignment: nil),
@@ -23,7 +23,7 @@ struct HomeView: View {
                               alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/,
                               spacing: 20,
                               content: {
-                        ForEach(viewModel.getData()) { item in
+                        ForEach(homeViewProtocol.getJsonData()) { item in
                             NavigationLink {
                                 CategoryItemView(item: item.productModel)
                             } label: {

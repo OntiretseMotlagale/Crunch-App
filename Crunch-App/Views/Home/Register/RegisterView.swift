@@ -15,12 +15,9 @@ enum AuthIcons: String {
     case lock
 }
 struct RegisterView: View {
-    @StateObject var viewModel: RegisterViewModel
+    @StateObject var viewModel = RegisterViewModel()
     @Environment(\.dismiss) var dimiss
     
-    init(authService: AuthenticationManager) {
-        _viewModel = StateObject(wrappedValue: RegisterViewModel(authService: authService))
-    }
     var body: some View {
         ScrollView {
             VStack {
@@ -90,7 +87,7 @@ struct RegisterView: View {
 }
 
 #Preview {
-    RegisterView(authService: AuthenticationManager())
+    RegisterView()
 }
 
 struct SecureText: View {

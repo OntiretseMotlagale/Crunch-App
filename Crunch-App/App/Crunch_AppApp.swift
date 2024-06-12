@@ -20,7 +20,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 
 @main
 struct Crunch_AppApp: App {
+   
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+   
     var body: some Scene {
         WindowGroup {
             ContentView()
