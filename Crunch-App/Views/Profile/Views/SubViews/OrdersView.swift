@@ -56,19 +56,14 @@ struct OrderItem: View {
                     .frame(width: 100, height: 100)
                     .shadow(color: Color.black.opacity(0.2), radius: 1, x: 0, y: 0.3)
             }
-            
-            
-            
             VStack(alignment: .leading, spacing: 20) {
                 if let name = item.productImage {
                     Text(name)
-                        .font(.custom(AppFonts.semibold, size: 21))
-                    
+                        .font(.custom(AppFonts.semibold, size: 18))
                 }
-                
                 HStack (alignment: .center) {
                     Text("Price:")
-                        .font(.custom(AppFonts.regular, size: 16))
+                        .font(.custom(AppFonts.regular, size: 14))
                         .foregroundStyle(.black.opacity(0.6))
                     if let price = item.price {
                         Text("R\(price)")

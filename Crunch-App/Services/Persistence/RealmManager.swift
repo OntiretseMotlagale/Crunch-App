@@ -2,7 +2,16 @@
 import Foundation
 import RealmSwift
 
-
+class RealmDatabaseUser: Object, Identifiable {
+    @Persisted var fullname: String
+    @Persisted var email: String
+    
+    convenience init(fullname: String, email: String) {
+        self.init()
+        self.email = email
+        self.fullname = fullname
+    }
+}
 class RealmProductItem: Object, Identifiable {
     var id = UUID().uuidString
     @Persisted var name: String
@@ -47,5 +56,17 @@ class RealmManager {
     }
     func fetchRealmItems() -> Results<RealmProductItem> {
         return realm.objects(RealmProductItem.self)
+    }
+    
+    
+    func addUserToRealm(databaseUser: RealmDatabaseUser) {
+        do {
+            try realm.write {
+                realm.add(databaseUser)
+            }
+        }
+        catch {
+            print(error.localizedDescription)
+        }
     }
 }

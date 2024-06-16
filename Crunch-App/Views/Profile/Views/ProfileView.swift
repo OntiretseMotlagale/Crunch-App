@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import FirebaseAuth
+import RealmSwift
 
 enum ProfileIcons: String {
     case house
@@ -16,12 +17,21 @@ enum ProfileIcons: String {
     case settings
     
 }
+
+
 @MainActor
 class ProfileViewModel: ObservableObject {
     @Published private(set) var databaseUser: DatabaseUser? = nil
     @Inject var firestoreManager: FirestoreManagerProtocol
     @Inject var authenticationManager: AuthenticationProtocol
+    @ObservedResults(RealmDatabaseUser.self) var realmDatabaseUser
     
+    let realmManager: RealmManager
+    
+    init(realmManager: RealmManager) {
+        self.realmManager = realmManager
+       
+    }
     func signOut() {
         authenticationManager.signOut()
         UserDefaults.isUserSignedIn = false
@@ -30,10 +40,17 @@ class ProfileViewModel: ObservableObject {
     func loadCurrentUser() async throws {
         let authUser =  try authenticationManager.getAuthenticatedUser()
         self.databaseUser = try await firestoreManager.fetchFirestoreUser(id: authUser)
+        addToRealm()
+    }
+    func addToRealm() {
+        let realmDatabaseUser = RealmDatabaseUser()
+        realmDatabaseUser.fullname = databaseUser?.fullname ?? "No Name"
+        realmDatabaseUser.email = databaseUser?.email ?? "No Email"
+        realmManager.addUserToRealm(databaseUser: realmDatabaseUser)
     }
 }
 struct ProfileView: View {
-    @StateObject var viewModel = ProfileViewModel()
+    @StateObject var viewModel = ProfileViewModel(realmManager: RealmManager())
     @State var profileData: [ProfileModel] = [
         ProfileModel(name: "Personal Details",
                      iconName: "person.fill",
@@ -52,18 +69,16 @@ struct ProfileView: View {
     var body: some View {
         NavigationView {
             ScrollView {
-               
                 VStack {
                     ProfileImage()
                         .padding(.bottom, 30)
-                  
                     HStack (spacing: 30) {
                         Image(systemName: "checkmark.seal")
                             .imageScale(.large)
                             .symbolRenderingMode(.multicolor)
                             .foregroundStyle(.white)
-                        if let fullname = viewModel.databaseUser?.fullname {
-                            Text(fullname)
+                        if let user = viewModel.realmDatabaseUser.first {
+                            Text(user.fullname)
                                 .font(.custom(AppFonts.bold, size: 20))
                                 .foregroundStyle(.white)
                         }

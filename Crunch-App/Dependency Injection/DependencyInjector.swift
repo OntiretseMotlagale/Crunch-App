@@ -21,7 +21,6 @@ struct DependencyInjector {
     
     static func register<T>(dependency: T) {
         self.dependencyList[String(describing: T.self)] = dependency
-        print("Registered --> \(T.self)")
     }
 }
 
@@ -30,7 +29,6 @@ struct DependencyInjector {
     
     init() {
         self.wrappedValue = DependencyInjector.resolve()
-        print("Injected ---> \(T.self)")
     }
 }
 

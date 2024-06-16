@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 @MainActor
 class PersonalDataViewModel: ObservableObject {
@@ -14,7 +15,7 @@ class PersonalDataViewModel: ObservableObject {
     @Published private var fullname: String = ""
     @Inject var firestoreManager: FirestoreManagerProtocol
     @Inject var authenticationManager: AuthenticationProtocol
-
+    @ObservedResults(RealmDatabaseUser.self) var realmDatabaseUser
     func loadCurrentLoggedInUser() async throws {
         let authUser = try authenticationManager.getAuthenticatedUser()
         self.databaseUser = try await firestoreManager.fetchFirestoreUser(id: authUser)
@@ -30,14 +31,14 @@ class PersonalDataViewModel: ObservableObject {
         return ""
     }
     func editFullname() {
-         newFullname = getFullname()
+        newFullname = getFullname()
     }
 }
 struct PersonalDetailsView: View {
     
     @State private var showAlert: Bool = false
-  
-   @StateObject private var viewModel = PersonalDataViewModel()
+    
+    @StateObject private var viewModel = PersonalDataViewModel()
     var body: some View {
         ScrollView {
             VStack {
@@ -76,9 +77,12 @@ struct PersonalDetailsView: View {
                         .foregroundStyle(Color("LightGray"))
                         .fontWeight(.semibold)
                         .padding(.bottom, 5)
-                   
-                    Text(viewModel.getFullname())
-                            .fontWeight(.semibold)
+                    
+                    if let user = viewModel.realmDatabaseUser.first {
+                        Text(user.fullname)
+                            .font(.custom(AppFonts.bold, size: 16))
+                            .foregroundStyle(.black)
+                    }
                     
                     Divider()
                         .padding(.bottom, 5)
@@ -98,9 +102,11 @@ struct PersonalDetailsView: View {
                         .fontWeight(.semibold)
                         .padding(.bottom, 5)
                     
-                    Text(viewModel.getEmail())
-                            .tint(.black)
-                            .fontWeight(.semibold)
+                    if let user = viewModel.realmDatabaseUser.first {
+                        Text(user.email)
+                            .font(.custom(AppFonts.bold, size: 16))
+                            .foregroundStyle(.black)
+                    }
                     Divider()
                         .padding(.bottom, 5)
                 }
@@ -111,17 +117,17 @@ struct PersonalDetailsView: View {
         buildUserProfileInputs()
             .alert("Edit Full Name", isPresented: $showAlert) {
                 TextField("Full Name", text: $viewModel.newFullname)
-            Button(role: .cancel) {
-                viewModel.editFullname()
-            } label: {
-                Text("Save")
+                Button(role: .cancel) {
+                    viewModel.editFullname()
+                } label: {
+                    Text("Save")
+                }
+                Button(role: .destructive) {
+                    self.showAlert = false
+                } label: {
+                    Text("Cancel")
+                }
             }
-            Button(role: .destructive) {
-                self.showAlert = false
-            } label: {
-                Text("Cancel")
-            }
-        }
     }
 }
 
