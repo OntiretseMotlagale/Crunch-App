@@ -19,7 +19,7 @@ struct ProfileImage: View {
                         .fill(Color("PrimaryGray"))
                 }
             HalfCircle()
-                .stroke(Color("PrimaryOrange"), lineWidth: 5)
+                .stroke(AppColors.primaryColor, lineWidth: 5)
                 .frame(width: 155, height: 125)
         }
         .clipped()

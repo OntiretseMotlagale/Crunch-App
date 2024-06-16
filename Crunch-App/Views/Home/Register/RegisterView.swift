@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import AlertKit
+
 
 enum AuthIcons: String {
     case person
@@ -13,40 +15,45 @@ enum AuthIcons: String {
     case lock
 }
 struct RegisterView: View {
-    @StateObject var viewModel: RegisterViewModel
+    @StateObject var viewModel = RegisterViewModel()
     @Environment(\.dismiss) var dimiss
     
-    init(authService: AuthenticationManager) {
-        _viewModel = StateObject(wrappedValue: RegisterViewModel(authService: authService))
-    }
     var body: some View {
         ScrollView {
             VStack {
-                VStack {
+                VStack  {
                     Image("bg")
                         .resizable()
                         .scaledToFit()
                     .frame(width: 150, height: 150)
-                    
-                    Text("Register Account")
+                    Text("Register")
                         .font(.largeTitle)
                         .fontWeight(.bold)
                         .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                         .padding(.bottom, 20)
                     InputText(value: $viewModel.fullName, placeholder: "Full Name", iconname: .person)
+               
                     InputText(value: $viewModel.email, placeholder: "Email Address", iconname: .envelope)
+              
                     SecureText(iconname: .lock, placeholder: "Password", value: $viewModel.password)
+                        .padding(.bottom, 10)
+                    Text(viewModel.errorMessage)
+                        .font(.custom(AppFonts.regular, size: 13))
+                        .foregroundStyle(.red)
                 }
                 .padding(.bottom, 15)
-            
+           
                 VStack (spacing: 20) {
                     CustomButton(title: "SIGN UP") {
-                        viewModel.register()
+                        Task {
+                            try await  viewModel.register()
+                        }
                     }
                     HStack {
                         RoundedRectangle(cornerSize: CGSize())
                             .frame(width: 50, height:  1)
                         Text("Or Continue with")
+                            .font(.custom(AppFonts.regular, size: 17))
                         RoundedRectangle(cornerSize: CGSize())
                             .frame(width: 50, height:  1)
                     }
@@ -58,11 +65,13 @@ struct RegisterView: View {
                     }
                     HStack {
                         Text("Already have an account ?")
+                            .font(.custom(AppFonts.regular, size: 15))
                         Button(action: {
                             dimiss()
                         }, label: {
                             Text("Login")
                                 .foregroundStyle(Color("TertiaryBlue"))
+                                .font(.custom(AppFonts.bold, size: 15))
                         })
                     }
                     .padding(.top, 10)
@@ -73,11 +82,12 @@ struct RegisterView: View {
         }
         .navigationBarBackButtonHidden()
         .navigationBarBackButtonHidden(true)
+        .alert(isPresent: $viewModel.isAccountCreated, view: AlertAppleMusic16View(subtitle: "Account Successfully Created"))
     }
 }
 
 #Preview {
-    RegisterView(authService: AuthenticationManager())
+    RegisterView()
 }
 
 struct SecureText: View {
@@ -93,8 +103,10 @@ struct SecureText: View {
                     .scaledToFit()
                     .foregroundStyle(Color("PrimaryGray"))
                     .frame(width: 20, height: 20)
-                SecureField(placeholder, text: $value)
-                    .font(.system(size: 14))
+                SecureField(text: $value) {
+                    Text(placeholder)
+                        .font(.custom(AppFonts.regular, size: 16))
+                }
             }
             .padding()
             .frame(height: 60)
@@ -117,9 +129,10 @@ struct InputText: View {
                     .scaledToFit()
                     .foregroundStyle(Color("PrimaryGray"))
                     .frame(width: 20, height: 20)
-                TextField(placeholder, text: $value)
-                    .font(.system(size: 14))
-                
+                TextField(text: $value) {
+                    Text(placeholder)
+                        .font(.custom(AppFonts.regular, size: 16))
+                }
             }
             .padding()
             .frame(height: 60)

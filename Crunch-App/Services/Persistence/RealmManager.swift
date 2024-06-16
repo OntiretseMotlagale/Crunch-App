@@ -2,6 +2,7 @@
 import Foundation
 import RealmSwift
 
+
 class RealmProductItem: Object, Identifiable {
     var id = UUID().uuidString
     @Persisted var name: String

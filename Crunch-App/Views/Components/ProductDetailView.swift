@@ -8,71 +8,75 @@
 import SwiftUI
 import UIKit
 import RealmSwift
+import AlertKit
 
 
 struct ProductDetailView: View {
-    @StateObject var viewModel = ProductDetailViewModel(realmManager: RealmManager())
-
+    @StateObject private var viewModel = ProductDetailViewModel(realmManager: RealmManager())
     let item: ProductModel
+    @State private var showCartAlert: Bool = false
 
     var body: some View {
-        VStack(alignment: .leading) {
-            TabView {
-                ForEach(item.gallery, id: \.self) { item in
-                    Image(item)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 300)
-                }
-            }
-            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
-            .onAppear(perform: setupAppearance)
-            Spacer()
+        ZStack {
             VStack(alignment: .leading) {
-                HStack {
-                    Text(item.name)
-                        .font(.title.bold())
-                        .padding(.bottom, 30)
-                    Spacer()
-                    HStack {
-                        Spacer()
-                        Text("R\(item.price)")
-                            .font(.title.bold())
-                            .foregroundStyle(Color.lightBlue)
+                TabView {
+                    ForEach(item.gallery, id: \.self) { item in
+                        Image(item)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 300)
                     }
                 }
-                Text("About:")
-                    .font(.title3)
-                    .fontWeight(.semibold)
-                    .padding(.bottom, 10)
-                Text(item.description)
-                    .foregroundStyle(Color.lightGray)
-                    .padding(.bottom, 20)
-                
-                Button(action: {
-                    viewModel.addItemToRealm(item: item)
-                }, label: {
-                    Text("Buy Now")
-                        .font(.headline)
-                        .foregroundStyle(.white)
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 55)
-                        .background(RoundedRectangle(cornerRadius: 10)
-                            .fill(Color("LightBlue")))
-                })
+                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+                .onAppear(perform: setupAppearance)
+                Spacer()
+                VStack(alignment: .leading) {
+                    HStack(alignment: .center) {
+                        Text(item.name)
+                            .font(.title2.bold())
+                            .foregroundStyle(Color(AppColors.lightGray))
+                        Spacer()
+                        HStack {
+                            Spacer()
+                            Text("R\(item.price)")
+                                .font(.title3.bold())
+                        }
+                    }
+                    Text("Description:")
+                        .font(.title3)
+                        .fontWeight(.semibold)
+                        .padding(.bottom, 10)
+                        .padding(.top, 25)
+                    Text(item.description)
+                        .foregroundStyle(Color.lightGray)
+                        .padding(.bottom, 20)
+                    
+                    CustomButton(title: "Add To Cart") {
+                        viewModel.addItemToRealm(item: item)
+                        withAnimation {
+                            self.showCartAlert.toggle()
+                        }
+                    }
+                }
             }
+            .padding(.horizontal)
+            .navigationTitle(item.name)
+            .navigationBarTitleDisplayMode(.inline)
         }
-        .padding(.horizontal)
-        .navigationTitle(item.name)
-        .navigationBarTitleDisplayMode(.inline)
+        .alert(isPresent: $showCartAlert, view: addedToCartAlert())
+    }
+    func addedToCartAlert() -> AlertAppleMusic16View {
+        let alertView = AlertAppleMusic16View(title: "Added to Cart", icon: .done)
+        alertView.duration = 2.0
+        return alertView
     }
     
     func setupAppearance() {
-        UIPageControl.appearance().currentPageIndicatorTintColor = .red
+        UIPageControl.appearance().currentPageIndicatorTintColor = .black
         UIPageControl.appearance().pageIndicatorTintColor = UIColor.black.withAlphaComponent(0.2)
     }
 }
 //
-//#Preview {
-//    ProductDetailView(item: ProductModel(id: 1, name: "Acer Inspire", image: "laptops", description: "This is the best windows machine you could ever find This is the best windows machine you could ever find This is the best windows machine you could ever find This is the best windows machine you could ever find", price: 4500, gallery: ["acer-1", "acer-2", "acer-3"]))
-//}
+#Preview {
+    ProductDetailView(item: ProductModel(id: 1, name: "Acer Inspire", image: "laptops", description: "This is the best windows machine you could ever find This is the best windows machine you could ever find This is the best windows machine you could ever find This is the best windows machine you could ever find", price: 4500, gallery: ["acer-1", "acer-2", "acer-3"]))
+}

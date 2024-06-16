@@ -8,20 +8,22 @@
 import SwiftUI
 
 struct HomeView: View {
-    @StateObject var viewModel = HomeViewModel()
+    
+    @Inject var homeViewProtocol: HomeViewProtocol
+    
     let column: [GridItem] = [
         GridItem(.flexible(), spacing: 15, alignment: nil),
-        GridItem(.flexible(), spacing: 15, alignment: nil)
-    ]
+        GridItem(.flexible(), spacing: 15, alignment: nil)]
+   
     var body: some View {
         NavigationStack {
-            ScrollView {
+            ScrollView  {
                 VStack {
                     LazyVGrid(columns: column,
                               alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/,
                               spacing: 20,
                               content: {
-                        ForEach(viewModel.getData()) { item in
+                        ForEach(homeViewProtocol.getJsonData()) { item in
                             NavigationLink {
                                 CategoryItemView(item: item.productModel)
                             } label: {
@@ -31,14 +33,14 @@ struct HomeView: View {
                     })
                 }
                 .padding(.horizontal)
+                .navigationTitle("Welcome Back")
             }
             .background(
-                Color("SecondaryColor")
-                        .ignoresSafeArea())
+                Color(AppColors.primaryLightGray)
+                    .ignoresSafeArea())
         }
     }
 }
-
 #Preview {
     HomeView()
 }

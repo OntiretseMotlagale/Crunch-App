@@ -9,84 +9,103 @@ import Foundation
 import SwiftUI
 import FirebaseAuth
 
-
-
+enum ProfileIcons: String {
+    case house
+    case address
+    case bag
+    case settings
+    
+}
+@MainActor
 class ProfileViewModel: ObservableObject {
+    @Published private(set) var databaseUser: DatabaseUser? = nil
+    @Inject var firestoreManager: FirestoreManagerProtocol
+    @Inject var authenticationManager: AuthenticationProtocol
     
     func signOut() {
-        AuthenticationManager.shared.signOut()
+        authenticationManager.signOut()
+        UserDefaults.isUserSignedIn = false
+    }
+    
+    func loadCurrentUser() async throws {
+        let authUser =  try authenticationManager.getAuthenticatedUser()
+        self.databaseUser = try await firestoreManager.fetchFirestoreUser(id: authUser)
     }
 }
 struct ProfileView: View {
     @StateObject var viewModel = ProfileViewModel()
     @State var profileData: [ProfileModel] = [
-        ProfileModel(name: "Personal Data",
-                     iconName: "person",
-                     Tab: .personalData),
+        ProfileModel(name: "Personal Details",
+                     iconName: "person.fill",
+                     Tab: .personalDetails),
         ProfileModel(name: "Address",
                      iconName: "house",
                      Tab: .address),
         ProfileModel(name: "Orders",
                      iconName: "bag",
                      Tab: .orders),
-        ProfileModel(name: "Setting",
+        ProfileModel(name: "Settings",
                      iconName: "gearshape",
                      Tab: .settings)
     ]
     
     var body: some View {
-        NavigationStack {
+        NavigationView {
             ScrollView {
+               
                 VStack {
                     ProfileImage()
-                    Text("Ontiretse Motlagale")
-                        .font(.title.bold())
+                        .padding(.bottom, 30)
+                  
                     HStack (spacing: 30) {
-                        Image(systemName: "bubbles.and.sparkles.fill")
-                            .resizable()
-                            .scaledToFit()
-                            .foregroundStyle(Color("PrimaryOrange"))
-                            .frame(width: 30, height: 30)
-                        VStack(alignment: .leading) {
-                            Text("30 Mar, 1997")
-                                .fontWeight(.bold)
-                                .foregroundStyle(Color("PrimaryOrange"))
-                            Text("Birth Date")
-                                .font(.footnote)
-                                .fontWeight(.semibold)
+                        Image(systemName: "checkmark.seal")
+                            .imageScale(.large)
+                            .symbolRenderingMode(.multicolor)
+                            .foregroundStyle(.white)
+                        if let fullname = viewModel.databaseUser?.fullname {
+                            Text(fullname)
+                                .font(.custom(AppFonts.bold, size: 20))
+                                .foregroundStyle(.white)
                         }
                     }
                     .padding()
                     .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                     .background(
                         RoundedRectangle(cornerRadius: 10)
-                            .fill(Color("SecondaryOrange")))
+                            .fill(AppColors.primaryColor))
                     .padding(.bottom, 20)
-                    VStack {
+                    VStack(alignment: .leading, spacing: 0) {
                         ForEach(profileData) { item in
-                            ProfileDetailButton(item: item, selectedTab: item.Tab )
-                                .padding(.bottom, 10)
+                            ProfileDetailButton(item: item, selectedTab: item.Tab)
                         }
                     }
                     .padding(.bottom, 30)
-                    Button(action: {}, label: {
-                        HStack(spacing: 15) {
-                            Image("logout")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 20, height: 20)
+                    Button(action: {
+                        viewModel.signOut()
+                    }, label: {
+                        HStack(spacing: 10) {
+                           Image(systemName:  "door.left.hand.open")
+                                .imageScale(.large)
+                                .foregroundStyle(.red)
                             Text("Logout")
-                                .font(.system(size: 20))
-                                .foregroundStyle(.black)
+                                .font(.custom(AppFonts.bold, size: 16))
+                                .foregroundStyle(.pink)
                         }
                     })
                     .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                    .frame(height: 50)
                     .padding(.horizontal)
                 }
                 .navigationTitle("My Profile")
                 .navigationBarTitleDisplayMode(.inline)
             }
             .padding(.horizontal)
+            .background(
+                AppColors.primaryLightGray
+                    .ignoresSafeArea())
+        }
+        .task {
+            try? await viewModel.loadCurrentUser()
         }
     }
 }
@@ -96,40 +115,41 @@ struct ProfileDetailButton: View {
     @State var selectedTab: ProfileCategory
     
     var body: some View {
-        VStack {
-            NavigationLink {
-                ProfileScreens(selectedTab: selectedTab)
-            } label: {
-                HStack(spacing: 15) {
-                    Image(systemName: item.iconName)
-                        .resizable()
-                        .scaledToFit()
-                        .foregroundStyle(Color("PrimaryOrange"))
-                        .frame(width: 25, height: 25)
-                    Text(item.name)
-                        .font(.system(size: 20))
-                        .foregroundStyle(.black)
-                    Spacer()
-                    Image(systemName: "chevron.right")
-                        .fontWeight(.bold)
-                        .foregroundStyle(Color("PrimaryGray"))
-                }
+        VStack (alignment: .leading, spacing: 0){
+            GroupBox {
+                NavigationLink {
+                    ProfileScreens(selectedTab: selectedTab)
+                } label: {
+                    HStack {
+                        HStack(spacing: 15) {
+                            Image(systemName: item.iconName)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 30, height: 30)
+                            Text(item.name)
+                                .font(.custom(AppFonts.semibold, size: 15))
+                                .foregroundStyle(.black)
+                        }
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                            .fontWeight(.regular)
+                            .foregroundStyle(.black)
+                    }
+            }
+                .frame(height: 30)
             }
         }
-        .padding()
+        .padding(.vertical, 8)
         .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-        .background(RoundedRectangle(cornerRadius: 10)
-            .fill(Color("LightWhite")))
     }
 }
 
 #Preview {
-    /*ProfileDetailButton*/
     ProfileView()
 }
 
 enum ProfileCategory: CaseIterable {
-    case personalData
+    case personalDetails
     case orders
     case address
     case settings
@@ -147,10 +167,10 @@ struct ProfileScreens: View {
     var body: some View {
         VStack {
             switch selectedTab {
-            case .personalData:
-               PersonalDataView()
+            case .personalDetails:
+                PersonalDetailsView()
             case .orders:
-              OrdersView()
+                OrdersView()
             case .address:
                 AddressView()
             case .settings:

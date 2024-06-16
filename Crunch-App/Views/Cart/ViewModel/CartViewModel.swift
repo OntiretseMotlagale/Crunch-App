@@ -7,6 +7,7 @@
 
 import Foundation
 import RealmSwift
+import FirebaseAuth
 
 
 struct UsableCartItems: Hashable {
@@ -26,10 +27,13 @@ struct UsableCartItems: Hashable {
         self.descript = descript
     }
 }
+
 class CartViewModel: ObservableObject {
-    @Published var total = 0
+    @Published var total: Int = 0
+    @Published var numberOfItems: Int = 0
     @Published var useableCartItems: [UsableCartItems] = []
-    @Published var cartItems: Results<RealmProductItem>! {
+    @Inject var firestoreManager: FirestoreManagerProtocol
+    @Published var realmCartItems: Results<RealmProductItem>! {
         didSet {
             self.calculateTotal()
         }
@@ -42,31 +46,55 @@ class CartViewModel: ObservableObject {
         fetchItems()
         calculateTotal()
         mapUsableCartItems()
+        increaseNumberOfItems()
+        decreaseNumberOfItems()
     }
     
     func mapUsableCartItems() {
-        self.useableCartItems = cartItems.map {
+        self.useableCartItems = realmCartItems.map {
             UsableCartItems(name: $0.name,
-                              image: $0.image,
-                              price: $0.price,
-                              descript: $0.descript)
+                            image: $0.image,
+                            price: $0.price,
+                            descript: $0.descript)
         }
     }
     func calculateTotal() {
         mapUsableCartItems()
         total = 0
+        calculatePrice()
+    }
+    
+    func calculatePrice() {
         for items in useableCartItems {
             total += items.price
         }
     }
-    func fetchItems() {
-        cartItems = realmManager.fetchRealmItems()
+    private func fetchItems() {
+        realmCartItems = realmManager.fetchRealmItems()
     }
     
     func deleteItem(at offSet: IndexSet) {
         offSet.forEach { index in
-            realmManager.deleteItem(item: cartItems[index])
+            realmManager.deleteItem(item: realmCartItems[index])
         }
         fetchItems()
+    }
+    func increaseNumberOfItems() {
+        numberOfItems += 1
+    }
+    func decreaseNumberOfItems() {
+        numberOfItems -= 1
+    }
+    
+    func submitOrder() async throws {
+        guard let currentUser = Auth.auth().currentUser?.uid else { return }
+        do {
+            for items in useableCartItems {
+                try await firestoreManager.uploadOrderItem(uid: currentUser,
+                                                           image: items.image,
+                                                           itemName: items.name,
+                                                           price: items.price)
+            }
+        }
     }
 }

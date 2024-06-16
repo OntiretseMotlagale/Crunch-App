@@ -11,16 +11,18 @@ enum ErrorState: Error {
     
 }
 struct ErrorStateView: View {
-    @Binding var error: String
+    @Binding var error: String?
     var body: some View {
-        HStack {
-            Image(systemName: "info.circle")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 20, height: 20)
-               Text(error)
+        if let error = error {
+            HStack {
+                Image(systemName: error.isEmpty ? "" : "info.circle")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 20, height: 20)
+                Text(error)
+            }
+            .foregroundStyle(.red)
         }
-        .foregroundStyle(.red)
     }
 }
 

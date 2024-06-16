@@ -9,60 +9,66 @@ struct CategoryItemView: View {
     let item: [ProductModel]
     
     var body: some View {
-        ScrollView {
-            LazyVGrid(columns: column, spacing: 10) {
+        ScrollView(showsIndicators: false) {
+            LazyVGrid(columns: column, spacing: 20) {
                 ForEach(item) { item in
                     NavigationLink {
                         ProductDetailView(item: item)
                     } label: {
-                        VStack (alignment: .center) {
-                            Image(item.image)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 150, height: 150)
-                            VStack(alignment: .leading) {
-                                Text(item.name)
-                                    .foregroundStyle(.black)
-                                    .font(.system(size: 15))
-                                    .fontWeight(.thin)
-                                    .padding(.bottom, 3)
-                                Text( item.description)
-                                    .font(.caption)
-                                    .foregroundStyle(Color.gray)
-                                    .frame(width: 100)
-                                    .lineLimit(1)
-                                    .truncationMode(.tail)
-                                    .padding(.bottom, 4)
-                                HStack {
-                                    Text("Price:")
-                                        .font(.footnote)
-                                        .fontWeight(.semibold)
-                                        .foregroundColor(.black)
-                                    Spacer()
-                                    Text("R\(item.price)")
-                                        .font(.footnote)
-                                        .fontWeight(.bold)
-                                        .foregroundColor(.black)
+                        VStack (alignment: .center, spacing: 0) {
+                            VStack {
+                                GroupBox {
+                                    Image(item.image)
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 150, height: 150)
                                 }
+                                VStack (alignment: .leading, spacing: 5) {
+                                    HStack {
+                                        Text(item.name)
+                                            .font(.custom(AppFonts.semibold, size: 15))
+                                            .foregroundStyle(.black)
+                                            .multilineTextAlignment(.leading)
+                                        Spacer()
+                                        Image(systemName: "star.fill")
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(width: 20, height: 20)
+                                            .foregroundStyle(Color("primaryGold"))
+                                        Text("4.0")
+                                            .font(.custom(AppFonts.bold, size: 15))
+                                            .foregroundStyle(.black)
+                                    }
+                                    Text(item.description)
+                                        .font(.custom(AppFonts.regular, size: 14))
+                                        .foregroundStyle(.gray)
+                                        .multilineTextAlignment(.leading)
+                                        .lineLimit(1)
+                                        .padding(.bottom, 10)
+                                    Text("R\(item.price)")
+                                        .font(.custom(AppFonts.bold, size: 17))
+                                        .foregroundStyle(.black)
+                                        .padding(.top, 5)
+                                }
+                                .padding(.vertical, 4)
+                                .padding(.horizontal, 10)
                             }
-                            .padding(6)
-                            .background(
-                                RoundedRectangle(cornerRadius: 5)
-                                    .fill(.white))
+                            .padding(.bottom)
                         }
-                        .padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(Color("PrimaryGray").opacity(0.2)))
+                        .frame(width: 185)
+                        .background(.white, in: RoundedRectangle(cornerRadius: 10))
                     }
                 }
             }
         }
+        .background(
+            Color(AppColors.primaryLightGray)
+                .ignoresSafeArea())
     }
 }
 #Preview {
     CategoryItemView(item: [
-        ProductModel(id: 12, name: "Asus", image: "acer-1", description: "jfkjdffdfdjfg dfff rerreer ewweewewew", price: 4000, gallery: [""]),
+        ProductModel(id: 12, name: "Samsung Galaxy", image: "acer-1", description: "Experience the perfect blend of power, portability, and style with the Connex 14 Celeron N4020 4/128SSD W11 Home laptop. Engineered to enhance your productivity and simplify your digital lifestyle", price: 4000, gallery: [""]),
         ProductModel(id: 12, name: "Asus", image: "acer-1", description: "jfkjjfg", price: 4000, gallery: [""]),
         ProductModel(id: 12, name: "Asus", image: "acer-1", description: "jfkjjfg", price: 4000, gallery: [""])
     ])

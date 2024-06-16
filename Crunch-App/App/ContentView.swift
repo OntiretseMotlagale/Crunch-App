@@ -7,36 +7,20 @@
 
 import SwiftUI
 import FirebaseAuth
-import Combine
 
 @MainActor
-class ContentViewModel: ObservableObject {
-    @Published var userSession: FirebaseAuth.User?
-    
-   private var cancellable = Set<AnyCancellable>()
-    
-    init() {
-        self.setupSubscriber()
-    }
-    
-    func setupSubscriber() {
-        AuthenticationManager.shared.$userSession.sink { [weak self] userSession in
-            self?.userSession = userSession
-        }
-        .store(in: &cancellable)
-    }
-}
 struct ContentView: View {
-    @StateObject var viewModel = ContentViewModel()
+    let dependencies = Dependencies()
+    @AppStorage(UserDefaultsKeys.isUserSignedIn) var isUserLoggedIn: Bool = false
+   
     var body: some View {
-        ProfileView()
-//        Group {
-//            if viewModel.userSession != nil {
-//                TabBarView()
-//            } else {
-//                LoginView()
-//            }
-//        }
+        Group {
+            if isUserLoggedIn {
+                TabBarView()
+            } else {
+                LoginView()
+            }
+        }
     }
 }
 #Preview {

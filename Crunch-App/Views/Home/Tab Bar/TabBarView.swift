@@ -16,62 +16,56 @@ struct TabBarItem: Identifiable {
 }
 
 struct TabBarView: View {
-    let imageName: Tab = .home
+    let tabItems: [TabBarItem] = [
+        TabBarItem(iconName: "house.fill", tab: .home, index: 0),
+        TabBarItem(iconName: "magnifyingglass", tab: .search, index: 1),
+        TabBarItem(iconName: "cart.fill", tab: .cart, index: 2),
+        TabBarItem(iconName: "person.fill", tab: .profile, index: 3)]
+    @State var selectedTab: Tab = .home
+    @State var xOffset: Double = 0.0
     var body: some View {
-        VStack {
-            
+        NavigationStack {
+            VStack {
+                VStack {
+                    RootView(selectedTab: $selectedTab)
+                    Spacer()
+                }
+                HStack {
+                    ForEach(tabItems) { item in
+                        Spacer()
+                        Image(systemName: item.iconName)
+                            .resizable()
+                            .frame(width: 25, height: 25)
+                            .foregroundStyle(selectedTab == item.tab ? .black : Color(AppColors.lightGray))
+                            .onTapGesture {
+                                withAnimation(.spring()) {
+                                    selectedTab = item.tab
+                                    xOffset = Double(item.index * 104)
+                                }
+                            }
+                        Spacer()
+                    }
+                }
+                .frame(height: 70)
+                .background(.white)
+                .cornerRadius(10)
+                .padding(.horizontal, 10)
+                .overlay(alignment: .bottomLeading) {
+                    Circle()
+                        .fill(.black)
+                        .frame(width: 10, height: 10)
+                        .offset(x: 55, y: -5)
+                        .offset(x: xOffset)
+                        .padding(.bottom, 3)
+                }
+            }
+            .navigationBarBackButtonHidden()
+        .navigationBarBackButtonHidden(true)
+        .background(Color(AppColors.primaryLightGray)
+            .ignoresSafeArea())
         }
     }
 }
-//struct TabBarView: View {
-//    let tabItems: [TabBarItem] = [
-//        TabBarItem(iconName: "house", tab: .home, index: 0),
-//        TabBarItem(iconName: "magnifyingglass", tab: .search, index: 1),
-//        TabBarItem(iconName: "cart", tab: .cart, index: 2),
-//        TabBarItem(iconName: "person", tab: .profile, index: 3)]
-//    @State var selectedTab: Tab = .home
-//    @State var xOffset: Double = 0.0
-//    var body: some View {
-//        NavigationStack {
-//            VStack {
-//                VStack {
-//                    RootView(selectedTab: $selectedTab)
-//                    Spacer()
-//                }
-//                HStack {
-//                    ForEach(tabItems) { item in
-//                        Spacer()
-//                        Image(systemName: item.iconName)
-//                            .resizable()
-//                            .frame(width: 20, height: 20)
-//                            .foregroundStyle(selectedTab == item.tab ? .white : .gray)
-//                            .onTapGesture {
-//                                withAnimation(.spring()) {
-//                                    selectedTab = item.tab
-//                                    xOffset = Double(item.index * 94)
-//                                }
-//                            }
-//                        Spacer()
-//                    }
-//                }
-//                .frame(height: 70)
-//                .background(Color.black)
-//                .cornerRadius(10)
-//                .padding(.horizontal, 10)
-//                .overlay(alignment: .bottomLeading) {
-//                    Circle()
-//                        .fill(.white)
-//                        .frame(width: 10, height: 10)
-//                        .offset(x: 50, y: -5)
-//                        .offset(x: xOffset)
-//                        .padding(.bottom, 3)
-//                }
-//            }
-//            .navigationBarBackButtonHidden()
-//        .navigationBarBackButtonHidden(true)
-//        }
-//    }
-//}
 
 #Preview {
     NavigationStack {
