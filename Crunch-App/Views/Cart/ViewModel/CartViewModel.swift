@@ -27,9 +27,10 @@ struct UsableCartItems: Hashable {
         self.descript = descript
     }
 }
+
 class CartViewModel: ObservableObject {
     @Published var total: Int = 0
-    @Published var numberOfItems: Int = 1
+    @Published var numberOfItems: Int = 0
     @Published var useableCartItems: [UsableCartItems] = []
     @Inject var firestoreManager: FirestoreManagerProtocol
     @Published var realmCartItems: Results<RealmProductItem>! {
@@ -49,17 +50,21 @@ class CartViewModel: ObservableObject {
         decreaseNumberOfItems()
     }
     
-    private func mapUsableCartItems() {
+    func mapUsableCartItems() {
         self.useableCartItems = realmCartItems.map {
             UsableCartItems(name: $0.name,
-                              image: $0.image,
-                              price: $0.price,
-                              descript: $0.descript)
+                            image: $0.image,
+                            price: $0.price,
+                            descript: $0.descript)
         }
     }
-   private func calculateTotal() {
+    func calculateTotal() {
         mapUsableCartItems()
         total = 0
+        calculatePrice()
+    }
+    
+    func calculatePrice() {
         for items in useableCartItems {
             total += items.price
         }
@@ -86,9 +91,9 @@ class CartViewModel: ObservableObject {
         do {
             for items in useableCartItems {
                 try await firestoreManager.uploadOrderItem(uid: currentUser,
-                                                                 image: items.image,
-                                                                 itemName: items.name,
-                                                                 price: items.price)
+                                                           image: items.image,
+                                                           itemName: items.name,
+                                                           price: items.price)
             }
         }
     }

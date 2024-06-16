@@ -15,5 +15,6 @@ class Dependencies {
         @Provider var firestoreManager = FirestoreManager() as FirestoreManagerProtocol
         @Provider var authServiceProtocol = AuthenticationManager() as AuthenticationProtocol
         @Provider var homeViewProtocol = HomeViewModel() as HomeViewProtocol
+       
     }
 }

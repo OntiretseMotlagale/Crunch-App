@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol RegisterUserProtocol {
+protocol RegisterUserProtocol: ObservableObject {
     var fullName: String { get set }
     var email: String { get set }
     var password: String { get set }
@@ -18,12 +18,13 @@ protocol RegisterUserProtocol {
     func clearUserDetails()
 }
 
-class RegisterViewModel: ObservableObject, RegisterUserProtocol {
+class RegisterViewModel: RegisterUserProtocol {
     @Published var fullName: String = ""
     @Published var email: String = ""
     @Published var password: String = ""
     @Published var errorMessage: String = ""
     @Published var isAccountCreated: Bool = false
+     
     
     @Inject var firestoreManager: FirestoreManagerProtocol
     @Inject var authenticationProtocol: AuthenticationProtocol
