@@ -10,29 +10,12 @@ import RealmSwift
 
 @MainActor
 class PersonalDataViewModel: ObservableObject {
-    @Published private(set) var databaseUser: DatabaseUser? = nil
-    @Published var newFullname: String = ""
-    @Published private var fullname: String = ""
+
     @Inject var firestoreManager: FirestoreManagerProtocol
     @Inject var authenticationManager: AuthenticationProtocol
     @ObservedResults(RealmDatabaseUser.self) var realmDatabaseUser
-    func loadCurrentLoggedInUser() async throws {
-        let authUser = try authenticationManager.getAuthenticatedUser()
-        self.databaseUser = try await firestoreManager.fetchFirestoreUser(id: authUser)
-    }
     
-    func getFullname() -> String {
-        if let fullname = databaseUser?.fullname { return fullname }
-        return ""
-    }
-    
-    func getEmail() -> String {
-        if let email = databaseUser?.email { return email }
-        return ""
-    }
-    func editFullname() {
-        newFullname = getFullname()
-    }
+
 }
 struct PersonalDetailsView: View {
     
@@ -56,16 +39,13 @@ struct PersonalDetailsView: View {
                             .fill(.white)}
                     }
                     .padding(.bottom, 30)
-                buildAlert()
+                buildUserProfileInputs()
                     .navigationTitle("Edit Profile")
                 CustomButton(title: "Save") {
                     
                 }
             }
             .padding(.horizontal)
-        }
-        .task {
-            try? await viewModel.loadCurrentLoggedInUser()
         }
     }
     
@@ -87,13 +67,6 @@ struct PersonalDetailsView: View {
                     Divider()
                         .padding(.bottom, 5)
                 }
-                Button(action: {
-                    self.showAlert.toggle()
-                }, label: {
-                    Text("Edit")
-                        .fontWeight(.semibold)
-                        .foregroundStyle(AppColors.textColor)
-                })
             }
             HStack {
                 VStack(alignment: .leading) {
@@ -112,22 +85,6 @@ struct PersonalDetailsView: View {
                 }
             }
         }
-    }
-    @ViewBuilder func buildAlert() -> some View {
-        buildUserProfileInputs()
-            .alert("Edit Full Name", isPresented: $showAlert) {
-                TextField("Full Name", text: $viewModel.newFullname)
-                Button(role: .cancel) {
-                    viewModel.editFullname()
-                } label: {
-                    Text("Save")
-                }
-                Button(role: .destructive) {
-                    self.showAlert = false
-                } label: {
-                    Text("Cancel")
-                }
-            }
     }
 }
 

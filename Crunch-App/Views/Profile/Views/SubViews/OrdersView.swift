@@ -19,7 +19,6 @@ class OrdersViewModel: ObservableObject {
         }
         do {
             self.orders = try await firestoreManager.fetchOrderItems(userID: authUser)
-            print(orders)
         }
     }
 }
@@ -35,6 +34,7 @@ struct OrdersView: View {
                         .padding(.bottom, 10)
                 }
             }
+            .listStyle(.insetGrouped)
         }
         .onAppear {
             Task {
@@ -53,7 +53,7 @@ struct OrderItem: View {
                 Image(image)
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 100, height: 100)
+                    .frame(width: 80, height: 80)
                     .shadow(color: Color.black.opacity(0.2), radius: 1, x: 0, y: 0.3)
             }
             VStack(alignment: .leading, spacing: 20) {
@@ -84,8 +84,8 @@ struct OrderItem: View {
 
 
 #Preview {
-    //    OrdersView()
-    OrderItem(item: DatabaseUserOrder(uid: "djfkfn7932j3n4o3no",
-                                      productImage: "acer-1",
-                                      productname: "Acer", price: 4555))
+    OrdersView()
+//    OrderItem(item: DatabaseUserOrder(uid: "djfkfn7932j3n4o3no",
+//                                      productImage: "acer-1",
+//                                      productname: "Acer", price: 4555))
 }

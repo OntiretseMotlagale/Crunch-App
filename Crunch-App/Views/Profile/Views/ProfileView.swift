@@ -15,7 +15,6 @@ enum ProfileIcons: String {
     case address
     case bag
     case settings
-    
 }
 
 

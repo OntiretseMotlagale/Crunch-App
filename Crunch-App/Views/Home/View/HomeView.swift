@@ -6,11 +6,12 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 struct HomeView: View {
     
     @Inject var homeViewProtocol: HomeViewProtocol
-    
+    @ObservedResults(RealmDatabaseUser.self) var databaseUser
     let column: [GridItem] = [
         GridItem(.flexible(), spacing: 15, alignment: nil),
         GridItem(.flexible(), spacing: 15, alignment: nil)]
@@ -19,6 +20,13 @@ struct HomeView: View {
         NavigationStack {
             ScrollView  {
                 VStack {
+                    if let name = databaseUser.first {
+                        Text("Welcome back, \(name.fullname)!")
+                            .font(.custom(AppFonts.bold, size: 25))
+                            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                            .padding(.top, 30)
+                            .padding(.bottom, 20)
+                    }
                     LazyVGrid(columns: column,
                               alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/,
                               spacing: 20,
@@ -33,7 +41,8 @@ struct HomeView: View {
                     })
                 }
                 .padding(.horizontal)
-                .navigationTitle("Welcome Back")
+                .navigationTitle("Home")
+                .navigationBarTitleDisplayMode(.inline)
             }
             .background(
                 Color(AppColors.primaryLightGray)
