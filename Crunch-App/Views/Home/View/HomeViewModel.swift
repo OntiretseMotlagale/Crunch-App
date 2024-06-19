@@ -18,6 +18,7 @@ struct CategoryModel: Identifiable {
 
 protocol HomeViewProtocol {
     func getJsonData() -> [CategoryModel]
+    func getFirstWord(word: String) -> String 
 }
 
 class HomeViewModel: HomeViewProtocol {
@@ -31,18 +32,27 @@ class HomeViewModel: HomeViewProtocol {
                           productModel:
                             dataService.laptop,
                           name: "Laptops"),
-            CategoryModel(imageName: "phones", 
+            CategoryModel(imageName: "phones",
                           color: "primaryPink",
                           productModel: dataService.phone,
                           name: "Phones"),
-            CategoryModel(imageName: "headphones", 
+            CategoryModel(imageName: "headphones",
                           color: "TextColor",
                           productModel: dataService.headphones,
                           name: "Headphones"),
-            CategoryModel(imageName: "televisions", 
+            CategoryModel(imageName: "televisions",
                           color: "primaryPurple",
                           productModel: dataService.television,
                           name: "Television")]
         return dataFromJSON
+    }
+    
+    func getFirstWord(word: String) -> String {
+        let wordComponent = word.split(separator: " ")
+        
+        if let firstWord = wordComponent.first {
+            return String(firstWord)
+        }
+        return ""
     }
 }

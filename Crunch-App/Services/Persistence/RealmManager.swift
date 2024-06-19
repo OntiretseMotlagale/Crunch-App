@@ -2,6 +2,18 @@
 import Foundation
 import RealmSwift
 
+class RealmDatabaseOrders :Object, Identifiable {
+    @Persisted var itemName: String
+    @Persisted var itemImage: String
+    @Persisted var itemPrice: Int
+    
+    convenience init(itemName: String,  itemImage: String, itemPrice: Int) {
+        self.init()
+        self.itemName = itemName
+        self.itemImage = itemImage
+        self.itemPrice = itemPrice
+    }
+}
 class RealmDatabaseUser: Object, Identifiable {
     @Persisted var fullname: String
     @Persisted var email: String
@@ -33,7 +45,7 @@ class RealmProductItem: Object, Identifiable {
 
 class RealmManager {
     let realm = try! Realm()
-   
+    
     func addItem(realmItem: RealmProductItem) {
         do {
             try realm.write {
@@ -63,6 +75,17 @@ class RealmManager {
         do {
             try realm.write {
                 realm.add(databaseUser)
+            }
+        }
+        catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func addOrdersToRealm(orderItem: [RealmDatabaseOrders]) {
+        do {
+            try realm.write {
+                realm.add(orderItem)
             }
         }
         catch {

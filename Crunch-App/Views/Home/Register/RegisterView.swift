@@ -47,6 +47,7 @@ struct RegisterView: View {
                     CustomButton(title: "SIGN UP") {
                         Task {
                             try await  viewModel.register()
+                         
                         }
                     }
                     HStack {
@@ -133,6 +134,7 @@ struct InputText: View {
                     Text(placeholder)
                         .font(.custom(AppFonts.regular, size: 16))
                 }
+                .autocorrectionDisabled(true)
             }
             .padding()
             .frame(height: 60)

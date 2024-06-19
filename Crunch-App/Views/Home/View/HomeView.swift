@@ -21,8 +21,8 @@ struct HomeView: View {
             ScrollView  {
                 VStack {
                     if let name = databaseUser.first {
-                        Text("Welcome back, \(name.fullname)!")
-                            .font(.custom(AppFonts.bold, size: 25))
+                        Text("Welcome back, \n\(homeViewProtocol.getFirstWord(word: name.fullname))!")
+                            .font(.custom(AppFonts.regular, size: 26))
                             .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                             .padding(.top, 30)
                             .padding(.bottom, 20)

@@ -23,7 +23,7 @@ struct PersonalDetailsView: View {
     
     @StateObject private var viewModel = PersonalDataViewModel()
     var body: some View {
-        ScrollView {
+        ScrollView(showsIndicators: false){
             VStack {
                 ProfileImage()
                     .overlay(alignment: .bottomTrailing) {
@@ -44,44 +44,50 @@ struct PersonalDetailsView: View {
                 CustomButton(title: "Save") {
                     
                 }
+                
+                .padding(.horizontal)
             }
-            .padding(.horizontal)
         }
     }
     
     @ViewBuilder func buildUserProfileInputs() -> some View {
         VStack  {
             HStack {
-                VStack(alignment: .leading) {
-                    Text("Full Name")
-                        .foregroundStyle(Color("LightGray"))
-                        .fontWeight(.semibold)
-                        .padding(.bottom, 5)
-                    
-                    if let user = viewModel.realmDatabaseUser.first {
-                        Text(user.fullname)
-                            .font(.custom(AppFonts.bold, size: 16))
-                            .foregroundStyle(.black)
+                List {
+                    VStack(alignment: .leading) {
+                        List {
+                            Text("Full Name")
+                                .foregroundStyle(Color("LightGray"))
+                                .fontWeight(.semibold)
+                                .padding(.bottom, 5)
+                            
+                            if let user = viewModel.realmDatabaseUser.first {
+                                Text(user.fullname)
+                                    .font(.custom(AppFonts.bold, size: 16))
+                                    .foregroundStyle(.black)
+                            }
+                        }
+                        Divider()
+                            .padding(.bottom, 5)
                     }
-                    
-                    Divider()
-                        .padding(.bottom, 5)
                 }
             }
             HStack {
-                VStack(alignment: .leading) {
-                    Text("Email")
-                        .foregroundStyle(Color("LightGray"))
-                        .fontWeight(.semibold)
-                        .padding(.bottom, 5)
-                    
-                    if let user = viewModel.realmDatabaseUser.first {
-                        Text(user.email)
-                            .font(.custom(AppFonts.bold, size: 16))
-                            .foregroundStyle(.black)
+                List {
+                    VStack(alignment: .leading) {
+                        Text("Email")
+                            .foregroundStyle(Color("LightGray"))
+                            .fontWeight(.semibold)
+                            .padding(.bottom, 5)
+                        
+                        if let user = viewModel.realmDatabaseUser.first {
+                            Text(user.email)
+                                .font(.custom(AppFonts.bold, size: 16))
+                                .foregroundStyle(.black)
+                        }
+                        Divider()
+                            .padding(.bottom, 5)
                     }
-                    Divider()
-                        .padding(.bottom, 5)
                 }
             }
         }
@@ -89,6 +95,7 @@ struct PersonalDetailsView: View {
 }
 
 #Preview {
+    
     PersonalDetailsView()
 }
 
