@@ -10,12 +10,11 @@ import RealmSwift
 
 @MainActor
 class PersonalDataViewModel: ObservableObject {
-
+    
     @Inject var firestoreManager: FirestoreManagerProtocol
     @Inject var authenticationManager: AuthenticationProtocol
     @ObservedResults(RealmDatabaseUser.self) var realmDatabaseUser
     
-
 }
 struct PersonalDetailsView: View {
     
@@ -23,8 +22,8 @@ struct PersonalDetailsView: View {
     
     @StateObject private var viewModel = PersonalDataViewModel()
     var body: some View {
-        ScrollView(showsIndicators: false){
-            VStack {
+        ScrollView(showsIndicators: false) {
+            VStack (spacing: 5) {
                 ProfileImage()
                     .overlay(alignment: .bottomTrailing) {
                         Button(action: {}, label: {
@@ -39,12 +38,18 @@ struct PersonalDetailsView: View {
                             .fill(.white)}
                     }
                     .padding(.bottom, 30)
-                buildUserProfileInputs()
                     .navigationTitle("Edit Profile")
+                
+                if let user = viewModel.realmDatabaseUser.first {
+                    ProfileTextFieldView(profileData: user.fullname, placeHolder: "FULL NAME")
+                }
+                if let user = viewModel.realmDatabaseUser.first {
+                    ProfileTextFieldView(profileData: user.email, placeHolder: "EMAIL")
+                }
+                
                 CustomButton(title: "Save") {
                     
                 }
-                
                 .padding(.horizontal)
             }
         }
@@ -52,42 +57,28 @@ struct PersonalDetailsView: View {
     
     @ViewBuilder func buildUserProfileInputs() -> some View {
         VStack  {
-            HStack {
-                List {
-                    VStack(alignment: .leading) {
-                        List {
-                            Text("Full Name")
-                                .foregroundStyle(Color("LightGray"))
-                                .fontWeight(.semibold)
-                                .padding(.bottom, 5)
-                            
-                            if let user = viewModel.realmDatabaseUser.first {
-                                Text(user.fullname)
-                                    .font(.custom(AppFonts.bold, size: 16))
-                                    .foregroundStyle(.black)
-                            }
-                        }
-                        Divider()
-                            .padding(.bottom, 5)
-                    }
+            List {
+                VStack(alignment: .leading) {
+                    Text("Full Name")
+                        .foregroundStyle(Color("LightGray"))
+                        .fontWeight(.semibold)
+                        .padding(.bottom, 5)
+                    
+                    
+                    Divider()
+                        .padding(.bottom, 5)
                 }
             }
-            HStack {
-                List {
-                    VStack(alignment: .leading) {
-                        Text("Email")
-                            .foregroundStyle(Color("LightGray"))
-                            .fontWeight(.semibold)
-                            .padding(.bottom, 5)
-                        
-                        if let user = viewModel.realmDatabaseUser.first {
-                            Text(user.email)
-                                .font(.custom(AppFonts.bold, size: 16))
-                                .foregroundStyle(.black)
-                        }
-                        Divider()
-                            .padding(.bottom, 5)
-                    }
+            List {
+                VStack(alignment: .leading) {
+                    Text("Email")
+                        .foregroundStyle(Color("LightGray"))
+                        .fontWeight(.semibold)
+                        .padding(.bottom, 5)
+                    
+                    
+                    Divider()
+                        .padding(.bottom, 5)
                 }
             }
         }

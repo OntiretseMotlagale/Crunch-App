@@ -15,6 +15,7 @@
 		2621A5B02C09E42300480AE8 /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2621A5AF2C09E42300480AE8 /* Montserrat-SemiBold.ttf */; };
 		2625A9F12BB2F63800BBB478 /* ErrorStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2625A9F02BB2F63800BBB478 /* ErrorStateView.swift */; };
 		263404C92BAC443D00A539C6 /* ProductDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 263404C82BAC443D00A539C6 /* ProductDetailViewModel.swift */; };
+		2640BC002C22CAF9007EE3F8 /* ProfileTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2640BBFF2C22CAF9007EE3F8 /* ProfileTextFieldView.swift */; };
 		264E50612B9CD53200E46BDD /* Crunch_AppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264E50602B9CD53200E46BDD /* Crunch_AppApp.swift */; };
 		264E50632B9CD53200E46BDD /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264E50622B9CD53200E46BDD /* ContentView.swift */; };
 		264E50652B9CD53800E46BDD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 264E50642B9CD53800E46BDD /* Assets.xcassets */; };
@@ -37,14 +38,10 @@
 		268796812B9F988E00566E28 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268796802B9F988E00566E28 /* HomeViewModel.swift */; };
 		268796842B9FA1F100566E28 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268796832B9FA1F100566E28 /* SearchView.swift */; };
 		268796862B9FA20000566E28 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268796852B9FA20000566E28 /* SearchViewModel.swift */; };
-		268796962B9FA3DC00566E28 /* covers.json in Resources */ = {isa = PBXBuildFile; fileRef = 2687968B2B9FA3DC00566E28 /* covers.json */; };
 		268796972B9FA3DC00566E28 /* television.json in Resources */ = {isa = PBXBuildFile; fileRef = 2687968C2B9FA3DC00566E28 /* television.json */; };
 		268796982B9FA3DC00566E28 /* headphones.json in Resources */ = {isa = PBXBuildFile; fileRef = 2687968D2B9FA3DC00566E28 /* headphones.json */; };
 		268796992B9FA3DC00566E28 /* phones.json in Resources */ = {isa = PBXBuildFile; fileRef = 2687968E2B9FA3DC00566E28 /* phones.json */; };
-		2687969A2B9FA3DC00566E28 /* nulls.json in Resources */ = {isa = PBXBuildFile; fileRef = 2687968F2B9FA3DC00566E28 /* nulls.json */; };
-		2687969B2B9FA3DC00566E28 /* deals.json in Resources */ = {isa = PBXBuildFile; fileRef = 268796902B9FA3DC00566E28 /* deals.json */; };
 		2687969C2B9FA3DC00566E28 /* laptop.json in Resources */ = {isa = PBXBuildFile; fileRef = 268796912B9FA3DC00566E28 /* laptop.json */; };
-		2687969D2B9FA3DC00566E28 /* newArrival.json in Resources */ = {isa = PBXBuildFile; fileRef = 268796922B9FA3DC00566E28 /* newArrival.json */; };
 		2687969E2B9FA3DC00566E28 /* CategoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268796932B9FA3DC00566E28 /* CategoryItem.swift */; };
 		2687969F2B9FA3DC00566E28 /* ProductModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268796942B9FA3DC00566E28 /* ProductModel.swift */; };
 		268796A22B9FA68A00566E28 /* CodableBundleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268796A12B9FA68A00566E28 /* CodableBundleExtension.swift */; };
@@ -103,6 +100,7 @@
 		2621A5AF2C09E42300480AE8 /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
 		2625A9F02BB2F63800BBB478 /* ErrorStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorStateView.swift; sourceTree = "<group>"; };
 		263404C82BAC443D00A539C6 /* ProductDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailViewModel.swift; sourceTree = "<group>"; };
+		2640BBFF2C22CAF9007EE3F8 /* ProfileTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTextFieldView.swift; sourceTree = "<group>"; };
 		264E505D2B9CD53200E46BDD /* Crunch-App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Crunch-App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		264E50602B9CD53200E46BDD /* Crunch_AppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Crunch_AppApp.swift; sourceTree = "<group>"; };
 		264E50622B9CD53200E46BDD /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -125,14 +123,10 @@
 		268796802B9F988E00566E28 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		268796832B9FA1F100566E28 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		268796852B9FA20000566E28 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
-		2687968B2B9FA3DC00566E28 /* covers.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = covers.json; sourceTree = "<group>"; };
 		2687968C2B9FA3DC00566E28 /* television.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = television.json; sourceTree = "<group>"; };
 		2687968D2B9FA3DC00566E28 /* headphones.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = headphones.json; sourceTree = "<group>"; };
 		2687968E2B9FA3DC00566E28 /* phones.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = phones.json; sourceTree = "<group>"; };
-		2687968F2B9FA3DC00566E28 /* nulls.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = nulls.json; sourceTree = "<group>"; };
-		268796902B9FA3DC00566E28 /* deals.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = deals.json; sourceTree = "<group>"; };
 		268796912B9FA3DC00566E28 /* laptop.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = laptop.json; sourceTree = "<group>"; };
-		268796922B9FA3DC00566E28 /* newArrival.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = newArrival.json; sourceTree = "<group>"; };
 		268796932B9FA3DC00566E28 /* CategoryItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryItem.swift; sourceTree = "<group>"; };
 		268796942B9FA3DC00566E28 /* ProductModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductModel.swift; sourceTree = "<group>"; };
 		268796A12B9FA68A00566E28 /* CodableBundleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableBundleExtension.swift; sourceTree = "<group>"; };
@@ -420,14 +414,10 @@
 		2687968A2B9FA3DC00566E28 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				2687968B2B9FA3DC00566E28 /* covers.json */,
 				2687968C2B9FA3DC00566E28 /* television.json */,
 				2687968D2B9FA3DC00566E28 /* headphones.json */,
 				2687968E2B9FA3DC00566E28 /* phones.json */,
-				2687968F2B9FA3DC00566E28 /* nulls.json */,
-				268796902B9FA3DC00566E28 /* deals.json */,
 				268796912B9FA3DC00566E28 /* laptop.json */,
-				268796922B9FA3DC00566E28 /* newArrival.json */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -543,6 +533,7 @@
 			isa = PBXGroup;
 			children = (
 				26BDE27C2BD7977B00E4DAB7 /* ProfileImage.swift */,
+				2640BBFF2C22CAF9007EE3F8 /* ProfileTextFieldView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -667,16 +658,12 @@
 				268796982B9FA3DC00566E28 /* headphones.json in Resources */,
 				2621A5AC2C09D7CB00480AE8 /* Montserrat-Regular.ttf in Resources */,
 				268796992B9FA3DC00566E28 /* phones.json in Resources */,
-				2687969B2B9FA3DC00566E28 /* deals.json in Resources */,
 				2621A5AB2C09D7CB00480AE8 /* Montserrat-Bold.ttf in Resources */,
 				268796972B9FA3DC00566E28 /* television.json in Resources */,
 				2621A5A82C08F38800480AE8 /* Montserrat-Black.ttf in Resources */,
-				2687969A2B9FA3DC00566E28 /* nulls.json in Resources */,
 				2621A5B02C09E42300480AE8 /* Montserrat-SemiBold.ttf in Resources */,
-				268796962B9FA3DC00566E28 /* covers.json in Resources */,
 				264E50652B9CD53800E46BDD /* Assets.xcassets in Resources */,
 				26BD82A02BAEAAE300915A14 /* GoogleService-Info.plist in Resources */,
-				2687969D2B9FA3DC00566E28 /* newArrival.json in Resources */,
 				2687969C2B9FA3DC00566E28 /* laptop.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -733,6 +720,7 @@
 				2687FA5B2BA8A9000051B6A0 /* CartItem.swift in Sources */,
 				26733B332C18AFB30037E85D /* UserDefaults+Extension.swift in Sources */,
 				26BDE2852BD7986600E4DAB7 /* SettingsView.swift in Sources */,
+				2640BC002C22CAF9007EE3F8 /* ProfileTextFieldView.swift in Sources */,
 				26975F772BA22CD200046D5B /* ProductDetailView.swift in Sources */,
 				26BEF8A02BD8F84D00B863E2 /* FirestoreManager.swift in Sources */,
 			);
