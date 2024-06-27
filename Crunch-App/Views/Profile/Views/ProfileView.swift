@@ -29,7 +29,6 @@ class ProfileViewModel: ObservableObject {
     
     init(realmManager: RealmManager) {
         self.realmManager = realmManager
-       
     }
     func signOut() {
         authenticationManager.signOut()
@@ -38,7 +37,7 @@ class ProfileViewModel: ObservableObject {
     
     func loadCurrentUser() async throws {
         let authUser =  try authenticationManager.getAuthenticatedUser()
-        self.databaseUser = try await firestoreManager.fetchFirestoreUser(id: authUser)
+        self.databaseUser = try await firestoreManager.fetchUser(userID: authUser)
         addToRealm()
     }
     func addToRealm() {

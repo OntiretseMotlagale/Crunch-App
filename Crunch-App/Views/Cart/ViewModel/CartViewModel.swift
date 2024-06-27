@@ -90,10 +90,11 @@ class CartViewModel: ObservableObject {
         guard let currentUser = Auth.auth().currentUser?.uid else { return }
         do {
             for items in useableCartItems {
-                try await firestoreManager.uploadOrderItem(uid: currentUser,
-                                                           image: items.image,
-                                                           itemName: items.name,
-                                                           price: items.price)
+                let order = DatabaseUserOrder(uid: currentUser,
+                                              productImage: items.image, 
+                                              productname: items.name,
+                                              price: items.price)
+                try await firestoreManager.createOrderItem(order: order)
             }
         }
     }

@@ -24,13 +24,17 @@ struct CategoryView: View {
                     .font(.custom(AppFonts.bold, size: 16))
                     .padding(.bottom, 4)
                     .foregroundStyle(.black)
-                Text("\(category.productModel.count) Items")
-                    .font(.custom(AppFonts.regular, size: 14))
-                    .foregroundStyle(.black)
-                    .padding(6)
-                    .background(RoundedRectangle(cornerRadius: 8)
-                        .fill(Color.gray.opacity(0.1)))
-                    .padding(.bottom, 20)
+                if category.productModel.isEmpty {
+                    ProgressView()
+                } else {
+                    Text("\(category.productModel.count) Items")
+                        .font(.custom(AppFonts.regular, size: 14))
+                        .foregroundStyle(.black)
+                        .padding(6)
+                        .background(RoundedRectangle(cornerRadius: 8)
+                            .fill(Color.gray.opacity(0.1)))
+                        .padding(.bottom, 20)
+                }
             }
             .frame(width: 170, height: 260)
             .background(.white, in: RoundedRectangle(cornerRadius: 10))

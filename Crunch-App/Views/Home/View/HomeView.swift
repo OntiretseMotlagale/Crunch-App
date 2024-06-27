@@ -10,7 +10,7 @@ import RealmSwift
 
 struct HomeView: View {
     
-    @Inject var homeViewProtocol: HomeViewProtocol
+    @StateObject var homeViewProtocol = HomeViewModel()
     @ObservedResults(RealmDatabaseUser.self) var databaseUser
     let column: [GridItem] = [
         GridItem(.flexible(), spacing: 15, alignment: nil),
@@ -47,6 +47,9 @@ struct HomeView: View {
             .background(
                 Color(AppColors.primaryLightGray)
                     .ignoresSafeArea())
+        }
+        .task {
+            try? await homeViewProtocol.getProductItems()
         }
     }
 }

@@ -16,12 +16,12 @@ class ProductDetailViewModel: ObservableObject {
         self.realmManager = realmManager
     }
     
-    func addItemToRealm(item: ProductModel) {
+    func addItemToRealm(item: DatabaseProductItem) {
         let realmProductItem = RealmProductItem()
-        realmProductItem.name = item.name
-        realmProductItem.descript = item.description
-        realmProductItem.image = item.image
-        realmProductItem.price = item.price
+        realmProductItem.name = item.name ?? ""
+        realmProductItem.descript = item.description ?? ""
+        realmProductItem.image = item.image ?? ""
+        realmProductItem.price = item.price ?? 0
         realmManager.addItem(realmItem: realmProductItem)
   }
 }

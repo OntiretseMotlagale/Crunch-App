@@ -18,7 +18,7 @@ class OrdersViewModel: ObservableObject {
             return
         }
         do {
-            self.orders = try await firestoreManager.fetchOrderItems(userID: authUser)
+            self.orders = try await firestoreManager.fetchOrders(userID: authUser)
         }
     }
 }
