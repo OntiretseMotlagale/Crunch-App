@@ -80,6 +80,7 @@
 		26CE449F2BFFCEDE00D539F6 /* PaymentSuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26CE449E2BFFCEDE00D539F6 /* PaymentSuccessView.swift */; };
 		26E4B8B42BFFB3500042A492 /* SuccessState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E4B8B32BFFB3500042A492 /* SuccessState.swift */; };
 		26F0D9F02BA0A923004FE68D /* CategoryItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26F0D9EF2BA0A923004FE68D /* CategoryItemView.swift */; };
+		26F7E6062C2DF765001547AB /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26F7E6052C2DF765001547AB /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -149,6 +150,7 @@
 		26CE449E2BFFCEDE00D539F6 /* PaymentSuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentSuccessView.swift; sourceTree = "<group>"; };
 		26E4B8B32BFFB3500042A492 /* SuccessState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessState.swift; sourceTree = "<group>"; };
 		26F0D9EF2BA0A923004FE68D /* CategoryItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryItemView.swift; sourceTree = "<group>"; };
+		26F7E6052C2DF765001547AB /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -276,6 +278,7 @@
 				264E50602B9CD53200E46BDD /* Crunch_AppApp.swift */,
 				264E50622B9CD53200E46BDD /* ContentView.swift */,
 				264E50662B9CD53800E46BDD /* Preview Content */,
+				26F7E6052C2DF765001547AB /* Launch Screen.storyboard */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -660,6 +663,7 @@
 				268796992B9FA3DC00566E28 /* phones.json in Resources */,
 				2621A5AB2C09D7CB00480AE8 /* Montserrat-Bold.ttf in Resources */,
 				268796972B9FA3DC00566E28 /* television.json in Resources */,
+				26F7E6062C2DF765001547AB /* Launch Screen.storyboard in Resources */,
 				2621A5A82C08F38800480AE8 /* Montserrat-Black.ttf in Resources */,
 				2621A5B02C09E42300480AE8 /* Montserrat-SemiBold.ttf in Resources */,
 				264E50652B9CD53800E46BDD /* Assets.xcassets in Resources */,
@@ -879,6 +883,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -909,6 +914,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

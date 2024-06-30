@@ -8,7 +8,14 @@
 import Foundation
 import RealmSwift
 
-
+struct DatabaseProductItem: Identifiable {
+    var id: String = UUID().uuidString
+    var gallery: [String]?
+    var description: String?
+    var image: String?
+    var name: String?
+    var price: Int?
+}
 struct CategoryModel: Identifiable {
     var id = UUID()
     var imageName: String
@@ -22,12 +29,13 @@ protocol HomeViewProtocol {
     func getFirstWord(word: String) -> String 
 }
 
+@MainActor
 class HomeViewModel: ObservableObject {
     
-    @Published var laptops: [DatabaseProductItem] = []
-    @Published var headphones: [DatabaseProductItem] = []
-    @Published var phones: [DatabaseProductItem] = []
-    @Published var televisions: [DatabaseProductItem] = []
+    @Published private var laptops: [DatabaseProductItem] = []
+    @Published private var headphones: [DatabaseProductItem] = []
+    @Published private var phones: [DatabaseProductItem] = []
+    @Published private var televisions: [DatabaseProductItem] = []
     
     @Inject var firestoreManager: FirestoreManagerProtocol
     
@@ -61,10 +69,10 @@ class HomeViewModel: ObservableObject {
     }
     
     func setupProductItems() async throws {
-        self.laptops = try await firestoreManager.fetchProductItems(from: "laptops", collectionName: "laptop")
-        self.phones = try await firestoreManager.fetchProductItems(from: "phones", collectionName: "phone")
-        self.headphones = try await firestoreManager.fetchProductItems(from: "headphones", collectionName: "headphone")
-        self.televisions = try await firestoreManager.fetchProductItems(from: "televisions", collectionName: "television")
+        self.laptops = try await firestoreManager.fetchProductItems(from: "laptops", collection: "laptop")
+        self.phones = try await firestoreManager.fetchProductItems(from: "phones", collection: "phone")
+        self.headphones = try await firestoreManager.fetchProductItems(from: "headphones", collection: "headphone")
+        self.televisions = try await firestoreManager.fetchProductItems(from: "televisions", collection: "television")
     }
     func getFirstWord(word: String) -> String {
         let wordComponent = word.split(separator: " ")

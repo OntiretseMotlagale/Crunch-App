@@ -94,7 +94,7 @@ class CartViewModel: ObservableObject {
                                               productImage: items.image, 
                                               productname: items.name,
                                               price: items.price)
-                try await firestoreManager.createOrderItem(order: order)
+                try await firestoreManager.uploadOrderItem(uid: currentUser, image: items.image, itemName: items.name, price: items.price)
             }
         }
     }

@@ -9,7 +9,7 @@ protocol FirestoreManagerProtocol {
     func fetchFirestoreUser(id: String) async throws -> DatabaseUser
     func uploadOrderItem(uid: String, image: String, itemName: String, price: Int) async throws
     func fetchOrderItems( userID: String) async throws -> [DatabaseUserOrder]
-    
+    func fetchProductItems(from: String, collection collectionName: String) async throws -> [DatabaseProductItem]
 }
 struct DatabaseUserOrder: Identifiable, Decodable {
     @DocumentID var id: String? = UUID().uuidString
@@ -30,6 +30,7 @@ class FirestoreManager: FirestoreManagerProtocol {
     
     private let userFirestoreReference = Firestore.firestore().collection("users")
     private let orderFirestoreReference = Firestore.firestore().collection("orders")
+    private let productFirestireReference = Firestore.firestore().collection("products")
     
     func uploadUser(uid: String, fullname: String, email: String, photoURL: String) async throws {
         let userData: [String : Any] = [
@@ -56,7 +57,7 @@ class FirestoreManager: FirestoreManagerProtocol {
         let fullname = data["fullname"] as? String
         let photoURL = data["photoURL"] as? String
         
-        return DatabaseUser(uid: uid, 
+        return DatabaseUser(uid: uid,
                             fullname: fullname,
                             email: email,
                             photoURL: photoURL)
@@ -100,4 +101,25 @@ class FirestoreManager: FirestoreManagerProtocol {
             throw error
         }
     }
+    
+    func fetchProductItems(from: String, collection collectionName: String) async throws -> [DatabaseProductItem] {
+        let documentSnapshot = try await productFirestireReference.document(from).collection(collectionName).getDocuments()
+        do {
+            let orderItems = documentSnapshot.documents.compactMap { document -> DatabaseProductItem? in
+                let orderData = document.data()
+              
+                let uid = orderData["id"] as? String ?? ""
+                let image = orderData["image"] as? String ?? ""
+                let itemName = orderData["name"] as? String ?? ""
+                let price = orderData["price"] as? Int ?? 0
+                let description = orderData["description"] as? String ?? ""
+                let gallery = orderData["gallery"] as? [String] ?? []
+                                
+                return DatabaseProductItem(id: uid, gallery: gallery, description: description, image: image, name: itemName, price: price)
+            }
+            
+            return orderItems
+        }
+    }
 }
+    

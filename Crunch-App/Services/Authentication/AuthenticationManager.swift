@@ -18,8 +18,7 @@ class AuthenticationManager: AuthenticationProtocol, ObservableObject{
     func registerUser(fullName: String, email: String, password: String) async throws {
         
         let authResult = try await Auth.auth().createUser(withEmail: email, password: password)
-        let user = DatabaseUser(uid: authResult.user.uid, fullname: fullName, email: email)
-        try await firestoreManager.createNewUser(user: user)
+        try await firestoreManager.uploadUser(uid: authResult.user.uid, fullname: fullName, email: email, photoURL: "")
     }
     func loginUser(email: String, password: String) async throws {
         do {

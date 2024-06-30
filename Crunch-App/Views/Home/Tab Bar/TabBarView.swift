@@ -1,5 +1,6 @@
 
 import SwiftUI
+import RealmSwift
 
 enum Tab: String, CaseIterable {
     case home
@@ -23,6 +24,7 @@ struct TabBarView: View {
         TabBarItem(iconName: "person.fill", tab: .profile, index: 3)]
     @State var selectedTab: Tab = .home
     @State var xOffset: Double = 0.0
+    @ObservedResults(RealmProductItem.self) var cartItems
     var body: some View {
         NavigationStack {
             VStack {
@@ -58,11 +60,20 @@ struct TabBarView: View {
                         .offset(x: xOffset)
                         .padding(.bottom, 3)
                 }
+                .overlay(alignment: .topTrailing) {
+                    Text("\(cartItems.count)")
+                            .font(.caption2)
+                            .foregroundColor(.white)
+                            .padding(5)
+                            .background(Color.red)
+                            .clipShape(Circle())
+                            .offset(x: -147, y: 9)
+                }
             }
             .navigationBarBackButtonHidden()
-        .navigationBarBackButtonHidden(true)
-        .background(Color(AppColors.primaryLightGray)
-            .ignoresSafeArea())
+            .navigationBarBackButtonHidden(true)
+            .background(Color(AppColors.primaryLightGray)
+                .ignoresSafeArea())
         }
     }
 }

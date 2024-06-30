@@ -37,7 +37,7 @@ class ProfileViewModel: ObservableObject {
     
     func loadCurrentUser() async throws {
         let authUser =  try authenticationManager.getAuthenticatedUser()
-        self.databaseUser = try await firestoreManager.fetchUser(userID: authUser)
+        self.databaseUser = try await firestoreManager.fetchFirestoreUser(id: authUser)
         addToRealm()
     }
     func addToRealm() {
