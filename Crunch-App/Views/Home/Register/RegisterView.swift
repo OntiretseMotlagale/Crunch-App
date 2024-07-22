@@ -17,6 +17,7 @@ enum AuthIcons: String {
 struct RegisterView: View {
     @StateObject var viewModel = RegisterViewModel()
     @Environment(\.dismiss) var dimiss
+    @AppStorage("isUserSignedIn") var isUserSignedIn: Bool = false
     
     var body: some View {
         ScrollView {
@@ -47,7 +48,6 @@ struct RegisterView: View {
                     CustomButton(title: "SIGN UP") {
                         Task {
                             try await  viewModel.register()
-                         
                         }
                     }
                     HStack {
@@ -60,7 +60,11 @@ struct RegisterView: View {
                     }
                     .foregroundStyle(Color("PrimaryGray"))
                     HStack (spacing: 30) {
-                        AuthIcon(imageName: "google", buttonAction: {})
+                        AuthIcon(imageName: "google", buttonAction: {
+                            Task {
+                               try await viewModel.registerWithGoogle()
+                            }
+                        })
                         AuthIcon(imageName: "facebook", buttonAction: {})
                         AuthIcon(imageName: "apple", buttonAction: {})
                     }
@@ -83,6 +87,9 @@ struct RegisterView: View {
         }
         .navigationBarBackButtonHidden()
         .navigationBarBackButtonHidden(true)
+        .fullScreenCover(isPresented: $isUserSignedIn, content: {
+            HomeView()
+        })
         .alert(isPresent: $viewModel.isAccountCreated, view: AlertAppleMusic16View(subtitle: "Account Successfully Created"))
     }
 }

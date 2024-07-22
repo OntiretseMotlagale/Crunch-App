@@ -61,13 +61,16 @@ struct TabBarView: View {
                         .padding(.bottom, 3)
                 }
                 .overlay(alignment: .topTrailing) {
-                    Text("\(cartItems.count)")
-                            .font(.caption2)
-                            .foregroundColor(.white)
-                            .padding(5)
-                            .background(Color.red)
-                            .clipShape(Circle())
-                            .offset(x: -147, y: 9)
+                    if !cartItems.isEmpty {
+                        Text("\(cartItems.count)")
+                                .font(.caption2)
+                                .foregroundColor(.white)
+                                .padding(5)
+                                .background(Color.red)
+                                .clipShape(Circle())
+                                .offset(x: -147, y: 9)
+                    }
+             
                 }
             }
             .navigationBarBackButtonHidden()

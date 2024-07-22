@@ -11,14 +11,14 @@ import FirebaseAuth
 @MainActor
 class OrdersViewModel: ObservableObject {
     @Published private(set)var orders: [DatabaseUserOrder] = []
-    @Inject var firestoreManager: FirestoreManagerProtocol
-    
+    @Inject private var orderProvider: OrderProvider
     func fetchOrders() async throws {
         guard let authUser = Auth.auth().currentUser?.uid else {
             return
         }
+
         do {
-            self.orders = try await firestoreManager.fetchOrderItems(userID: authUser)
+            self.orders = try await orderProvider.fetchOrderItems(userID: authUser)
         }
     }
 }
@@ -28,6 +28,19 @@ struct OrdersView: View {
     
     var body: some View {
         VStack {
+            if viewModel.orders.isEmpty {
+                VStack {
+                    Image("emptyOrder")
+                       
+                    Text("Your order history is empty.")
+                        .font(.custom(AppFonts.bold, size: 20))
+                        .padding(.bottom)
+                    Text("Explore our collection and place an order.")
+                        .font(.custom(AppFonts.regular, size: 18))
+                        .foregroundStyle(AppColors.lightGray)
+                        .padding(.horizontal)
+                }
+            }
             List {
                 ForEach(viewModel.orders, id: \.id) { order in
                     OrderItem(item: order)

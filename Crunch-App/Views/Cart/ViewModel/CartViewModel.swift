@@ -32,7 +32,7 @@ class CartViewModel: ObservableObject {
     @Published var total: Int = 0
     @Published var numberOfItems: Int = 0
     @Published var useableCartItems: [UsableCartItems] = []
-    @Inject var firestoreManager: FirestoreManagerProtocol
+    @Inject var orderProvider: OrderProvider
     @Published var realmCartItems: Results<RealmProductItem>! {
         didSet {
             self.calculateTotal()
@@ -73,6 +73,9 @@ class CartViewModel: ObservableObject {
         realmCartItems = realmManager.fetchRealmItems()
     }
     
+    func deleteAll() {
+        realmManager.deleteAll()
+    }
     func deleteItem(at offSet: IndexSet) {
         offSet.forEach { index in
             realmManager.deleteItem(item: realmCartItems[index])
@@ -94,7 +97,7 @@ class CartViewModel: ObservableObject {
                                               productImage: items.image, 
                                               productname: items.name,
                                               price: items.price)
-                try await firestoreManager.uploadOrderItem(uid: currentUser, image: items.image, itemName: items.name, price: items.price)
+                try await orderProvider.uploadOrderItem(uid: currentUser, image: items.image, itemName: items.name, price: items.price)
             }
         }
     }

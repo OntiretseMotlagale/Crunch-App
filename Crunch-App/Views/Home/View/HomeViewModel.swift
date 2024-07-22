@@ -37,7 +37,7 @@ class HomeViewModel: ObservableObject {
     @Published private var phones: [DatabaseProductItem] = []
     @Published private var televisions: [DatabaseProductItem] = []
     
-    @Inject var firestoreManager: FirestoreManagerProtocol
+    @Inject var productProvider: ProductProvider
     
     func getProductItems() async throws {
         do {
@@ -69,10 +69,10 @@ class HomeViewModel: ObservableObject {
     }
     
     func setupProductItems() async throws {
-        self.laptops = try await firestoreManager.fetchProductItems(from: "laptops", collection: "laptop")
-        self.phones = try await firestoreManager.fetchProductItems(from: "phones", collection: "phone")
-        self.headphones = try await firestoreManager.fetchProductItems(from: "headphones", collection: "headphone")
-        self.televisions = try await firestoreManager.fetchProductItems(from: "televisions", collection: "television")
+        self.laptops = try await productProvider.fetchProductItems(from: "laptops", collection: "laptop")
+        self.phones = try await productProvider.fetchProductItems(from: "phones", collection: "phone")
+        self.headphones = try await productProvider.fetchProductItems(from: "headphones", collection: "headphone")
+        self.televisions = try await productProvider.fetchProductItems(from: "televisions", collection: "television")
     }
     func getFirstWord(word: String) -> String {
         let wordComponent = word.split(separator: " ")

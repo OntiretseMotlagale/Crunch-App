@@ -66,6 +66,13 @@ class RealmManager {
             print("Error deleting an item \(error.localizedDescription)")
         }
     }
+    func deleteAll() {
+        do {
+            try! realm.write {
+                realm.deleteAll()
+            }
+        }
+    }
     func fetchRealmItems() -> Results<RealmProductItem> {
         return realm.objects(RealmProductItem.self)
     }

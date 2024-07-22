@@ -14,12 +14,6 @@ enum EmailValidationError: Error {
     case invalidCharacterFound(Character)
     
 }
-protocol LoginProvider {
-   var email: Binding<String> { get set }
-   var password: Binding<String> { get set }
-   var errorMessage: Binding<String> { get set }
-    
-}
 
 @MainActor
 class LoginViewModel: ObservableObject {
@@ -27,7 +21,7 @@ class LoginViewModel: ObservableObject {
     @Published var password: String = ""
     @Published var errorMessage: String = ""
     
-    @Inject var authenticationProtocol: AuthenticationProtocol
+    @Inject var authenticationProtocol: SignInEmailPasswordProvider
     
     func signIn() async throws {
         do {

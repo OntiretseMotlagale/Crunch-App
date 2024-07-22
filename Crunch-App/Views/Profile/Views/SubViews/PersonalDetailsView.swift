@@ -10,9 +10,8 @@ import RealmSwift
 
 @MainActor
 class PersonalDataViewModel: ObservableObject {
-    
-    @Inject var firestoreManager: FirestoreManagerProtocol
-    @Inject var authenticationManager: AuthenticationProtocol
+
+    @Inject var authenticationManager: SignInEmailPasswordProvider
     @ObservedResults(RealmDatabaseUser.self) var realmDatabaseUser
     
 }
@@ -38,7 +37,8 @@ struct PersonalDetailsView: View {
                             .fill(.white)}
                     }
                     .padding(.bottom, 30)
-                    .navigationTitle("Edit Profile")
+                    .navigationTitle("Profile Data")
+                    .navigationBarTitleDisplayMode(.inline)
                 
                 if let user = viewModel.realmDatabaseUser.first {
                     ProfileTextFieldView(profileData: user.fullname, placeHolder: "FULL NAME")
@@ -46,11 +46,6 @@ struct PersonalDetailsView: View {
                 if let user = viewModel.realmDatabaseUser.first {
                     ProfileTextFieldView(profileData: user.email, placeHolder: "EMAIL")
                 }
-                
-                CustomButton(title: "Save") {
-                    
-                }
-                .padding(.horizontal)
             }
         }
     }

@@ -4,6 +4,21 @@
 <dict>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>Google Sign In</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.127578171147-iiqqmena61b7jns37e3littrc23djp9p</string>
+			</array>
+		</dict>
+	</array>
+	<key>GIDClientID</key>
+	<string>127578171147-iiqqmena61b7jns37e3littrc23djp9p.apps.googleusercontent.com</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Montserrat-SemiBold.ttf</string>

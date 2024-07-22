@@ -1,24 +1,45 @@
-
-
 import Foundation
 import FirebaseCore
 import FirebaseAuth
-import Combine
+import GoogleSignIn
+import GoogleSignInSwift
 
-protocol AuthenticationProtocol {
+
+
+struct AuthResultModel {
+    let uid: String?
+    let fullName: String?
+    let email: String?
+    let photoURL: String?
+    
+    init(user: User) {
+        self.email = user.email
+        self.uid = user.uid
+        self.fullName = user.displayName
+        self.photoURL = user.photoURL?.absoluteString
+    }
+}
+protocol SignInEmailPasswordProvider {
     func registerUser(fullName: String, email: String, password: String) async throws
     func loginUser(email: String, password: String) async throws
     func signOut()
-    func getAuthenticatedUser() throws -> String 
+    func getAuthenticatedUser() throws -> String
 }
-class AuthenticationManager: AuthenticationProtocol, ObservableObject{
 
-    @Inject var firestoreManager: FirestoreManagerProtocol
+enum AuthProviderOptions: String {
+    case email = "password"
+    case google = "google.com"
+}
+
+class SignInEmailPasswordViewModel: SignInEmailPasswordProvider {
+
+    @Inject var userProvider: UserProvider
 
     func registerUser(fullName: String, email: String, password: String) async throws {
         
         let authResult = try await Auth.auth().createUser(withEmail: email, password: password)
-        try await firestoreManager.uploadUser(uid: authResult.user.uid, fullname: fullName, email: email, photoURL: "")
+        let newUser = DatabaseUser(uid: authResult.user.uid, fullname: fullName, email: email)
+        try await userProvider.uploadUser(user: newUser)
     }
     func loginUser(email: String, password: String) async throws {
         do {
@@ -28,7 +49,6 @@ class AuthenticationManager: AuthenticationProtocol, ObservableObject{
             print("Failed to log in")
         }
     }
-    
     func signOut() {
         do {
            try Auth.auth().signOut()
@@ -37,7 +57,6 @@ class AuthenticationManager: AuthenticationProtocol, ObservableObject{
             print("Unable to log out \(error.localizedDescription)")
         }
     }
-    
     func getAuthenticatedUser() throws -> String {
         guard let user = Auth.auth().currentUser?.uid else {
             throw URLError(.badURL)
@@ -45,3 +64,4 @@ class AuthenticationManager: AuthenticationProtocol, ObservableObject{
         return user
     }
 }
+

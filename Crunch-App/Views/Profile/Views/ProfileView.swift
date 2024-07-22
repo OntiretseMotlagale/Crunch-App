@@ -21,8 +21,10 @@ enum ProfileIcons: String {
 @MainActor
 class ProfileViewModel: ObservableObject {
     @Published private(set) var databaseUser: DatabaseUser? = nil
-    @Inject var firestoreManager: FirestoreManagerProtocol
-    @Inject var authenticationManager: AuthenticationProtocol
+    @Published var authProviderOption: [AuthProviderOptions] = []
+    @Inject var userProvider: UserProvider
+    @Inject var googleProvider: SignInGoogleProvider
+    @Inject var signInEmailPasswordProvider: SignInEmailPasswordProvider
     @ObservedResults(RealmDatabaseUser.self) var realmDatabaseUser
     
     let realmManager: RealmManager
@@ -31,13 +33,16 @@ class ProfileViewModel: ObservableObject {
         self.realmManager = realmManager
     }
     func signOut() {
-        authenticationManager.signOut()
+        signInEmailPasswordProvider.signOut()
         UserDefaults.isUserSignedIn = false
     }
     
+    func deleteAll() {
+        realmManager.deleteAll()
+    }
     func loadCurrentUser() async throws {
-        let authUser =  try authenticationManager.getAuthenticatedUser()
-        self.databaseUser = try await firestoreManager.fetchFirestoreUser(id: authUser)
+        let userID =  try signInEmailPasswordProvider.getAuthenticatedUser()
+        self.databaseUser = try await userProvider.getUser(userID: userID)
         addToRealm()
     }
     func addToRealm() {
@@ -45,6 +50,12 @@ class ProfileViewModel: ObservableObject {
         realmDatabaseUser.fullname = databaseUser?.fullname ?? "No Name"
         realmDatabaseUser.email = databaseUser?.email ?? "No Email"
         realmManager.addUserToRealm(databaseUser: realmDatabaseUser)
+    }
+    func getAuthProviders() {
+        if let authProvider = try? googleProvider.getProviders() {
+            self.authProviderOption = authProvider
+            print(authProviderOption)
+        }
     }
 }
 struct ProfileView: View {
@@ -89,12 +100,19 @@ struct ProfileView: View {
                     .padding(.bottom, 20)
                     VStack(alignment: .leading, spacing: 0) {
                         ForEach(profileData) { item in
-                            ProfileDetailButton(item: item, selectedTab: item.Tab)
+                            if viewModel.authProviderOption.contains(.google) {
+                                
+                            }
+                            if viewModel.authProviderOption.contains(.email) {
+                                ProfileDetailButton(item: item, selectedTab: .orders)
+                            }
+                          
                         }
                     }
                     .padding(.bottom, 30)
                     Button(action: {
                         viewModel.signOut()
+                        viewModel.deleteAll()
                     }, label: {
                         HStack(spacing: 10) {
                            Image(systemName:  "door.left.hand.open")
@@ -116,6 +134,9 @@ struct ProfileView: View {
             .background(
                 AppColors.primaryLightGray
                     .ignoresSafeArea())
+        }
+        .onAppear {
+            viewModel.getAuthProviders()
         }
         .task {
             try? await viewModel.loadCurrentUser()

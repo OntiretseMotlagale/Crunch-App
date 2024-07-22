@@ -31,7 +31,6 @@ struct CartView: View {
                             
                             CartItem(cartViewModel: viewModel,
                                      item: items)
-                            
                             .padding(.bottom, 10)
                         }
                         .onDelete(perform: viewModel.deleteItem)
@@ -52,7 +51,6 @@ struct CartView: View {
                             Task {
                                 try await viewModel.submitOrder()
                             }
-                            
                         }
                     }
                     .padding(.horizontal)

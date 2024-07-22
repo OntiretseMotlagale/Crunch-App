@@ -25,9 +25,9 @@ class RegisterViewModel: RegisterUserProtocol {
     @Published var errorMessage: String = ""
     @Published var isAccountCreated: Bool = false
      
-    
-    @Inject var firestoreManager: FirestoreManagerProtocol
-    @Inject var authenticationProtocol: AuthenticationProtocol
+
+    @Inject var authenticationProtocol: SignInEmailPasswordProvider
+    @Inject var googleProvider: SignInGoogleProvider
 
     func register() async throws {
         do {
@@ -37,6 +37,16 @@ class RegisterViewModel: RegisterUserProtocol {
         }
         catch let error {
             self.errorMessage = error.localizedDescription
+        }
+    }
+    
+    func registerWithGoogle() async throws {
+        do {
+            try await googleProvider.signWithGoogle()
+            UserDefaults.isUserSignedIn = true
+        }
+        catch {
+            print("-------------FAILED TO SIGN UP WITH GOOD-------------")
         }
     }
     func clearUserDetails() {

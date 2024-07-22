@@ -48,7 +48,7 @@ struct SuccessState: View {
                                 .frame(width: 240, height: 240)
                         }
                         VStack (spacing: 10 ){
-                            Text("Payment Successfully!")
+                            Text("Payment Successful!")
                                 .font(.custom(AppFonts.bold, size: 30))
                                 .fontWeight(.bold)
                                 .padding(.top, 80)
@@ -63,6 +63,7 @@ struct SuccessState: View {
                             Button(action: {
                                 withAnimation(.easeInOut(duration: 0.5)){
                                     showHomeScreen = true
+                                    viewModel.deleteAll()
                                 }
                             }, label: {
                                 HStack(spacing: 20) {

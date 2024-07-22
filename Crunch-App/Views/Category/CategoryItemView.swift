@@ -2,13 +2,13 @@
 import SwiftUI
 
 struct CategoryItemView: View {
-   
+    
     let column: [GridItem] = [
         GridItem(.flexible(), spacing: 5, alignment: nil),
         GridItem(.flexible(), spacing: 5, alignment: nil)
     ]
-    let item: [DatabaseProductItem]
-    
+    var item: [DatabaseProductItem]
+
     var body: some View {
         ScrollView(showsIndicators: false) {
             LazyVGrid(columns: column, spacing: 20) {
@@ -20,7 +20,7 @@ struct CategoryItemView: View {
                             VStack {
                                 GroupBox {
                                     if let image = item.image {
-                                        Image(item.image!)
+                                        Image(image)
                                             .resizable()
                                             .scaledToFit()
                                             .frame(width: 150, height: 150)
@@ -52,12 +52,15 @@ struct CategoryItemView: View {
                                             .multilineTextAlignment(.leading)
                                             .lineLimit(1)
                                             .padding(.bottom, 10)
-                                        Text("R\(price)")
-                                            .font(.custom(AppFonts.bold, size: 17))
-                                            .foregroundStyle(.black)
-                                            .padding(.top, 5)
+                                        HStack {
+                                            Text("R\(price)")
+                                                .font(.custom(AppFonts.bold, size: 17))
+                                                .foregroundStyle(.black)
+                                                .padding(.top, 5)
+                                            Spacer()
+                                        }
                                     }
-                                   
+                                
                                 }
                                 .padding(.vertical, 4)
                                 .padding(.horizontal, 10)
@@ -74,9 +77,10 @@ struct CategoryItemView: View {
             Color(AppColors.primaryLightGray)
                 .ignoresSafeArea())
     }
+  
 }
-#Preview {
-    CategoryItemView(item: [
-        DatabaseProductItem(id: "12", gallery: [""], description: "Experience the perfect blend of power, portability, and style with the Connex 14 Celeron N4020 4/128SSD W11 Home laptop. Engineered to enhance your productivity and simplify your digital lifestyle", image: "acer-1", name: "Samsung Galaxy", price: 4000)
-    ])
-}
+//#Preview {
+//    CategoryItemView(item: [
+//        DatabaseProductItem(id: "12", gallery: [""], description: "Experience the perfect blend of power, portability, and style with the Connex 14 Celeron N4020 4/128SSD W11 Home laptop. Engineered to enhance your productivity and simplify your digital lifestyle", image: "acer-1", name: "Samsung Galaxy", price: 4000)
+//    ])
+//}
