@@ -21,7 +21,6 @@ enum ProfileIcons: String {
 @MainActor
 class ProfileViewModel: ObservableObject {
     @Published private(set) var databaseUser: DatabaseUser? = nil
-    @Published var authProviderOption: [AuthProviderOptions] = []
     @Inject var userProvider: UserProvider
     @Inject var googleProvider: SignInGoogleProvider
     @Inject var signInEmailPasswordProvider: SignInEmailPasswordProvider
@@ -37,11 +36,11 @@ class ProfileViewModel: ObservableObject {
         UserDefaults.isUserSignedIn = false
     }
     
-    func deleteAll() {
+    func deleteAllRealmItems() {
         realmManager.deleteAll()
     }
-    func loadCurrentUser() async throws {
-        let userID =  try signInEmailPasswordProvider.getAuthenticatedUser()
+    func loadCurrentLoggedInUser() async throws {
+        let userID = try signInEmailPasswordProvider.getAuthenticatedUser()
         self.databaseUser = try await userProvider.getUser(userID: userID)
         addToRealm()
     }
@@ -50,12 +49,6 @@ class ProfileViewModel: ObservableObject {
         realmDatabaseUser.fullname = databaseUser?.fullname ?? "No Name"
         realmDatabaseUser.email = databaseUser?.email ?? "No Email"
         realmManager.addUserToRealm(databaseUser: realmDatabaseUser)
-    }
-    func getAuthProviders() {
-        if let authProvider = try? googleProvider.getProviders() {
-            self.authProviderOption = authProvider
-            print(authProviderOption)
-        }
     }
 }
 struct ProfileView: View {
@@ -100,19 +93,13 @@ struct ProfileView: View {
                     .padding(.bottom, 20)
                     VStack(alignment: .leading, spacing: 0) {
                         ForEach(profileData) { item in
-                            if viewModel.authProviderOption.contains(.google) {
-                                
-                            }
-                            if viewModel.authProviderOption.contains(.email) {
-                                ProfileDetailButton(item: item, selectedTab: .orders)
-                            }
-                          
+                            ProfileDetailButton(item: item, selectedTab: item.Tab)
                         }
                     }
                     .padding(.bottom, 30)
                     Button(action: {
                         viewModel.signOut()
-                        viewModel.deleteAll()
+                        viewModel.deleteAllRealmItems()
                     }, label: {
                         HStack(spacing: 10) {
                            Image(systemName:  "door.left.hand.open")
@@ -135,11 +122,8 @@ struct ProfileView: View {
                 AppColors.primaryLightGray
                     .ignoresSafeArea())
         }
-        .onAppear {
-            viewModel.getAuthProviders()
-        }
         .task {
-            try? await viewModel.loadCurrentUser()
+            try? await viewModel.loadCurrentLoggedInUser()
         }
     }
 }

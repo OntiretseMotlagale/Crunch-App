@@ -22,6 +22,7 @@ struct TabBarView: View {
         TabBarItem(iconName: "magnifyingglass", tab: .search, index: 1),
         TabBarItem(iconName: "cart.fill", tab: .cart, index: 2),
         TabBarItem(iconName: "person.fill", tab: .profile, index: 3)]
+    
     @State var selectedTab: Tab = .home
     @State var xOffset: Double = 0.0
     @ObservedResults(RealmProductItem.self) var cartItems

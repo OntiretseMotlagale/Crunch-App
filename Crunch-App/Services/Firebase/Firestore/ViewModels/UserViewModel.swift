@@ -8,27 +8,25 @@
 import Foundation
 import FirebaseFirestore
 
-
-struct DatabaseUser: Codable {
-    var uid: String?
-    var fullname: String?
-    var email: String?
-}
-
 protocol UserProvider {
-    func uploadUser(user: DatabaseUser) async throws
+    func uploadUserToDatabase(user: DatabaseUser) async throws
     func getUser(userID: String) async throws -> DatabaseUser
 }
 
+enum DatabaseCollectionType: String {
+    case users
+    case orders
+    case products
+}
 class UserViewModel: UserProvider {
     
-    private let userFirestoreReference = Firestore.firestore().collection("users")
-    
+
     private func userDocument(uid: String) -> DocumentReference {
+        let userFirestoreReference = Firestore.firestore().collection(DatabaseCollectionType.users.rawValue)
         return userFirestoreReference.document(uid)
     }
     
-    func uploadUser(user: DatabaseUser) async throws {
+    func uploadUserToDatabase(user: DatabaseUser) async throws {
         guard let id = user.uid else {
             return
         }

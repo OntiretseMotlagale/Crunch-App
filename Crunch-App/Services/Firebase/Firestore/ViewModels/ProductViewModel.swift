@@ -8,30 +8,30 @@
 import Foundation
 import FirebaseFirestore
 
+
+
 protocol ProductProvider {
-    func fetchProductItems(from: String, collection collectionName: String) async throws -> [DatabaseProductItem]
+    func getProductItems(from: String, collection collectionName: String) async throws -> [DatabaseProductItem]
 }
 
+enum ProductKey: String {
+    case products
+}
 class ProductViewModel: ProductProvider {
     
-    private let productFirestireReference = Firestore.firestore().collection("products")
     
-    func fetchProductItems(from: String, collection collectionName: String) async throws -> [DatabaseProductItem] {
-        let documentSnapshot = try await productFirestireReference.document(from).collection(collectionName).getDocuments()
+    private func productDocument(docName: String) -> DocumentReference {
+        let productFirestoreReference = Firestore.firestore().collection(DatabaseCollectionType.products.rawValue)
+       return productFirestoreReference.document(docName)
+    }
+
+    func getProductItems(from: String, collection collectionName: String) async throws -> [DatabaseProductItem] {
+        let snapshot = try await productDocument(docName: from).collection(collectionName).getDocuments()
         do {
-            let orderItems = documentSnapshot.documents.compactMap { document -> DatabaseProductItem? in
-                let orderData = document.data()
-              
-                let uid = orderData["id"] as? String ?? ""
-                let image = orderData["image"] as? String ?? ""
-                let itemName = orderData["name"] as? String ?? ""
-                let price = orderData["price"] as? Int ?? 0
-                let description = orderData["description"] as? String ?? ""
-                let gallery = orderData["gallery"] as? [String] ?? []
-                                
-                return DatabaseProductItem(id: uid, gallery: gallery, description: description, image: image, name: itemName, price: price)
+            let productItems = snapshot.documents.compactMap { document -> DatabaseProductItem? in
+              return try? document.data(as: DatabaseProductItem.self)
             }
-            return orderItems
+            return productItems
         }
     }
 }

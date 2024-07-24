@@ -8,14 +8,7 @@
 import Foundation
 import RealmSwift
 
-struct DatabaseProductItem: Identifiable {
-    var id: String = UUID().uuidString
-    var gallery: [String]?
-    var description: String?
-    var image: String?
-    var name: String?
-    var price: Int?
-}
+
 struct CategoryModel: Identifiable {
     var id = UUID()
     var imageName: String
@@ -39,20 +32,13 @@ class HomeViewModel: ObservableObject {
     
     @Inject var productProvider: ProductProvider
     
-    func getProductItems() async throws {
-        do {
-            try await setupProductItems()
-        } catch {
-            print(error.localizedDescription)
-        }
-    }
     func getJsonData() -> [CategoryModel] {
         let dataFromJSON = [
             CategoryModel(imageName: "laptops",
                           color: "primaryGreen",
                           productModel:
                            laptops,
-                          name: "Phones"),
+                          name: "Laptops"),
             CategoryModel(imageName: "phones",
                           color: "primaryPink",
                           productModel: phones,
@@ -69,10 +55,10 @@ class HomeViewModel: ObservableObject {
     }
     
     func setupProductItems() async throws {
-        self.laptops = try await productProvider.fetchProductItems(from: "laptops", collection: "laptop")
-        self.phones = try await productProvider.fetchProductItems(from: "phones", collection: "phone")
-        self.headphones = try await productProvider.fetchProductItems(from: "headphones", collection: "headphone")
-        self.televisions = try await productProvider.fetchProductItems(from: "televisions", collection: "television")
+        self.laptops = try await productProvider.getProductItems(from: "laptops", collection: "laptop")
+        self.phones = try await productProvider.getProductItems(from: "phones", collection: "phone")
+        self.headphones = try await productProvider.getProductItems(from: "headphones", collection: "headphone")
+        self.televisions = try await productProvider.getProductItems(from: "televisions", collection: "television")
     }
     func getFirstWord(word: String) -> String {
         let wordComponent = word.split(separator: " ")

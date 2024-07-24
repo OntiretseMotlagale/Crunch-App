@@ -67,6 +67,11 @@
 		2687FA652BA982F90051B6A0 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2687FA642BA982F90051B6A0 /* RealmManager.swift */; };
 		2687FA672BA985A00051B6A0 /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2687FA662BA985A00051B6A0 /* DataService.swift */; };
 		26975F772BA22CD200046D5B /* ProductDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26975F762BA22CD200046D5B /* ProductDetailView.swift */; };
+		269880C52C51796F00DC9C05 /* DatabaseUserOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269880C42C51796F00DC9C05 /* DatabaseUserOrder.swift */; };
+		269880C72C5179A300DC9C05 /* DatabaseUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269880C62C5179A300DC9C05 /* DatabaseUser.swift */; };
+		269880C92C5179C300DC9C05 /* DatabaseProductItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269880C82C5179C300DC9C05 /* DatabaseProductItem.swift */; };
+		269880CC2C51801C00DC9C05 /* GoogleAuthProviderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269880CB2C51801C00DC9C05 /* GoogleAuthProviderModel.swift */; };
+		269880D02C518ACC00DC9C05 /* AuthResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 269880CF2C518ACC00DC9C05 /* AuthResultModel.swift */; };
 		26BB9FA62BFF2AE80002FBE6 /* PaymentButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BB9FA52BFF2AE80002FBE6 /* PaymentButton.swift */; };
 		26BD829D2BADCE0C00915A14 /* CartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BD829C2BADCE0C00915A14 /* CartViewModel.swift */; };
 		26BD82A22BAEAB5700915A14 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 26BD82A12BAEAB5700915A14 /* FirebaseAnalytics */; };
@@ -151,6 +156,11 @@
 		2687FA642BA982F90051B6A0 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
 		2687FA662BA985A00051B6A0 /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 		26975F762BA22CD200046D5B /* ProductDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailView.swift; sourceTree = "<group>"; };
+		269880C42C51796F00DC9C05 /* DatabaseUserOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseUserOrder.swift; sourceTree = "<group>"; };
+		269880C62C5179A300DC9C05 /* DatabaseUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseUser.swift; sourceTree = "<group>"; };
+		269880C82C5179C300DC9C05 /* DatabaseProductItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseProductItem.swift; sourceTree = "<group>"; };
+		269880CB2C51801C00DC9C05 /* GoogleAuthProviderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleAuthProviderModel.swift; sourceTree = "<group>"; };
+		269880CF2C518ACC00DC9C05 /* AuthResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthResultModel.swift; sourceTree = "<group>"; };
 		26BB9FA52BFF2AE80002FBE6 /* PaymentButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentButton.swift; sourceTree = "<group>"; };
 		26BD829C2BADCE0C00915A14 /* CartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewModel.swift; sourceTree = "<group>"; };
 		26BD82B12BAEC94D00915A14 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -360,7 +370,6 @@
 			isa = PBXGroup;
 			children = (
 				266C12B32C4C46D400D66BC0 /* GoogleService-Info.plist */,
-				266C12BA2C4E4AF100D66BC0 /* ViewModels */,
 				2687FA632BA9694F0051B6A0 /* Authentication */,
 				26BEF89E2BD8F82E00B863E2 /* Firestore */,
 			);
@@ -517,8 +526,29 @@
 		2687FA632BA9694F0051B6A0 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
+				269880CA2C517F6500DC9C05 /* Models */,
+				266C12BA2C4E4AF100D66BC0 /* ViewModels */,
 			);
 			path = Authentication;
+			sourceTree = "<group>";
+		};
+		269880C32C51794C00DC9C05 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				269880C62C5179A300DC9C05 /* DatabaseUser.swift */,
+				269880C42C51796F00DC9C05 /* DatabaseUserOrder.swift */,
+				269880C82C5179C300DC9C05 /* DatabaseProductItem.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		269880CA2C517F6500DC9C05 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				269880CB2C51801C00DC9C05 /* GoogleAuthProviderModel.swift */,
+				269880CF2C518ACC00DC9C05 /* AuthResultModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		26BB9FA42BFF2AD10002FBE6 /* Components */ = {
@@ -587,6 +617,7 @@
 		26BEF89E2BD8F82E00B863E2 /* Firestore */ = {
 			isa = PBXGroup;
 			children = (
+				269880C32C51794C00DC9C05 /* Models */,
 				266C12BF2C4E50DD00D66BC0 /* ViewModels */,
 			);
 			path = Firestore;
@@ -738,10 +769,12 @@
 				264E508A2B9DE04B00E46BDD /* TabBarView.swift in Sources */,
 				266C12BE2C4E4C3600D66BC0 /* SignInEmailPasswordViewModel.swift in Sources */,
 				26733B2C2C1885660037E85D /* Dependencies.swift in Sources */,
+				269880C92C5179C300DC9C05 /* DatabaseProductItem.swift in Sources */,
 				264E507E2B9CFBB100E46BDD /* HomeView.swift in Sources */,
 				268796842B9FA1F100566E28 /* SearchView.swift in Sources */,
 				266C12C52C4E539200D66BC0 /* ProductViewModel.swift in Sources */,
 				26BDE2832BD7985900E4DAB7 /* OrdersView.swift in Sources */,
+				269880CC2C51801C00DC9C05 /* GoogleAuthProviderModel.swift in Sources */,
 				2687FA672BA985A00051B6A0 /* DataService.swift in Sources */,
 				2687FA652BA982F90051B6A0 /* RealmManager.swift in Sources */,
 				2621A5AE2C09DEAA00480AE8 /* AppFonts.swift in Sources */,
@@ -749,6 +782,7 @@
 				26BB9FA62BFF2AE80002FBE6 /* PaymentButton.swift in Sources */,
 				26BD82B22BAEC94D00915A14 /* ProfileView.swift in Sources */,
 				268796862B9FA20000566E28 /* SearchViewModel.swift in Sources */,
+				269880C72C5179A300DC9C05 /* DatabaseUser.swift in Sources */,
 				26E4B8B42BFFB3500042A492 /* SuccessState.swift in Sources */,
 				264E50632B9CD53200E46BDD /* ContentView.swift in Sources */,
 				2687967F2B9F6CAE00566E28 /* CategoryView.swift in Sources */,
@@ -758,6 +792,7 @@
 				267C4D902BDC2987008F412D /* AppColors.swift in Sources */,
 				26BDE27F2BD7983E00E4DAB7 /* PersonalDetailsView.swift in Sources */,
 				26BDE2812BD7984D00E4DAB7 /* AddressView.swift in Sources */,
+				269880D02C518ACC00DC9C05 /* AuthResultModel.swift in Sources */,
 				266C12BC2C4E4B3400D66BC0 /* SignInWithGoogleViewModel.swift in Sources */,
 				26BD829D2BADCE0C00915A14 /* CartViewModel.swift in Sources */,
 				26733B252C1874360037E85D /* DependencyInjector.swift in Sources */,
@@ -778,6 +813,7 @@
 				26BDE2852BD7986600E4DAB7 /* SettingsView.swift in Sources */,
 				2640BC002C22CAF9007EE3F8 /* ProfileTextFieldView.swift in Sources */,
 				26975F772BA22CD200046D5B /* ProductDetailView.swift in Sources */,
+				269880C52C51796F00DC9C05 /* DatabaseUserOrder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

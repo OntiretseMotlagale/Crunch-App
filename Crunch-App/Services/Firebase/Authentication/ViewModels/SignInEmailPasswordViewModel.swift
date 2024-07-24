@@ -5,20 +5,6 @@ import GoogleSignIn
 import GoogleSignInSwift
 
 
-
-struct AuthResultModel {
-    let uid: String?
-    let fullName: String?
-    let email: String?
-    let photoURL: String?
-    
-    init(user: User) {
-        self.email = user.email
-        self.uid = user.uid
-        self.fullName = user.displayName
-        self.photoURL = user.photoURL?.absoluteString
-    }
-}
 protocol SignInEmailPasswordProvider {
     func registerUser(fullName: String, email: String, password: String) async throws
     func loginUser(email: String, password: String) async throws
@@ -39,7 +25,7 @@ class SignInEmailPasswordViewModel: SignInEmailPasswordProvider {
         
         let authResult = try await Auth.auth().createUser(withEmail: email, password: password)
         let newUser = DatabaseUser(uid: authResult.user.uid, fullname: fullName, email: email)
-        try await userProvider.uploadUser(user: newUser)
+        try await userProvider.uploadUserToDatabase(user: newUser)
     }
     func loginUser(email: String, password: String) async throws {
         do {

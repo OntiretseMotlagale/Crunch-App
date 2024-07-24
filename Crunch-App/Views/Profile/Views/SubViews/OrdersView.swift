@@ -12,11 +12,11 @@ import FirebaseAuth
 class OrdersViewModel: ObservableObject {
     @Published private(set)var orders: [DatabaseUserOrder] = []
     @Inject private var orderProvider: OrderProvider
+    
     func fetchOrders() async throws {
         guard let authUser = Auth.auth().currentUser?.uid else {
             return
         }
-
         do {
             self.orders = try await orderProvider.fetchOrderItems(userID: authUser)
         }
