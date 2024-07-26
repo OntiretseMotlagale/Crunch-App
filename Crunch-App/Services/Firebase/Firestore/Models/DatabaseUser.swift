@@ -12,4 +12,5 @@ struct DatabaseUser: Codable {
     var uid: String?
     var fullname: String?
     var email: String?
+    var orders: [DatabaseUserOrder]?
 }

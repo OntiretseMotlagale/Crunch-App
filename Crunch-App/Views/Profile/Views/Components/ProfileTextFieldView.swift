@@ -37,3 +37,4 @@ struct ProfileTextFieldView: View {
 #Preview {
     ProfileTextFieldView(profileData: "Ontiretse Motlagale", placeHolder: "FULL NAME")
 }
+

@@ -17,9 +17,9 @@ class OrdersViewModel: ObservableObject {
         guard let authUser = Auth.auth().currentUser?.uid else {
             return
         }
-        do {
-            self.orders = try await orderProvider.fetchOrderItems(userID: authUser)
-        }
+//        do {
+//            self.orders = try await orderProvider.fetchOrderItems(userID: authUser)
+//        }
     }
 }
 

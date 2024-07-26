@@ -14,4 +14,5 @@ struct DatabaseUserOrder: Identifiable, Codable {
     var productImage: String?
     var productname: String?
     var price: Int?
+    var date: Date
 }

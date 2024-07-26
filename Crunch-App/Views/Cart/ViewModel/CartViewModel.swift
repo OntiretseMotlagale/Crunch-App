@@ -96,8 +96,9 @@ class CartViewModel: ObservableObject {
                 let order = DatabaseUserOrder(uid: currentUser,
                                               productImage: items.image, 
                                               productname: items.name,
-                                              price: items.price)
-                try await orderProvider.uploadOrderItem(order: order)
+                                              price: items.price, date: Date())
+                
+               try await orderProvider.addOrderToUser(newOrder: order)
             }
         }
     }

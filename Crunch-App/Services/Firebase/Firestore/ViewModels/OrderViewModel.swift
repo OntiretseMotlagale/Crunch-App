@@ -2,34 +2,25 @@ import Foundation
 import FirebaseFirestore
 
 protocol OrderProvider {
-    func uploadOrderItem(order: DatabaseUserOrder) async throws
-    func fetchOrderItems( userID: String) async throws -> [DatabaseUserOrder]
+      func addOrderToUser(newOrder: DatabaseUserOrder) async throws
 }
 class OrderViewModel: OrderProvider {
   
     func orderDocument(uid: String) -> DocumentReference {
-        let orderFirestoreReference = Firestore.firestore().collection(DatabaseCollectionType.orders.rawValue)
-        return orderFirestoreReference.document(uid)
+        let userFirestoreReference = Firestore.firestore().collection(DatabaseCollectionType.users.rawValue)
+        return userFirestoreReference.document(uid)
     }
     
-    func uploadOrderItem(order: DatabaseUserOrder) async throws {
-        guard let uid = order.uid else {
-            return
-        }
-        try orderDocument(uid: uid).collection(uid).addDocument(from: order)
-    }
     
-    func fetchOrderItems(userID: String) async throws -> [DatabaseUserOrder] {
-        let ordersCollection = orderDocument(uid: userID).collection(userID)
-        do {
-            let snapshot = try await ordersCollection.getDocuments()
-            let orderItems = snapshot.documents.compactMap { document -> DatabaseUserOrder? in
-                try? document.data(as: DatabaseUserOrder.self)
-            }
-            return orderItems
-        } catch {
-            throw error
-        }
+    func addOrderToUser(newOrder: DatabaseUserOrder) async throws {
+        guard let uid = newOrder.uid else { return }
+        let orderRef = orderDocument(uid: uid)
+        
+        let document = try await orderRef.getDocument()
+     
+        var user = try document.data(as: DatabaseUser.self)
+            user.orders?.append(newOrder)
+            try orderRef.setData(from: user)
     }
 }
 

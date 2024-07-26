@@ -15,7 +15,7 @@ protocol SignInGoogleProvider {
     func signWithGoogle() async throws
 }
 class SignInWithGoogleViewModel: SignInGoogleProvider {
-    
+    @Inject var userProvider: UserProvider
     @MainActor
     func signWithGoogle() async throws {
         guard let topVC =  Utilities.shared.topViewController() else {
@@ -39,6 +39,8 @@ class SignInWithGoogleViewModel: SignInGoogleProvider {
     
     func signInAuth(credential: AuthCredential) async throws -> AuthResultModel {
         let authResult = try await Auth.auth().signIn(with: credential)
+        let newUser = DatabaseUser(uid: authResult.user.uid, fullname: authResult.user.displayName, email: authResult.user.email, orders: [])
+        try await userProvider.uploadUserToDatabase(user: newUser)
         return AuthResultModel(user: authResult.user)
     }
 }
