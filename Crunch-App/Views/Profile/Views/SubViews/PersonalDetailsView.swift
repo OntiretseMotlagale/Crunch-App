@@ -58,8 +58,6 @@ struct PersonalDetailsView: View {
                         .foregroundStyle(Color("LightGray"))
                         .fontWeight(.semibold)
                         .padding(.bottom, 5)
-                    
-                    
                     Divider()
                         .padding(.bottom, 5)
                 }
@@ -70,8 +68,6 @@ struct PersonalDetailsView: View {
                         .foregroundStyle(Color("LightGray"))
                         .fontWeight(.semibold)
                         .padding(.bottom, 5)
-                    
-                    
                     Divider()
                         .padding(.bottom, 5)
                 }
@@ -81,7 +77,6 @@ struct PersonalDetailsView: View {
 }
 
 #Preview {
-    
     PersonalDetailsView()
 }
 

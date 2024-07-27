@@ -48,6 +48,7 @@ class ProfileViewModel: ObservableObject {
         let realmDatabaseUser = RealmDatabaseUser()
         realmDatabaseUser.fullname = databaseUser?.fullname ?? "No Name"
         realmDatabaseUser.email = databaseUser?.email ?? "No Email"
+        realmDatabaseUser.orders = List<databaseUser?.orders>()
         realmManager.addUserToRealm(databaseUser: realmDatabaseUser)
     }
 }
@@ -57,15 +58,9 @@ struct ProfileView: View {
         ProfileModel(name: "Personal Details",
                      iconName: "person.fill",
                      Tab: .personalDetails),
-        ProfileModel(name: "Address",
-                     iconName: "house",
-                     Tab: .address),
         ProfileModel(name: "Orders",
                      iconName: "bag",
-                     Tab: .orders),
-        ProfileModel(name: "Settings",
-                     iconName: "gearshape",
-                     Tab: .settings)
+                     Tab: .orders)
     ]
     
     var body: some View {
@@ -169,8 +164,6 @@ struct ProfileDetailButton: View {
 enum ProfileCategory: CaseIterable {
     case personalDetails
     case orders
-    case address
-    case settings
 }
 
 struct ProfileModel: Identifiable {
@@ -189,10 +182,6 @@ struct ProfileScreens: View {
                 PersonalDetailsView()
             case .orders:
                 OrdersView()
-            case .address:
-                AddressView()
-            case .settings:
-                SettingsView()
             }
         }
     }

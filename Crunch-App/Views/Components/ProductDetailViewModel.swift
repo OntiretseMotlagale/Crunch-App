@@ -8,7 +8,10 @@
 import Foundation
 import RealmSwift
 
-class ProductDetailViewModel: ObservableObject {
+protocol RealmProductItemProvider {
+    func addItemToRealm(item: DatabaseProductItem)
+}
+class ProductDetailViewModel: ObservableObject, RealmProductItemProvider {
   
     let realmManager: RealmManager
     

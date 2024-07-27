@@ -24,7 +24,7 @@ class SignInEmailPasswordViewModel: SignInEmailPasswordProvider {
     func registerUser(fullName: String, email: String, password: String) async throws {
         
         let authResult = try await Auth.auth().createUser(withEmail: email, password: password)
-        let newUser = DatabaseUser(uid: authResult.user.uid, fullname: fullName, email: email)
+        let newUser = DatabaseUser(uid: authResult.user.uid, fullname: fullName, email: email, orders: [])
         try await userProvider.uploadUserToDatabase(user: newUser)
     }
     func loginUser(email: String, password: String) async throws {

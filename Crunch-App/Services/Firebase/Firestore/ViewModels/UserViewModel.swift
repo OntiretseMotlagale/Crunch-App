@@ -20,7 +20,6 @@ enum DatabaseCollectionType: String {
 }
 class UserViewModel: UserProvider {
     
-
     private func userDocument(uid: String) -> DocumentReference {
         let userFirestoreReference = Firestore.firestore().collection(DatabaseCollectionType.users.rawValue)
         return userFirestoreReference.document(uid)

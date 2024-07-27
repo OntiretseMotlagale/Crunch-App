@@ -17,13 +17,30 @@ class RealmDatabaseOrders :Object, Identifiable {
 class RealmDatabaseUser: Object, Identifiable {
     @Persisted var fullname: String
     @Persisted var email: String
+    @Persisted var orders: List<RealmOrders>
     
-    convenience init(fullname: String, email: String) {
+    convenience init(fullname: String, email: String, orders: List<RealmOrders>) {
         self.init()
-        self.email = email
         self.fullname = fullname
+        self.email = email
+        self.orders = orders
     }
 }
+class RealmOrders: Object, Identifiable {
+    @Persisted var productImage: String
+    @Persisted var productPrice: Int
+    @Persisted var productName: String
+    @Persisted var productDescription: String
+    
+    convenience init(productImage: String, productPrice: Int, productName: String, productDescription: String) {
+        self.init()
+        self.productImage = productImage
+        self.productPrice = productPrice
+        self.productName = productName
+        self.productDescription = productDescription
+    }
+}
+
 class RealmProductItem: Object, Identifiable {
     var id = UUID().uuidString
     @Persisted var name: String

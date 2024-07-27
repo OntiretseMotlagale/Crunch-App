@@ -11,7 +11,6 @@ class OrderViewModel: OrderProvider {
         return userFirestoreReference.document(uid)
     }
     
-    
     func addOrderToUser(newOrder: DatabaseUserOrder) async throws {
         guard let uid = newOrder.uid else { return }
         let orderRef = orderDocument(uid: uid)
@@ -19,7 +18,7 @@ class OrderViewModel: OrderProvider {
         let document = try await orderRef.getDocument()
      
         var user = try document.data(as: DatabaseUser.self)
-            user.orders?.append(newOrder)
+        user.orders.append(newOrder)
             try orderRef.setData(from: user)
     }
 }
