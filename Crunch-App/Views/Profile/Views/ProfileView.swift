@@ -8,62 +8,75 @@
 import Foundation
 import SwiftUI
 import FirebaseAuth
+import RealmSwift
 
 enum ProfileIcons: String {
     case house
     case address
     case bag
     case settings
-    
 }
+
+
 @MainActor
 class ProfileViewModel: ObservableObject {
     @Published private(set) var databaseUser: DatabaseUser? = nil
-    @Inject var firestoreManager: FirestoreManagerProtocol
-    @Inject var authenticationManager: AuthenticationProtocol
+    @Inject var userProvider: UserProvider
+    @Inject var googleProvider: SignInGoogleProvider
+    @Inject var signInEmailPasswordProvider: SignInEmailPasswordProvider
+    @ObservedResults(RealmDatabaseUser.self) var realmDatabaseUser
     
+    let realmManager: RealmManager
+    
+    init(realmManager: RealmManager) {
+        self.realmManager = realmManager
+    }
     func signOut() {
-        authenticationManager.signOut()
+        signInEmailPasswordProvider.signOut()
         UserDefaults.isUserSignedIn = false
     }
     
-    func loadCurrentUser() async throws {
-        let authUser =  try authenticationManager.getAuthenticatedUser()
-        self.databaseUser = try await firestoreManager.fetchFirestoreUser(id: authUser)
+    func deleteAllRealmItems() {
+        realmManager.deleteAll()
+    }
+    
+    func loadCurrentLoggedInUser() async throws {
+        let userID = try signInEmailPasswordProvider.getAuthenticatedUser()
+        self.databaseUser = try await userProvider.getUser(userID: userID)
+        addToRealm()
+    }
+    func addToRealm() {
+        let realmDatabaseUser = RealmDatabaseUser()
+        realmDatabaseUser.fullname = databaseUser?.fullname ?? "No Name"
+        realmDatabaseUser.email = databaseUser?.email ?? "No Email"
+        realmDatabaseUser.orders = List<databaseUser?.orders>()
+        realmManager.addUserToRealm(databaseUser: realmDatabaseUser)
     }
 }
 struct ProfileView: View {
-    @StateObject var viewModel = ProfileViewModel()
+    @StateObject var viewModel = ProfileViewModel(realmManager: RealmManager())
     @State var profileData: [ProfileModel] = [
         ProfileModel(name: "Personal Details",
                      iconName: "person.fill",
                      Tab: .personalDetails),
-        ProfileModel(name: "Address",
-                     iconName: "house",
-                     Tab: .address),
         ProfileModel(name: "Orders",
                      iconName: "bag",
-                     Tab: .orders),
-        ProfileModel(name: "Settings",
-                     iconName: "gearshape",
-                     Tab: .settings)
+                     Tab: .orders)
     ]
-    
+    @State var isUserLogOut: Bool = false
     var body: some View {
         NavigationView {
             ScrollView {
-               
                 VStack {
                     ProfileImage()
                         .padding(.bottom, 30)
-                  
                     HStack (spacing: 30) {
                         Image(systemName: "checkmark.seal")
                             .imageScale(.large)
                             .symbolRenderingMode(.multicolor)
                             .foregroundStyle(.white)
-                        if let fullname = viewModel.databaseUser?.fullname {
-                            Text(fullname)
+                        if let user = viewModel.realmDatabaseUser.first {
+                            Text(user.fullname)
                                 .font(.custom(AppFonts.bold, size: 20))
                                 .foregroundStyle(.white)
                         }
@@ -81,7 +94,7 @@ struct ProfileView: View {
                     }
                     .padding(.bottom, 30)
                     Button(action: {
-                        viewModel.signOut()
+                        self.isUserLogOut = true
                     }, label: {
                         HStack(spacing: 10) {
                            Image(systemName:  "door.left.hand.open")
@@ -96,6 +109,16 @@ struct ProfileView: View {
                     .frame(height: 50)
                     .padding(.horizontal)
                 }
+                 .alert(isPresented: $isUserLogOut) {
+                    Alert(
+                        title: Text("Are you sure you want to log out ?"),
+                        primaryButton: .cancel(Text("Log out")) {
+                            viewModel.signOut()
+                            viewModel.deleteAllRealmItems()
+                        },
+                        secondaryButton: .destructive(Text("Cancel")) {}
+                    )
+                }
                 .navigationTitle("My Profile")
                 .navigationBarTitleDisplayMode(.inline)
             }
@@ -105,7 +128,7 @@ struct ProfileView: View {
                     .ignoresSafeArea())
         }
         .task {
-            try? await viewModel.loadCurrentUser()
+            try? await viewModel.loadCurrentLoggedInUser()
         }
     }
 }
@@ -151,8 +174,6 @@ struct ProfileDetailButton: View {
 enum ProfileCategory: CaseIterable {
     case personalDetails
     case orders
-    case address
-    case settings
 }
 
 struct ProfileModel: Identifiable {
@@ -171,10 +192,6 @@ struct ProfileScreens: View {
                 PersonalDetailsView()
             case .orders:
                 OrdersView()
-            case .address:
-                AddressView()
-            case .settings:
-                SettingsView()
             }
         }
     }

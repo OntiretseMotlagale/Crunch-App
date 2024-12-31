@@ -8,41 +8,64 @@
 import Foundation
 import RealmSwift
 
+
 struct CategoryModel: Identifiable {
     var id = UUID()
     var imageName: String
     var color: String
-    var productModel: [ProductModel]
+    var productModel: [DatabaseProductItem]
     var name: String
 }
 
 protocol HomeViewProtocol {
     func getJsonData() -> [CategoryModel]
+    func getFirstWord(word: String) -> String 
 }
 
-class HomeViewModel: HomeViewProtocol {
+@MainActor
+class HomeViewModel: ObservableObject {
     
-    let dataService = DataService()
+    @Published private var laptops: [DatabaseProductItem] = []
+    @Published private var headphones: [DatabaseProductItem] = []
+    @Published private var phones: [DatabaseProductItem] = []
+    @Published private var televisions: [DatabaseProductItem] = []
+    
+    @Inject var productProvider: ProductProvider
     
     func getJsonData() -> [CategoryModel] {
         let dataFromJSON = [
             CategoryModel(imageName: "laptops",
                           color: "primaryGreen",
                           productModel:
-                            dataService.laptop,
+                           laptops,
                           name: "Laptops"),
-            CategoryModel(imageName: "phones", 
+            CategoryModel(imageName: "phones",
                           color: "primaryPink",
-                          productModel: dataService.phone,
+                          productModel: phones,
                           name: "Phones"),
-            CategoryModel(imageName: "headphones", 
+            CategoryModel(imageName: "headphones",
                           color: "TextColor",
-                          productModel: dataService.headphones,
+                          productModel: headphones,
                           name: "Headphones"),
-            CategoryModel(imageName: "televisions", 
+            CategoryModel(imageName: "televisions",
                           color: "primaryPurple",
-                          productModel: dataService.television,
+                          productModel: televisions,
                           name: "Television")]
         return dataFromJSON
+    }
+    
+    func setupProductItems() async throws {
+        self.laptops = try await productProvider.getProductItems(from: "laptops", collection: "laptop")
+        self.phones = try await productProvider.getProductItems(from: "phones", collection: "phone")
+        self.headphones = try await productProvider.getProductItems(from: "headphones", collection: "headphone")
+        self.televisions = try await productProvider.getProductItems(from: "televisions", collection: "television")
+    }
+    func getFirstWord(word: String) -> String {
+        let wordComponent = word.split(separator: " ")
+        
+        if let firstWord = wordComponent.first {
+            return String(firstWord)
+        }
+        return ""
     }
 }

@@ -8,7 +8,7 @@
 import Foundation
 import RealmSwift
 import FirebaseAuth
-
+import UserNotifications
 
 struct UsableCartItems: Hashable {
     var id = UUID().uuidString
@@ -27,19 +27,19 @@ struct UsableCartItems: Hashable {
         self.descript = descript
     }
 }
-
 class CartViewModel: ObservableObject {
     @Published var total: Int = 0
     @Published var numberOfItems: Int = 0
     @Published var useableCartItems: [UsableCartItems] = []
-    @Inject var firestoreManager: FirestoreManagerProtocol
     @Published var realmCartItems: Results<RealmProductItem>! {
         didSet {
             self.calculateTotal()
         }
     }
+    
     let realmManager: RealmManager
     let realm = try! Realm()
+    @Inject var orderProvider: OrderProvider
     
     init(realmManager: RealmManager) {
         self.realmManager = realmManager
@@ -64,6 +64,12 @@ class CartViewModel: ObservableObject {
         calculatePrice()
     }
     
+    func addUnique(item: UsableCartItems) {
+        if useableCartItems.contains(item) {
+            return
+        }
+    }
+    
     func calculatePrice() {
         for items in useableCartItems {
             total += items.price
@@ -73,6 +79,10 @@ class CartViewModel: ObservableObject {
         realmCartItems = realmManager.fetchRealmItems()
     }
     
+    func deleteAll() {
+        realmManager.deleteAll()
+        useableCartItems = []
+    }
     func deleteItem(at offSet: IndexSet) {
         offSet.forEach { index in
             realmManager.deleteItem(item: realmCartItems[index])
@@ -90,10 +100,12 @@ class CartViewModel: ObservableObject {
         guard let currentUser = Auth.auth().currentUser?.uid else { return }
         do {
             for items in useableCartItems {
-                try await firestoreManager.uploadOrderItem(uid: currentUser,
-                                                           image: items.image,
-                                                           itemName: items.name,
-                                                           price: items.price)
+                let order = DatabaseUserOrder(uid: currentUser,
+                                              productImage: items.image, 
+                                              productname: items.name,
+                                              price: items.price, date: Date())
+
+               try await orderProvider.addOrderToUser(newOrder: order)
             }
         }
     }

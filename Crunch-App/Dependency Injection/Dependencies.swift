@@ -10,11 +10,11 @@ import Swinject
 
 @MainActor
 class Dependencies {
-    
     init() {
-        @Provider var firestoreManager = FirestoreManager() as FirestoreManagerProtocol
-        @Provider var authServiceProtocol = AuthenticationManager() as AuthenticationProtocol
-        @Provider var homeViewProtocol = HomeViewModel() as HomeViewProtocol
-       
+        @Provider var userViewModel = UserViewModel() as UserProvider
+        @Provider var orderViewModel = OrderViewModel() as OrderProvider
+        @Provider var productViewModel = ProductViewModel() as ProductProvider
+        @Provider var signInEmailPasswordViewModel = SignInEmailPasswordViewModel() as SignInEmailPasswordProvider
+        @Provider var SignInWithGoogleViewModel = SignInWithGoogleViewModel() as SignInGoogleProvider
     }
 }

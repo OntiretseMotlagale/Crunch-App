@@ -3,42 +3,69 @@ import SwiftUI
 
 struct LoginView: View {
     @StateObject var viewModel = LoginViewModel()
+    
     var body: some View {
         NavigationStack {
-            VStack {
-                Image("bg")
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 150, height: 150)
-                Text("Login")
-                    .font(.custom(AppFonts.bold, size: 30))
-                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                    .padding(.bottom, 20)
-                InputText(value: $viewModel.email, placeholder: "Email Address", iconname: .envelope)
-                SecureText(iconname: .lock, placeholder: "Password", value: $viewModel.password)
+            ZStack {
+                VStack {
+                    Image("bg")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 150, height: 150)
+                    Text("Login")
+                        .font(.custom(AppFonts.bold, size: 30))
+                        .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                        .padding(.bottom, 20)
+                    
+                    buildLoginFields()
+                    buildRegisterSection()
+                }
+                .padding(.horizontal)
                 
-                CustomButton(title: "LOG IN") {
-                    Task {
-                       try await viewModel.signIn()
+                if viewModel.showWheel {
+                    GroupBox {
+                        ProgressView()
+                            .controlSize(.extraLarge)
+                        Text("Signing...")
                     }
                 }
-                    .padding(.bottom, 10)
-                HStack {
-                    Text("Don't have an account ?")
-                        .font(.custom(AppFonts.regular, size: 15))
-                    NavigationLink {
-                        RegisterView()
-                    } label: {
-                        Text("Register")
-                            .font(.custom(AppFonts.bold, size: 15))
-                            .foregroundStyle(LinearGradient(colors: [AppColors.primaryColor, AppColors.secondayColor], startPoint: .center, endPoint: .center))
-                    }
-                }
-                .padding(.top, 10)
-                .font(.subheadline)
             }
-            .padding(.horizontal)
         }
+    }
+    
+    
+    @ViewBuilder
+    func buildRegisterSection() -> some View {
+        HStack {
+            Text("Don't have an account ?")
+                .font(.custom(AppFonts.regular, size: 15))
+            NavigationLink {
+                RegisterView()
+            } label: {
+                Text("Register")
+                    .font(.custom(AppFonts.bold, size: 15))
+                    .foregroundStyle(
+                        LinearGradient(colors: [AppColors.primaryColor,
+                                                AppColors.secondayColor],
+                                       startPoint: .center,
+                                       endPoint: .center))
+            }
+        }
+        .padding(.top, 10)
+        .font(.subheadline)
+    }
+    
+    @ViewBuilder
+    func buildLoginFields() -> some View {
+        InputText(value: $viewModel.email, placeholder: "Email Address", iconname: .envelope)
+        SecureText(iconname: .lock, placeholder: "Password", value: $viewModel.password)
+        
+        CustomButton(title: "LOG IN") {
+            Task {
+                try await viewModel.signIn()
+            }
+        }
+        .padding(.bottom, 10)
     }
 }
 

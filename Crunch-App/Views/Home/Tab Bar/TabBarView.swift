@@ -1,9 +1,10 @@
 
 import SwiftUI
+import RealmSwift
 
 enum Tab: String, CaseIterable {
     case home
-    case search
+    case favourite
     case cart
     case profile
 }
@@ -18,13 +19,14 @@ struct TabBarItem: Identifiable {
 struct TabBarView: View {
     let tabItems: [TabBarItem] = [
         TabBarItem(iconName: "house.fill", tab: .home, index: 0),
-        TabBarItem(iconName: "magnifyingglass", tab: .search, index: 1),
+        TabBarItem(iconName: "heart.fill", tab: .favourite, index: 1),
         TabBarItem(iconName: "cart.fill", tab: .cart, index: 2),
         TabBarItem(iconName: "person.fill", tab: .profile, index: 3)]
+    
     @State var selectedTab: Tab = .home
     @State var xOffset: Double = 0.0
+    @ObservedResults(RealmProductItem.self) var cartItems
     var body: some View {
-        NavigationStack {
             VStack {
                 VStack {
                     RootView(selectedTab: $selectedTab)
@@ -58,12 +60,22 @@ struct TabBarView: View {
                         .offset(x: xOffset)
                         .padding(.bottom, 3)
                 }
+                .overlay(alignment: .topTrailing) {
+                    if !cartItems.isEmpty {
+                        Text("\(cartItems.count)")
+                                .font(.caption2)
+                                .foregroundColor(.white)
+                                .padding(5)
+                                .background(Color.red)
+                                .clipShape(Circle())
+                                .offset(x: -147, y: 9)
+                    }
+                }
             }
             .navigationBarBackButtonHidden()
-        .navigationBarBackButtonHidden(true)
-        .background(Color(AppColors.primaryLightGray)
-            .ignoresSafeArea())
-        }
+            .navigationBarBackButtonHidden(true)
+            .background(Color(AppColors.primaryLightGray)
+                .ignoresSafeArea())
     }
 }
 
@@ -76,15 +88,17 @@ struct TabBarView: View {
 struct RootView: View {
     @Binding var selectedTab: Tab
     var body: some View {
-        switch selectedTab {
-        case .home:
-            HomeView()
-        case .search:
-            Text("Search")
-        case .cart:
-            CartView(realmManager: RealmManager())
-        case .profile:
-            ProfileView()
-        }
+            VStack {
+                switch selectedTab {
+                case .home:
+                    HomeView()
+                case .favourite:
+                    FavouriteView()
+                case .cart:
+                    CartView(realmManager: RealmManager())
+                case .profile:
+                    ProfileView()
+                }
+            }
     }
 }

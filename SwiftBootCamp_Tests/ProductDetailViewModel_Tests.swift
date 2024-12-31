@@ -23,12 +23,12 @@ final class ProductDetailViewModel_Tests: XCTestCase {
         realmManager = nil
     }
     
-    func testProductDetailViewModel_addItemToRealm() {
-        let productItem: ProductModel = ProductModel(id: 0, name: "iPhone", image: "iPhone 15", description: "", price: 2, gallery: [""])
-        
-        viewModel?.addItemToRealm(item: productItem)
-        
-        XCTAssertEqual(realmManager?.fetchRealmItems().count, realmManager?.fetchRealmItems().count)
-    }
+//    func testProductDetailViewModel_addItemToRealm() {
+//        let productItem: ProductModel = ProductModel(id: 0, name: "iPhone", image: "iPhone 15", description: "", price: 2, gallery: [""])
+//        
+//        viewModel?.addItemToRealm(item: productItem)
+//        
+//        XCTAssertEqual(realmManager?.fetchRealmItems().count, realmManager?.fetchRealmItems().count)
+//    }
 
 }

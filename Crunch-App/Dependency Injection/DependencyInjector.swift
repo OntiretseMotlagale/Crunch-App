@@ -15,25 +15,19 @@ struct DependencyInjector {
         guard let t = dependencyList[String(describing: T.self)] as? T else {
             fatalError("No Registered dependency found \(T.self)")
         }
-        
         return t
     }
-    
     static func register<T>(dependency: T) {
         self.dependencyList[String(describing: T.self)] = dependency
-        print("Registered --> \(T.self)")
     }
 }
-
 @propertyWrapper struct Inject<T> {
     var wrappedValue: T
     
     init() {
         self.wrappedValue = DependencyInjector.resolve()
-        print("Injected ---> \(T.self)")
     }
 }
-
 @propertyWrapper struct Provider<T> {
     var wrappedValue: T
     

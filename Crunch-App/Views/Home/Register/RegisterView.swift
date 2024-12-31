@@ -1,13 +1,5 @@
-//
-//  RegisterView.swift
-//  Crunch-App
-//
-//  Created by Ontiretse Motlagale on 2024/03/09.
-//
-
 import SwiftUI
 import AlertKit
-
 
 enum AuthIcons: String {
     case person
@@ -17,11 +9,12 @@ enum AuthIcons: String {
 struct RegisterView: View {
     @StateObject var viewModel = RegisterViewModel()
     @Environment(\.dismiss) var dimiss
+    @AppStorage("isUserSignedIn") var isUserSignedIn: Bool = false
     
     var body: some View {
         ScrollView {
             VStack {
-                VStack  {
+                VStack {
                     Image("bg")
                         .resizable()
                         .scaledToFit()
@@ -32,18 +25,12 @@ struct RegisterView: View {
                         .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                         .padding(.bottom, 20)
                     InputText(value: $viewModel.fullName, placeholder: "Full Name", iconname: .person)
-               
                     InputText(value: $viewModel.email, placeholder: "Email Address", iconname: .envelope)
-              
                     SecureText(iconname: .lock, placeholder: "Password", value: $viewModel.password)
                         .padding(.bottom, 10)
-                    Text(viewModel.errorMessage)
-                        .font(.custom(AppFonts.regular, size: 13))
-                        .foregroundStyle(.red)
                 }
-                .padding(.bottom, 15)
-           
-                VStack (spacing: 20) {
+                .padding(.bottom)
+                VStack (spacing: 10) {
                     CustomButton(title: "SIGN UP") {
                         Task {
                             try await  viewModel.register()
@@ -52,16 +39,18 @@ struct RegisterView: View {
                     HStack {
                         RoundedRectangle(cornerSize: CGSize())
                             .frame(width: 50, height:  1)
-                        Text("Or Continue with")
+                        Text("or continue with")
                             .font(.custom(AppFonts.regular, size: 17))
                         RoundedRectangle(cornerSize: CGSize())
                             .frame(width: 50, height:  1)
                     }
                     .foregroundStyle(Color("PrimaryGray"))
                     HStack (spacing: 30) {
-                        AuthIcon(imageName: "google", buttonAction: {})
-                        AuthIcon(imageName: "facebook", buttonAction: {})
-                        AuthIcon(imageName: "apple", buttonAction: {})
+                        AuthenticationButton(imageName: "google", buttonAction: {
+                            Task {
+                               try await viewModel.registerWithGoogle()
+                            }
+                        })
                     }
                     HStack {
                         Text("Already have an account ?")
@@ -82,12 +71,22 @@ struct RegisterView: View {
         }
         .navigationBarBackButtonHidden()
         .navigationBarBackButtonHidden(true)
+        .fullScreenCover(isPresented: $isUserSignedIn, content: {
+            HomeView()
+        })
         .alert(isPresent: $viewModel.isAccountCreated, view: AlertAppleMusic16View(subtitle: "Account Successfully Created"))
+        .alert(isPresented: $viewModel.showAlert) {
+            Alert(
+                title: Text("Error"),
+                message: Text(viewModel.errorMessage),
+                dismissButton: .default(Text("OK"))
+            )
+        }
     }
 }
 
 #Preview {
-    RegisterView()
+    AuthenticationButton(imageName: "google", buttonAction: {})
 }
 
 struct SecureText: View {
@@ -133,6 +132,7 @@ struct InputText: View {
                     Text(placeholder)
                         .font(.custom(AppFonts.regular, size: 16))
                 }
+                .autocorrectionDisabled(true)
             }
             .padding()
             .frame(height: 60)
@@ -144,21 +144,31 @@ struct InputText: View {
     }
 }
 
-struct AuthIcon: View {
+struct AuthenticationButton: View {
     let imageName: String
     let buttonAction: () -> ()
     var body: some View {
-        Button(action: {
-            buttonAction()
-        }, label: {
-            Image(imageName)
-                .resizable()
-                .scaledToFit()
-                .frame(width: 40, height: 40)
-                .padding(8)
-                .background(
-                    Color("PrimaryLightGray"))
-                .cornerRadius(50)
-        })
+        VStack {
+            Button(action: {
+                buttonAction()
+            }, label: {
+                Image(imageName)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 40, height: 40)
+                    .padding(8)
+                    .background(
+                        Color("PrimaryLightGray"))
+                    .cornerRadius(50)
+                Text("Continue With Google")
+                    .font(.custom(AppFonts.bold, size: 14))
+                    .foregroundStyle(.black)
+                   
+            })
+            .frame(maxWidth: .infinity)
+            .frame(height: 55)
+            .background(RoundedRectangle(cornerRadius: 10)
+                .fill(Color("PrimaryBlue")))
+        }
     }
 }

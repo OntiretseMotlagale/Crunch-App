@@ -6,7 +6,9 @@
 //
 
 import Foundation
+import FirebaseAuth
 
+@MainActor
 protocol RegisterUserProtocol: ObservableObject {
     var fullName: String { get set }
     var email: String { get set }
@@ -18,25 +20,40 @@ protocol RegisterUserProtocol: ObservableObject {
     func clearUserDetails()
 }
 
+
 class RegisterViewModel: RegisterUserProtocol {
     @Published var fullName: String = ""
     @Published var email: String = ""
     @Published var password: String = ""
     @Published var errorMessage: String = ""
     @Published var isAccountCreated: Bool = false
-     
+    @Published var showAlert: Bool = false
     
-    @Inject var firestoreManager: FirestoreManagerProtocol
-    @Inject var authenticationProtocol: AuthenticationProtocol
-
-    func register() async throws {
+    
+    @Inject var googleProvider: SignInGoogleProvider
+    @Inject var emailPasswordAuthProvider: SignInEmailPasswordProvider
+    
+    func register() async {
         do {
-            try await authenticationProtocol.registerUser(fullName: fullName, email: email, password: password)
-            clearUserDetails()
-            self.isAccountCreated = true
+            try await emailPasswordAuthProvider.registerUser(fullName: fullName, email: email, password: password)
         }
-        catch let error {
-            self.errorMessage = error.localizedDescription
+        catch {
+            showError(error.localizedDescription)
+        }
+    }
+    
+    private func showError(_ message: String) {
+        errorMessage = message
+        showAlert = true
+    }
+    
+    func registerWithGoogle() async throws {
+        do {
+            try await googleProvider.signWithGoogle()
+            UserDefaults.isUserSignedIn = true
+        }
+        catch {
+            print(error.localizedDescription)
         }
     }
     func clearUserDetails() {

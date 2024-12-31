@@ -2,12 +2,13 @@
 import SwiftUI
 
 struct CategoryItemView: View {
+    
     let column: [GridItem] = [
         GridItem(.flexible(), spacing: 5, alignment: nil),
         GridItem(.flexible(), spacing: 5, alignment: nil)
     ]
-    let item: [ProductModel]
-    
+    var item: [DatabaseProductItem]
+
     var body: some View {
         ScrollView(showsIndicators: false) {
             LazyVGrid(columns: column, spacing: 20) {
@@ -18,17 +19,21 @@ struct CategoryItemView: View {
                         VStack (alignment: .center, spacing: 0) {
                             VStack {
                                 GroupBox {
-                                    Image(item.image)
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 150, height: 150)
+                                    if let image = item.image {
+                                        Image(image)
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(width: 150, height: 150)
+                                    }
                                 }
                                 VStack (alignment: .leading, spacing: 5) {
                                     HStack {
-                                        Text(item.name)
-                                            .font(.custom(AppFonts.semibold, size: 15))
-                                            .foregroundStyle(.black)
-                                            .multilineTextAlignment(.leading)
+                                        if let name = item.name {
+                                            Text(name)
+                                                .font(.custom(AppFonts.semibold, size: 15))
+                                                .foregroundStyle(.black)
+                                                .multilineTextAlignment(.leading)
+                                        }
                                         Spacer()
                                         Image(systemName: "star.fill")
                                             .resizable()
@@ -39,16 +44,23 @@ struct CategoryItemView: View {
                                             .font(.custom(AppFonts.bold, size: 15))
                                             .foregroundStyle(.black)
                                     }
-                                    Text(item.description)
-                                        .font(.custom(AppFonts.regular, size: 14))
-                                        .foregroundStyle(.gray)
-                                        .multilineTextAlignment(.leading)
-                                        .lineLimit(1)
-                                        .padding(.bottom, 10)
-                                    Text("R\(item.price)")
-                                        .font(.custom(AppFonts.bold, size: 17))
-                                        .foregroundStyle(.black)
-                                        .padding(.top, 5)
+                                    if let description = item.description,
+                                       let price = item.price {
+                                        Text(description)
+                                            .font(.custom(AppFonts.regular, size: 14))
+                                            .foregroundStyle(.gray)
+                                            .multilineTextAlignment(.leading)
+                                            .lineLimit(1)
+                                            .padding(.bottom, 10)
+                                        HStack {
+                                            Text("R\(price)")
+                                                .font(.custom(AppFonts.bold, size: 17))
+                                                .foregroundStyle(.black)
+                                                .padding(.top, 5)
+                                            Spacer()
+                                        }
+                                    }
+                                
                                 }
                                 .padding(.vertical, 4)
                                 .padding(.horizontal, 10)
@@ -65,11 +77,10 @@ struct CategoryItemView: View {
             Color(AppColors.primaryLightGray)
                 .ignoresSafeArea())
     }
+  
 }
 #Preview {
     CategoryItemView(item: [
-        ProductModel(id: 12, name: "Samsung Galaxy", image: "acer-1", description: "Experience the perfect blend of power, portability, and style with the Connex 14 Celeron N4020 4/128SSD W11 Home laptop. Engineered to enhance your productivity and simplify your digital lifestyle", price: 4000, gallery: [""]),
-        ProductModel(id: 12, name: "Asus", image: "acer-1", description: "jfkjjfg", price: 4000, gallery: [""]),
-        ProductModel(id: 12, name: "Asus", image: "acer-1", description: "jfkjjfg", price: 4000, gallery: [""])
+        DatabaseProductItem(id: "12", gallery: [""], description: "Experience the perfect blend of power, portability, and style with the Connex 14 Celeron N4020 4/128SSD W11 Home laptop. Engineered to enhance your productivity and simplify your digital lifestyle", image: "acer-1", name: "Samsung Galaxy", price: 4000),
     ])
 }

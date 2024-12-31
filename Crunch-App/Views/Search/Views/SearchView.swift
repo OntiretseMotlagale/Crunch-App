@@ -1,5 +1,5 @@
 //
-//  SearchView.swift
+//  FavouriteView.swift
 //  Crunch-App
 //
 //  Created by Ontiretse Motlagale on 2024/03/11.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SearchView: View {
+struct FavouriteView: View {
     @State var searchText: String = ""
     var body: some View {
         NavigationStack {
@@ -24,5 +24,5 @@ struct SearchView: View {
 }
 
 #Preview {
-    SearchView()
+    FavouriteView()
 }
