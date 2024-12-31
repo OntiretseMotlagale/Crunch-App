@@ -22,10 +22,19 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 struct Crunch_AppApp: App {
    
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    let dependencies = Dependencies()
+    @AppStorage("isOnboardingDone") var isOnboardingDone: Bool = false
    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationView {
+                if isOnboardingDone {
+                   ContentView()
+                }
+                else {
+                    OnboardingView()
+                }
+            }
         }
     }
 }

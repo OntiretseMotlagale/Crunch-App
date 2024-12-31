@@ -8,6 +8,7 @@ struct SuccessState: View {
     
     @State var animateCircle: Bool = true
     @State private var showHomeScreen: Bool = false
+    @Environment(\.dismiss) var dismiss
 
     var icon = "successImage"
     var body: some View {
@@ -62,7 +63,7 @@ struct SuccessState: View {
                             .padding(.bottom, 30)
                             Button(action: {
                                 withAnimation(.easeInOut(duration: 0.5)){
-                                    showHomeScreen = true
+                                        self.dismiss()
                                     viewModel.deleteAll()
                                 }
                             }, label: {
@@ -84,9 +85,7 @@ struct SuccessState: View {
                     }
                 }.padding(.horizontal, 5)
                     .offset(y: show ? -30 : 300)
-                if showHomeScreen {
-                    TabBarView()
-                }
+                
             }
             .onChange(of: show) { oldValue, newValue in
                 if newValue {
@@ -97,6 +96,9 @@ struct SuccessState: View {
                     })
                 }
             }
+        }
+        .onAppear {
+           
         }
         .ignoresSafeArea()
     }

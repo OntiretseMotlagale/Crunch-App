@@ -8,9 +8,19 @@
 import Foundation
 import SwiftUI
 
+class CAppearancehandler {
+    static let shared =  CAppearancehandler()
+    
+    func regularFont(size: CGFloat) -> Font {
+        return Font.custom(AppFonts.semibold, size: size)
+    }
+}
+
 
 struct OrderItem: View {
     let item: DatabaseUserOrder
+    let appearanceHandler = CAppearancehandler.shared
+    
     var body: some View {
             HStack (alignment: .center) {
                 if let image = item.productImage {
@@ -23,7 +33,7 @@ struct OrderItem: View {
                 VStack(alignment: .leading, spacing: 20) {
                     if let name = item.productname {
                         Text(name)
-                            .font(.custom(AppFonts.semibold, size: 18))
+                            .font(appearanceHandler.regularFont(size: 20))
                     }
                     HStack (alignment: .center) {
                         Text("Price:")

@@ -79,8 +79,8 @@ struct CategoryItemView: View {
     }
   
 }
-//#Preview {
-//    CategoryItemView(item: [
-//        DatabaseProductItem(id: "12", gallery: [""], description: "Experience the perfect blend of power, portability, and style with the Connex 14 Celeron N4020 4/128SSD W11 Home laptop. Engineered to enhance your productivity and simplify your digital lifestyle", image: "acer-1", name: "Samsung Galaxy", price: 4000)
-//    ])
-//}
+#Preview {
+    CategoryItemView(item: [
+        DatabaseProductItem(id: "12", gallery: [""], description: "Experience the perfect blend of power, portability, and style with the Connex 14 Celeron N4020 4/128SSD W11 Home laptop. Engineered to enhance your productivity and simplify your digital lifestyle", image: "acer-1", name: "Samsung Galaxy", price: 4000),
+    ])
+}

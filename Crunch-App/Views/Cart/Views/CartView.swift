@@ -15,7 +15,6 @@ struct CartView: View {
         _viewModel = StateObject(wrappedValue: CartViewModel(realmManager: realmManager))
     }
     @State private var paymentView: Bool = false
-    @State private var realmItems: UsableCartItems = UsableCartItems(name: "", image: "", price: 0, descript: "")
     
     var body: some View {
         NavigationStack {
@@ -28,7 +27,6 @@ struct CartView: View {
                 else {
                     List {
                         ForEach(viewModel.useableCartItems, id: \.self) { items in
-                            
                             CartItem(cartViewModel: viewModel,
                                      item: items)
                             .padding(.bottom, 10)
@@ -54,11 +52,10 @@ struct CartView: View {
                         }
                     }
                     .padding(.horizontal)
-                    
                 }
             }
             .fullScreenCover(isPresented: $paymentView, content: {
-                ProcessPaymentView()
+                ProcessPaymentView(viewModel: viewModel)
             })
             .navigationTitle("My Cart")
             .navigationBarTitleDisplayMode(.inline)
@@ -78,7 +75,7 @@ struct EmptyCartView: View {
             Text("Your cart is empty")
                 .font(.title)
                 .fontWeight(.bold)
-            Text("Looks like you haven't made your choise yet.")
+            Text("Looks like you haven't made your choice yet.")
                 .font(.system(size: 17))
                 .multilineTextAlignment(.center)
                 .lineLimit(2)
@@ -96,8 +93,12 @@ struct EmptyCartView: View {
 }
 struct ProcessPaymentView: View {
     @State private var show: Bool = false
+    @ObservedObject var viewModel: CartViewModel
     var body: some View {
         NavigationView {
+            if show {
+                SuccessState(viewModel: viewModel, show: $show)
+            }
             ZStack {
                 Color.primaryLightGray
                 VStack(spacing: 30) {
@@ -110,9 +111,6 @@ struct ProcessPaymentView: View {
                         .multilineTextAlignment(.center)
                 }
                 .padding(.horizontal)
-                .fullScreenCover(isPresented: $show, content: {
-                    SuccessState(viewModel: CartViewModel(realmManager: RealmManager()), show: $show)
-                })
                 .onAppear {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
                         self.show = true

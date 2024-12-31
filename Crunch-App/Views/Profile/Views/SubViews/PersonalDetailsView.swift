@@ -42,38 +42,12 @@ struct PersonalDetailsView: View {
                 
                 if let user = viewModel.realmDatabaseUser.first {
                     ProfileTextFieldView(profileData: user.fullname, placeHolder: "FULL NAME")
-                }
-                if let user = viewModel.realmDatabaseUser.first {
                     ProfileTextFieldView(profileData: user.email, placeHolder: "EMAIL")
                 }
             }
         }
     }
-    
-    @ViewBuilder func buildUserProfileInputs() -> some View {
-        VStack  {
-            List {
-                VStack(alignment: .leading) {
-                    Text("Full Name")
-                        .foregroundStyle(Color("LightGray"))
-                        .fontWeight(.semibold)
-                        .padding(.bottom, 5)
-                    Divider()
-                        .padding(.bottom, 5)
-                }
-            }
-            List {
-                VStack(alignment: .leading) {
-                    Text("Email")
-                        .foregroundStyle(Color("LightGray"))
-                        .fontWeight(.semibold)
-                        .padding(.bottom, 5)
-                    Divider()
-                        .padding(.bottom, 5)
-                }
-            }
-        }
-    }
+
 }
 
 #Preview {

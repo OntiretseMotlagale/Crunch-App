@@ -27,7 +27,7 @@ struct ProductDetailView: View {
                             .frame(width: 300)
                     }
                 }
-                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+                .tabViewStyle(.page)
                 .onAppear(perform: setupAppearance)
                 Spacer()
                 VStack(alignment: .leading) {
@@ -50,7 +50,6 @@ struct ProductDetailView: View {
                     Text(item.description!)
                         .foregroundStyle(Color.lightGray)
                         .padding(.bottom, 20)
-                    
                     CustomButton(title: "Add To Cart") {
                         viewModel.addItemToRealm(item: item)
                         withAnimation {
@@ -77,6 +76,12 @@ struct ProductDetailView: View {
     }
 }
 //
-//#Preview {
-//    ProductDetailView(item: ProductModel(id: 1, name: "Acer Inspire", image: "laptops", description: "This is the best windows machine you could ever find This is the best windows machine you could ever find This is the best windows machine you could ever find This is the best windows machine you could ever find", price: 4500, gallery: ["acer-1", "acer-2", "acer-3"]))
-//}
+#Preview {
+    ProductDetailView(
+                      item: DatabaseProductItem(id: "",
+                                                gallery: ["acer-1", "acer-2", "acer-3"],
+                                                description: "This is the best windows machine you could ever find This is the best windows machine you could ever find This is the best windows machine you could ever find This is the best windows machine you could ever find",
+                                                image: "laptops",
+                                                name: "Acer Inspire",
+                                                price: 4500))
+}

@@ -15,6 +15,6 @@ class Dependencies {
         @Provider var orderViewModel = OrderViewModel() as OrderProvider
         @Provider var productViewModel = ProductViewModel() as ProductProvider
         @Provider var signInEmailPasswordViewModel = SignInEmailPasswordViewModel() as SignInEmailPasswordProvider
-        @Provider var signInGoogleViewModel = SignInWithGoogleViewModel() as SignInGoogleProvider
+        @Provider var SignInWithGoogleViewModel = SignInWithGoogleViewModel() as SignInGoogleProvider
     }
 }

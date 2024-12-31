@@ -26,7 +26,7 @@ final class CartViewModel_tests: XCTestCase {
         XCTAssertEqual(viewModel?.total, viewModel?.total)
     }
     
-    func testCartViewModel_tota_ShouldNotStartAsMoreThanZero() {   
+    func testCartViewModel_total_ShouldNotStartAsMoreThanZero() {   
         XCTAssertNotEqual(viewModel?.total, 1)
     }
     

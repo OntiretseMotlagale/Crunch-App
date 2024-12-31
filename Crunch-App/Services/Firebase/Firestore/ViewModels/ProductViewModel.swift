@@ -18,8 +18,7 @@ enum ProductKey: String {
     case products
 }
 class ProductViewModel: ProductProvider {
-    
-    
+     
     private func productDocument(docName: String) -> DocumentReference {
         let productFirestoreReference = Firestore.firestore().collection(DatabaseCollectionType.products.rawValue)
        return productFirestoreReference.document(docName)

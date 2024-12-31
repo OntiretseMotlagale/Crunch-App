@@ -10,17 +10,17 @@ import FirebaseAuth
 
 @MainActor
 struct ContentView: View {
-    let dependencies = Dependencies()
+    
     @AppStorage(UserDefaultsKeys.isUserSignedIn) var isUserLoggedIn: Bool = false
    
     var body: some View {
-        Group {
-            if isUserLoggedIn {
-                TabBarView()
-            } else {
-                LoginView()
+            Group {
+                if isUserLoggedIn {
+                    TabBarView()
+                } else {
+                    LoginView()
+                }
             }
-        }
     }
 }
 #Preview {

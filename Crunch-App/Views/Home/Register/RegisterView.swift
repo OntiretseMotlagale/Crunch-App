@@ -28,9 +28,6 @@ struct RegisterView: View {
                     InputText(value: $viewModel.email, placeholder: "Email Address", iconname: .envelope)
                     SecureText(iconname: .lock, placeholder: "Password", value: $viewModel.password)
                         .padding(.bottom, 10)
-                    Text(viewModel.errorMessage)
-                        .font(.custom(AppFonts.regular, size: 13))
-                        .foregroundStyle(.red)
                 }
                 .padding(.bottom)
                 VStack (spacing: 10) {
@@ -78,6 +75,13 @@ struct RegisterView: View {
             HomeView()
         })
         .alert(isPresent: $viewModel.isAccountCreated, view: AlertAppleMusic16View(subtitle: "Account Successfully Created"))
+        .alert(isPresented: $viewModel.showAlert) {
+            Alert(
+                title: Text("Error"),
+                message: Text(viewModel.errorMessage),
+                dismissButton: .default(Text("OK"))
+            )
+        }
     }
 }
 

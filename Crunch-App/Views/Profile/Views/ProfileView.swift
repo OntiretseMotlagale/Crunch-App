@@ -39,6 +39,7 @@ class ProfileViewModel: ObservableObject {
     func deleteAllRealmItems() {
         realmManager.deleteAll()
     }
+    
     func loadCurrentLoggedInUser() async throws {
         let userID = try signInEmailPasswordProvider.getAuthenticatedUser()
         self.databaseUser = try await userProvider.getUser(userID: userID)
@@ -62,7 +63,7 @@ struct ProfileView: View {
                      iconName: "bag",
                      Tab: .orders)
     ]
-    
+    @State var isUserLogOut: Bool = false
     var body: some View {
         NavigationView {
             ScrollView {
@@ -93,8 +94,7 @@ struct ProfileView: View {
                     }
                     .padding(.bottom, 30)
                     Button(action: {
-                        viewModel.signOut()
-                        viewModel.deleteAllRealmItems()
+                        self.isUserLogOut = true
                     }, label: {
                         HStack(spacing: 10) {
                            Image(systemName:  "door.left.hand.open")
@@ -108,6 +108,16 @@ struct ProfileView: View {
                     .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                     .frame(height: 50)
                     .padding(.horizontal)
+                }
+                 .alert(isPresented: $isUserLogOut) {
+                    Alert(
+                        title: Text("Are you sure you want to log out ?"),
+                        primaryButton: .cancel(Text("Log out")) {
+                            viewModel.signOut()
+                            viewModel.deleteAllRealmItems()
+                        },
+                        secondaryButton: .destructive(Text("Cancel")) {}
+                    )
                 }
                 .navigationTitle("My Profile")
                 .navigationBarTitleDisplayMode(.inline)

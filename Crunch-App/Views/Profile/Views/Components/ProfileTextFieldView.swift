@@ -19,14 +19,16 @@ struct ProfileTextFieldView: View {
     var body: some View {
         VStack {
             GroupBox {
-                Text(placeHolder)
-                    .font(.custom(AppFonts.regular, size: 13))
-                    .foregroundStyle(AppColors.lightGray)
-                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                    .padding(.bottom, 5)
-                Text(profileData)
-                    .font(.custom(AppFonts.regular, size: 18))
-                    .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                VStack {
+                    Text(placeHolder)
+                        .font(.custom(AppFonts.regular, size: 13))
+                        .foregroundStyle(AppColors.lightGray)
+                        .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                    Text(profileData)
+                        .font(.custom(AppFonts.regular, size: 18))
+                        .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                }
+                .frame(height: 23)
             }
             .padding(.bottom)
         }

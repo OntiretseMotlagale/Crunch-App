@@ -7,12 +7,13 @@
 
 import Foundation
 import SwiftUI
+import FirebaseAuth
+
 
 enum EmailValidationError: Error {
     case tooShort
     case tooLong
     case invalidCharacterFound(Character)
-    
 }
 
 @MainActor
@@ -20,22 +21,28 @@ class LoginViewModel: ObservableObject {
     @Published var email: String = ""
     @Published var password: String = ""
     @Published var errorMessage: String = ""
-    
-    @Inject var authenticationProtocol: SignInEmailPasswordProvider
+    @Published var showAlert: Bool = false
+    @Published var showWheel: Bool = false
     
     func signIn() async throws {
         do {
-            try await authenticationProtocol.loginUser(email: email, password: password)
-            clearUserDetails()
+            self.showWheel = true
+            try await Auth.auth().signIn(withEmail: email, password: password)
             UserDefaults.isUserSignedIn = true
         }
-        catch let error {
-            self.errorMessage = error.localizedDescription
+        catch {
+            self.showWheel = false
+            print(error.localizedDescription)
         }
     }
     private func clearUserDetails() {
         self.email = ""
         self.password = ""
         self.errorMessage = ""
+    }
+    
+    private func showError(_ message: String) {
+        errorMessage = message
+        showAlert = true
     }
 }

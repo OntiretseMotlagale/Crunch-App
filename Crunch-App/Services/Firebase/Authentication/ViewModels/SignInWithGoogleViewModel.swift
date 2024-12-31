@@ -10,10 +10,10 @@ import FirebaseAuth
 import GoogleSignIn
 import GoogleSignInSwift
 
-
 protocol SignInGoogleProvider {
     func signWithGoogle() async throws
 }
+
 class SignInWithGoogleViewModel: SignInGoogleProvider {
     @Inject var userProvider: UserProvider
     @MainActor
@@ -31,6 +31,7 @@ class SignInWithGoogleViewModel: SignInGoogleProvider {
         
         try await signInGoogle(tokens: tokens)
     }
+    
     @discardableResult
     func signInGoogle(tokens: GoogleAuthProvidertModel) async throws -> AuthResultModel {
         let credentials = GoogleAuthProvider.credential(withIDToken: tokens.idToken, accessToken: tokens.accessToken)

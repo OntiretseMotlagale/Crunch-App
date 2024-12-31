@@ -63,7 +63,7 @@ class RealmProductItem: Object, Identifiable {
 class RealmManager {
     let realm = try! Realm()
     
-    func addItem(realmItem: RealmProductItem) {
+    func addItem(realmItem: Object) {
         do {
             try realm.write {
                 realm.add(realmItem)
